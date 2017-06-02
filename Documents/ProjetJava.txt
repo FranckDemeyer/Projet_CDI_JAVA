@@ -1,0 +1,9 @@
+. cahier des charges
+. use cases
+. diagramme d'activité par use case
+. mock-up site
+. diagramme d'activité pour navigation du site
+. description textuelle des use cases 
+-> identification des entités et de leur données
+  -> MCD
+  -> diagramme de classe
