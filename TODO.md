@@ -3,10 +3,12 @@
 - liste des Use Case utilisateur
 - Use Case Utilisateur
 - diagrammes d'activité utilisateur
+- maquettes utilisateur
 - déscription des Use Case utilisateur
 - liste des Use Case admnistrateur
 - Use Case administrateur
 - diagrammes d'activité administrateur
+- maquettes administrateur
 ---
 # Choses restantes a faire
 - cahier des charges
