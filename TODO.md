@@ -17,3 +17,15 @@
 	- MCD
 	- diagramme de classe
 
+---
+
+Urgence :
+- Utilisateur : bouton urgence avec type service + contact + geoloc ou adresse + rayon de recherche -> envoie
+- Professionel : 
+	- s'enregistrer comme professionel : info, coordonnées, horaires d'ouvertures ...
+	- login : téléphone
+	- se loguer sur l'appli
+	- envoie geoloc sinon position adresse par défaut
+	- si logué et si il est sur un rayon d'une demande d'urgence, il voit la notif et peut la prendre
+	- si un professionel prend une urgence, elle est marquée comme prise et ne peut plus être prise par un autre
+	- si prend la garde, vois infos + lien géoloc + lien téléphone
