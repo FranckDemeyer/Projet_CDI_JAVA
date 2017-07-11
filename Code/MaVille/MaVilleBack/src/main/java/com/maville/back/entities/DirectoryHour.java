@@ -1,24 +1,48 @@
 package com.maville.back.entities;
+
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class DirectoryHour {
+	
 	/* Variable */
-	private String dDay;
-	private String dHour;
+	
+	@ManyToOne
+	private Directory directory;
+	private String day;
+	private String hour;
+
 	/* Getters and Setters */
-	public String getdDay() {
-		return dDay;
+	
+	public Directory getDirectory() {
+		return directory;
 	}
-	public void setdDay(String dDay) {
-		this.dDay = dDay;
+	
+	public void setDirectory(Directory directory) {
+		this.directory = directory;
 	}
-	public String getdHour() {
-		return dHour;
+	
+	public String getDay() {
+		return day;
 	}
-	public void setdHour(String dHour) {
-		this.dHour = dHour;
+	
+	public void setDay(String day) {
+		this.day = day;
 	}
+	
+	public String getHour() {
+		return hour;
+	}
+	
+	public void setHour(String hour) {
+		this.hour = hour;
+	}
+	
 	/* Methods */
+	
 	@Override
 	public String toString() {
-		return "DirectoryHour [day=" + dDay + ", time=" + dHour + "]";
+		return "DirectoryHour > day : " + day + ", time : " + hour;
 	}
 }

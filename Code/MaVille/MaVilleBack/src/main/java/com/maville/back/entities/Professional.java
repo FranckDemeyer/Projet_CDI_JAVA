@@ -1,75 +1,118 @@
 package com.maville.back.entities;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
 public class Professional {
-	/* Variables */
-	private int id;
+	
+	/* private Variables */
+	
+	@Id
+	@GeneratedValue
+	private int professionalId;
 	private String bussinessName;
-	private String lastName;
-	private String firstName;
+	private String name;
 	private String address;
 	private String postalCode;
-	private String Town;
-	private Category category;
+	private String town;
+	private String phone;
+	@ManyToOne
+	private ProfessionalCategory category;
 	private boolean connected;
+	@OneToOne
+	@JoinColumn(name="account_id", referencedColumnName="accountId")
+	private Account account;
+
 	/* Getters and Setters */
-	public int getId() {
-		return id;
+	
+	public int getProfessionalId() {
+		return professionalId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	
+	public void setProfessionalId(int professionalId) {
+		this.professionalId = professionalId;
 	}
+	
 	public String getBussinessName() {
 		return bussinessName;
 	}
+	
 	public void setBussinessName(String bussinessName) {
 		this.bussinessName = bussinessName;
 	}
-	public String getLastName() {
-		return lastName;
+	
+	public String getName() {
+		return name;
 	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getFirstName() {
-		return firstName;
-	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+	
 	public String getAddress() {
 		return address;
 	}
+	
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	
 	public String getPostalCode() {
 		return postalCode;
 	}
+	
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
 	}
+	
 	public String getTown() {
-		return Town;
+		return town;
 	}
+	
 	public void setTown(String town) {
-		Town = town;
+		this.town = town;
 	}
-	public Category getCategory() {
+	
+	public String getPhone() {
+		return phone;
+	}
+	
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	
+	public ProfessionalCategory getCategory() {
 		return category;
 	}
-	public void setCategory(Category category) {
+	
+	public void setCategory(ProfessionalCategory category) {
 		this.category = category;
 	}
+	
 	public boolean isConnected() {
 		return connected;
 	}
+	
 	public void setConnected(boolean connected) {
 		this.connected = connected;
 	}
-	/* Methods */
+	
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
+	/* public Methods */
+	
 	@Override
 	public String toString() {
-		return "Professional [id=" + id + ", bussinessName=" + bussinessName + ", lastName=" + lastName + ", firstName="
-				+ firstName + ", address=" + address + ", postalCode=" + postalCode + ", Town=" + Town + ", category="
-				+ category + ", connected=" + connected + "]";
+		return "Professional > professionalId : " + professionalId + ", bussinessName : " + bussinessName + ", name : " + name  + ", address : " + address + ", postalCode : " + postalCode +
+				", town : " + town + ", phone : " + phone + ", connected : " + connected;
 	}
 }

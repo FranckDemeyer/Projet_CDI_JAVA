@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 22 Juin 2017 à 15:44
+-- Généré le :  Ven 23 Juin 2017 à 11:13
 -- Version du serveur :  10.1.21-MariaDB
 -- Version de PHP :  5.6.30
 
@@ -35,6 +35,14 @@ CREATE TABLE `account` (
   `email` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `account`
+--
+
+INSERT INTO `account` (`accountId`, `username`, `password`, `isAdmin`, `professionalId`, `email`) VALUES
+(1, 'toto', 'titi', 0, 1, 'test@net.fr'),
+(2, 'lulu', 'paswordlulu', 1, 0, 'lulu@free.fr');
+
 -- --------------------------------------------------------
 
 --
@@ -48,6 +56,18 @@ CREATE TABLE `category` (
   `subCategory` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `category`
+--
+
+INSERT INTO `category` (`categoryId`, `name`, `type`, `subCategory`) VALUES
+(1, 'plombier', 'travaux', ''),
+(2, 'serrurier', 'travaux', ''),
+(3, 'médecin', 'médical', ''),
+(4, 'dentiste', 'médical', ''),
+(5, 'electricien', 'travaux', ''),
+(6, 'psychiatre', 'médical', '');
+
 -- --------------------------------------------------------
 
 --
@@ -60,6 +80,15 @@ CREATE TABLE `categorytype` (
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
+--
+-- Contenu de la table `categorytype`
+--
+
+INSERT INTO `categorytype` (`subcategoryId`, `name`, `description`) VALUES
+(1, 'travaux', 'services de dépannage à domicile'),
+(2, 'médical', 'interventions à domicile'),
+(3, 'culture', 'évenements culturels et artistiques');
+
 -- --------------------------------------------------------
 
 --
@@ -69,7 +98,7 @@ CREATE TABLE `categorytype` (
 CREATE TABLE `directory` (
   `directoryId` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `adresse` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
   `postalCode` varchar(255) NOT NULL,
   `town` varchar(255) NOT NULL,
   `phone` varchar(255) NOT NULL,
@@ -91,7 +120,7 @@ CREATE TABLE `directory` (
 CREATE TABLE `directoryhour` (
   `directoryId` int(11) NOT NULL,
   `dDay` varchar(255) NOT NULL,
-  `dHour` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `dHour` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
@@ -101,13 +130,11 @@ CREATE TABLE `directoryhour` (
 --
 
 CREATE TABLE `event` (
-  `evenementId` int(11) NOT NULL,
+  `eventId` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `category` varchar(255) NOT NULL,
-  `dateStart` varchar(255) NOT NULL,
-  `dateEnd` varchar(255) NOT NULL,
   `picture` varchar(255) NOT NULL,
-  `adress` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
   `postCode` varchar(255) NOT NULL,
   `town` varchar(255) NOT NULL,
   `lat` varchar(255) NOT NULL,
@@ -124,7 +151,6 @@ CREATE TABLE `event` (
 CREATE TABLE `eventhour` (
   `eventId` int(11) NOT NULL,
   `eHour` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `dateEnd` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -137,13 +163,20 @@ CREATE TABLE `professional` (
   `professionalId` int(11) NOT NULL,
   `businessName` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `adress` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
   `postCode` varchar(255) NOT NULL,
   `town` varchar(255) NOT NULL,
   `category` varchar(255) NOT NULL,
   `phone` varchar(255) NOT NULL,
   `isConnected` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `professional`
+--
+
+INSERT INTO `professional` (`professionalId`, `businessName`, `name`, `address`, `postCode`, `town`, `category`, `phone`, `isConnected`) VALUES
+(1, 'totosarl', 'totopro', 'rue de tata', '75018', 'Paris', 'plombier', '0631471984', 0);
 
 --
 -- Index pour les tables exportées
@@ -196,7 +229,8 @@ ALTER TABLE `eventhour`
 --
 ALTER TABLE `professional`
   ADD PRIMARY KEY (`professionalId`);
-
+  
+ALTER TABLE `account` ADD FOREIGN KEY (`professionalId`) REFERENCES `professional`(`professionalId`) ON DELETE CASCADE ON UPDATE CASCADE;
 --
 -- AUTO_INCREMENT pour les tables exportées
 --
@@ -205,17 +239,17 @@ ALTER TABLE `professional`
 -- AUTO_INCREMENT pour la table `account`
 --
 ALTER TABLE `account`
-  MODIFY `accountId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `accountId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `category`
 --
 ALTER TABLE `category`
-  MODIFY `categoryId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `categoryId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT pour la table `categorytype`
 --
 ALTER TABLE `categorytype`
-  MODIFY `subcategoryId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `subcategoryId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `directory`
 --
@@ -230,7 +264,7 @@ ALTER TABLE `event`
 -- AUTO_INCREMENT pour la table `professional`
 --
 ALTER TABLE `professional`
-  MODIFY `professionalId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `professionalId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
