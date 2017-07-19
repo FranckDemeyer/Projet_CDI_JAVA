@@ -6,40 +6,40 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.ValueChangeEvent;
 
-import com.maville.back.entities.Account;
-import com.maville.back.entities.Professional;
-import com.maville.back.entities.ProfessionalCategory;
+import com.maville.back.dto.AccountDTO;
+import com.maville.back.dto.ProfessionalDTO;
+import com.maville.back.dto.ProfessionalCategoryDTO;
 import com.maville.back.factories.ServiceFactory;
 @ManagedBean(name="account")
 @SessionScoped
 public class AccountBean {
 	/* private Variables */
-	private Account account = new Account();
-	private static Map<Integer, Account> accounts = new HashMap<>();
+	private AccountDTO account = new AccountDTO();
+	private static Map<Integer, AccountDTO> accounts = new HashMap<>();
 	
 	public AccountBean() {
-		account.setProfessional(new Professional());
-		account.getProfessional().setCategory(new ProfessionalCategory());
+		account.setProfessional(new ProfessionalDTO());
+		account.getProfessional().setCategory(new ProfessionalCategoryDTO());
 	}
 	
 	/* Getters and Setters */
-	public Account getAccount() {
+	public AccountDTO getAccount() {
 		return account;
 	}
-	public void setAccount(Account account) {
+	public void setAccount(AccountDTO account) {
 		this.account = account;
 	}
-	public Map<Integer, Account> getAccounts() {
+	public Map<Integer, AccountDTO> getAccounts() {
 		return accounts;
 	}
 	/* private Methods */
-	private static void addAccounts(Account account) {
+	private static void addAccounts(AccountDTO account) {
 		accounts.put(account.getAccountId(), account);
 	}
 	private static void deleteAccounts(Integer accountId) {
 		accounts.remove(accountId);
 	}
-	private static void updateAccounts(Account account) {
+	private static void updateAccounts(AccountDTO account) {
 		accounts.put(account.getAccountId(), account);
 	}
 	

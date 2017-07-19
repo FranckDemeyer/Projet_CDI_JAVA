@@ -3,8 +3,8 @@ package com.maville.back.factories;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.maville.back.service.AccountService;
-import com.maville.back.service.ProfessionalCategoryService;
+import com.maville.back.service.interfaces.AccountService;
+import com.maville.back.service.interfaces.ProfessionalCategoryService;
 
 
 public class ServiceFactory {
