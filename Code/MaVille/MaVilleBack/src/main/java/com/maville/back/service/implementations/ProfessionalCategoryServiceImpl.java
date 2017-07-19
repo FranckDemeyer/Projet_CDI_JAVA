@@ -8,27 +8,27 @@ import com.maville.back.service.interfaces.ProfessionalCategoryService;
 public class ProfessionalCategoryServiceImpl implements ProfessionalCategoryService {
 	
 	@Override
-	public ProfessionalCategoryDTO getById(int id) {
+	public ProfessionalCategoryDTO getProfessionalCategoryById(int id) {
 		return null;
 	}
 	
 	@Override
-	public List<ProfessionalCategoryDTO> getAll() {
+	public List<ProfessionalCategoryDTO> getAllProfessionalCategory() {
 		return null;
 	}
 	
 	@Override
-	public void add(ProfessionalCategoryDTO category) {
+	public void addProfessionalCategory(ProfessionalCategoryDTO category) {
 
 	}
 
 	@Override
-	public void delete(ProfessionalCategoryDTO category) {
+	public void deleteProfessionalCategory(ProfessionalCategoryDTO category) {
 
 	}
 	
 	@Override
-	public void update(ProfessionalCategoryDTO category) {
+	public void updateProfessionalCategory(ProfessionalCategoryDTO category) {
 
 	}
 }

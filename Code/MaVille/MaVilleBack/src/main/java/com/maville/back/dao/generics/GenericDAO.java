@@ -1,5 +1,6 @@
 package com.maville.back.dao.generics;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -71,6 +72,21 @@ public class GenericDAO<T, PK> implements AbstractDAO<T, PK> {
 		return result;
 	}
 
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<T> findGroup(String namedQuery, Map<String, Object> parameters) {
+		List<T> results = new ArrayList<>();
+		try {
+			Query query = em.createNamedQuery(namedQuery);
+			if(parameters != null && !parameters.isEmpty()) populateQueryParameters(query, parameters);
+			results = query.getResultList();
+		} catch (Exception e) {
+			log.debug("Erreur dans la methode findGroupResults :" + e.getMessage());
+			e.printStackTrace();
+		}
+		return results;
+	}
+	
 	@Override
 	public T update(T entity) {
 		return em.merge(entity);

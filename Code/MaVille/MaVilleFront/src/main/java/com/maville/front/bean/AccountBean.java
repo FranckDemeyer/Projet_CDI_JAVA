@@ -45,19 +45,19 @@ public class AccountBean {
 	
 	/* public Methods */
 	public String add() throws Exception {
-		ServiceFactory.getInstance().getAccountService().add(account);
+		ServiceFactory.getInstance().getAccountService().addAccount(account);
 		addAccounts(account);
 		return "add";
 	}
 	
 	public String delete() {
-		ServiceFactory.getInstance().getAccountService().delete(account);
+		ServiceFactory.getInstance().getAccountService().deleteAccount(account);
 		deleteAccounts(account.getAccountId());
 		return "delete";
 	}
 	
 	public String update() throws Exception {
-		ServiceFactory.getInstance().getAccountService().update(account);
+		ServiceFactory.getInstance().getAccountService().updateAccount(account);
 		updateAccounts(account);
 		return "update";
 	}

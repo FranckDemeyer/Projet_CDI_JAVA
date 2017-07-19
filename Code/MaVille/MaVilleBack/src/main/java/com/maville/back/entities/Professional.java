@@ -19,6 +19,8 @@ public class Professional {
 	private String postalCode;
 	private String town;
 	private String phone;
+	private String lat;
+	private String lng;
 	@ManyToOne
 	private ProfessionalCategory category;
 	private boolean connected;
@@ -84,6 +86,22 @@ public class Professional {
 		this.phone = phone;
 	}
 	
+	public String getLat() {
+		return lat;
+	}
+
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+
+	public String getLng() {
+		return lng;
+	}
+
+	public void setLng(String lng) {
+		this.lng = lng;
+	}
+
 	public ProfessionalCategory getCategory() {
 		return category;
 	}
@@ -112,7 +130,9 @@ public class Professional {
 	
 	@Override
 	public String toString() {
-		return "Professional > professionalId : " + professionalId + ", bussinessName : " + bussinessName + ", name : " + name  + ", address : " + address + ", postalCode : " + postalCode +
-				", town : " + town + ", phone : " + phone + ", connected : " + connected;
+		return "Professional > professionalId : " + professionalId + ", bussinessName : " + bussinessName + ", name : "
+				+ name + ", address : " + address + ", postalCode : " + postalCode + ", town : " + town + ", phone : "
+				+ phone + ", lat : " + lat + ", lng : " + lng + ", category : " + category + ", connected : "
+				+ connected + ", account : " + account;
 	}
 }

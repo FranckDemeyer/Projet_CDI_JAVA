@@ -2,31 +2,42 @@ package com.maville.back.service.implementations;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Component;
+
 import com.maville.back.dto.AccountDTO;
 import com.maville.back.service.interfaces.AccountService;
 
+@Transactional
+@Component("accountService")
 public class AccountServiceImpl implements AccountService {
 	
+	
 	@Override
-	public AccountDTO getById(int id) {
+	public AccountDTO getAccountById(int id) {
 		AccountDTO account = null;
 		return account;
 	}
-
-	public List<AccountDTO> getAll() {
+	
+	@Override
+	public List<AccountDTO> getAllAccount() {
 		List<AccountDTO> accounts = null;
 		return accounts;
 	}
 
-	public void add(AccountDTO account) throws Exception {
+	@Override
+	public void addAccount(AccountDTO account) throws Exception {
 
 	}
 
-	public void delete(AccountDTO account) {
+	@Override
+	public void deleteAccount(AccountDTO account) {
 
 	}
 
-	public void update(AccountDTO account) throws Exception {
+	@Override
+	public void updateAccount(AccountDTO account) throws Exception {
 
 	}
 }

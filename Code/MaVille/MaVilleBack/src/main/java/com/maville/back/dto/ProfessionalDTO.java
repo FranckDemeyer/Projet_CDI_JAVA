@@ -14,6 +14,8 @@ public class ProfessionalDTO implements Serializable {
 	private String postalCode;
 	private String town;
 	private String phone;
+	private String lat;
+	private String lng;
 	private ProfessionalCategoryDTO category;
 	private boolean connected;
 	private AccountDTO account;
@@ -76,6 +78,22 @@ public class ProfessionalDTO implements Serializable {
 		this.phone = phone;
 	}
 	
+	public String getLat() {
+		return lat;
+	}
+
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+
+	public String getLng() {
+		return lng;
+	}
+
+	public void setLng(String lng) {
+		this.lng = lng;
+	}
+
 	public ProfessionalCategoryDTO getCategory() {
 		return category;
 	}
@@ -104,7 +122,9 @@ public class ProfessionalDTO implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Professional > professionalId : " + professionalId + ", bussinessName : " + bussinessName + ", name : " + name  + ", address : " + address + ", postalCode : " + postalCode +
-				", town : " + town + ", phone : " + phone + ", connected : " + connected;
+		return "ProfessionalDTO > professionalId : " + professionalId + ", bussinessName : " + bussinessName
+				+ ", name : " + name + ", address : " + address + ", postalCode : " + postalCode + ", town : " + town
+				+ ", phone : " + phone + ", lat : " + lat + ", lng : " + lng + ", category : " + category
+				+ ", connected : " + connected + ", account : " + account;
 	}
 }
