@@ -8,25 +8,45 @@ import com.maville.back.service.interfaces.AccountService;
 public class AccountServiceImpl implements AccountService {
 	
 	@Override
-	public AccountDTO getById(int id) {
+	public AccountDTO getAccountById(int id) {
 		AccountDTO account = null;
+		// TODO Auto-generated method stub
 		return account;
 	}
 
-	public List<AccountDTO> getAll() {
-		List<AccountDTO> accounts = null;
-		return accounts;
+	@Override
+	public List<AccountDTO> getAllAccount() {
+		List<AccountDTO> listAccounts = null;
+		// TODO Auto-generated method stub
+		return listAccounts;
 	}
 
-	public void add(AccountDTO account) throws Exception {
-
+	@Override
+	public List<AccountDTO> getAllProfessional() {
+		List<AccountDTO> listAccounts = null;
+		// TODO Auto-generated method stub
+		return listAccounts;
 	}
 
-	public void delete(AccountDTO account) {
-
+	@Override
+	public List<AccountDTO> getAllAdmin() {
+		List<AccountDTO> listAccounts = null;
+		// TODO Auto-generated method stub
+		return listAccounts;
 	}
 
-	public void update(AccountDTO account) throws Exception {
+	@Override
+	public void addAccount(AccountDTO account) throws Exception {
+		// TODO 
+	}
 
+	@Override
+	public void deleteAccount(AccountDTO account) {
+		// TODO 
+	}
+
+	@Override
+	public void updateAccount(AccountDTO account) throws Exception {
+		// TODO 
 	}
 }
