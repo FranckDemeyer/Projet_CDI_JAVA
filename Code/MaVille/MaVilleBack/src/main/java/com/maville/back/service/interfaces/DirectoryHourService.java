@@ -17,6 +17,6 @@ public interface DirectoryHourService {
 	
 	public void deleteDirectoryHour(DirectoryHourDTO directoryHour);
 	
-	public void updateDirectoryHour(DirectoryHourDTO directoryHour);
+	DirectoryHourDTO void updateDirectoryHour(DirectoryHourDTO directoryHour);
 	
 }
