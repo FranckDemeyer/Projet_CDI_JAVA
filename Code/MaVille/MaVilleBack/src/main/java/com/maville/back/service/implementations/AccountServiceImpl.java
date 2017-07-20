@@ -37,7 +37,7 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public void updateAccount(AccountDTO account) throws Exception {
-
+	public AccountDTO updateAccount(AccountDTO account) throws Exception {
+		return account;
 	}
 }

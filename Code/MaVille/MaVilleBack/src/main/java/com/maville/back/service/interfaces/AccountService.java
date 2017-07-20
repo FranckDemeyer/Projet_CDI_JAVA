@@ -9,5 +9,5 @@ public interface AccountService {
 	List<AccountDTO> getAllAccount();
 	void addAccount(AccountDTO account) throws Exception;
 	void deleteAccount(AccountDTO account);
-	void updateAccount(AccountDTO account) throws Exception;
+	AccountDTO updateAccount(AccountDTO account) throws Exception;
 }

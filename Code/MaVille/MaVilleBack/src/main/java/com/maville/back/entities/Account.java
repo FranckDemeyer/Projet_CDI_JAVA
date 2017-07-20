@@ -3,11 +3,22 @@ package com.maville.back.entities;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="Account.findAllProfessional", query="SELECT a FROM Account a WHERE admin=false"),
+	@NamedQuery(name="Account.findAllAdmin", query="SELECT a FROM Account a WHERE admin=true")
+})
 public class Account {
-
+	
+	/* Constants */
+	
+	public final static String FIND_ALL_PROFESSIONAL ="";
+	public final static String FIND_ALL_ADMIN ="";
+	
 	/* Variables */
 
 	@Id

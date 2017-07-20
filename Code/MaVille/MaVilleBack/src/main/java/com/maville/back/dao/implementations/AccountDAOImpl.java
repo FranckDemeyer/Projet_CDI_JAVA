@@ -1,8 +1,6 @@
 package com.maville.back.dao.implementations;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.maville.back.dao.generics.GenericDAO;
 import com.maville.back.dao.interfaces.AccountDAO;
@@ -16,16 +14,12 @@ public class AccountDAOImpl extends GenericDAO<Account, Integer> implements Acco
 
 	@Override
 	public List<Account> findAllProfessional() {
-		Map<String, Object> parameters = new HashMap<>();
-		parameters.put("admin", Boolean.TRUE);
-		return super.findGroup(namedQuery, parameters);
-		// TODO creer la namedQuery
+		return super.findGroup(Account.FIND_ALL_PROFESSIONAL, null);
 	}
 
 	@Override
 	public List<Account> findAllAdmin() {
-		// TODO Auto-generated method stub
-		return null;
+		return super.findGroup(Account.FIND_ALL_ADMIN, null);
 	}
 
 }
