@@ -5,10 +5,21 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="directoryCategory.getDirectoryCategoryByName", query="SELECT dc FROM DirectoryCategory dc WHERE dc.name = :name"),
+	@NamedQuery(name="directoryCategory.getDirectoriesByCategory", query="SELECT dc FROM DirectoryCategory dc WHERE dc.directories= :directories")
+})
 public class DirectoryCategory {
+	
+	/* Constants */
+	
+	public static final String GET_CATEGORY_BYNAME = "directoryCategory.getDirectoryCategoryByName";
+	public static final String GET_DIRECTORIES_BYCATEGORY = "directoryCategory.getDirectoriesByCategory";
 	
 	/* Variables */
 	

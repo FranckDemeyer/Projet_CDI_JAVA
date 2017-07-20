@@ -54,6 +54,6 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public AccountDTO updateAccount(AccountDTO account) throws Exception {
-		// TODO
+		return null;
 	}
 }

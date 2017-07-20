@@ -5,7 +5,13 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import com.maville.back.service.interfaces.AccountService;
 import com.maville.back.service.interfaces.DirectoryCategoryService;
+import com.maville.back.service.interfaces.DirectoryHourService;
+import com.maville.back.service.interfaces.DirectoryService;
+import com.maville.back.service.interfaces.EventCategoryService;
+import com.maville.back.service.interfaces.EventHourService;
+import com.maville.back.service.interfaces.EventService;
 import com.maville.back.service.interfaces.ProfessionalCategoryService;
+import com.maville.back.service.interfaces.ProfessionalService;
 
 
 public class ServiceFactory {
@@ -52,7 +58,7 @@ public class ServiceFactory {
 	}
 	
 	public ProfessionalService getProfessionalService() {
-			return context.getBean("professionalService", EProfessionalService.class);
+			return context.getBean("professionalService", ProfessionalService.class);
 	}
 	
 	public ProfessionalCategoryService getCategoryService() {

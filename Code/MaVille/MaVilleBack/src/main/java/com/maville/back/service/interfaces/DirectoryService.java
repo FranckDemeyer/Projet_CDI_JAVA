@@ -24,6 +24,6 @@ public interface DirectoryService {
 
 	public List<DirectoryDTO> getDirectoryByCoord(String lat, String lng, double rayon);
 	
-	public List<DirectoryHourDTO> getDirectoryHours(DirectoryDTO directory); 
+	public List<DirectoryHourDTO> getDirectoryHoursByDirectory(DirectoryDTO directory); 
 
 }

@@ -6,10 +6,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="directory.getDirectoryByCoord", query="SELECT d FROM Directory d WHERE d.lat > :latMin AND d.lat < :latMax AND d.lng > :lngMin AND d.lng < :lngMax"),
+	@NamedQuery(name="directory.getDirectoryByName", query="SELECT d FROM Directory d WHERE d.name = :name"),
+	@NamedQuery(name="directory.getDirectoryByCategory", query="SELECT d FROM Directory WHERE d.category = :category")
+})
 public class Directory {
+	
+	/* Constants */
+	
+	public static final String GET_DIRECTORY_BYCOORD = "directory.getDirectoryByCoord";
+	public static final String GET_DIRECTORY_BYNAME = "directory.getDirectoryByName";
+	public static final String GET_DIRECTORY_BYCATEGORY = "directory.getDirectoryByCategory";
 	
 	/* Variables */
 	

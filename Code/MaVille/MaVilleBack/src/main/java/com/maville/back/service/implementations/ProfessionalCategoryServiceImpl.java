@@ -36,7 +36,7 @@ public class ProfessionalCategoryServiceImpl implements ProfessionalCategoryServ
 	
 	@Override
 	public ProfessionalCategoryDTO updateProfessionalCategory(ProfessionalCategoryDTO category) {
-
+		return null;
 	}
 
 	@Override

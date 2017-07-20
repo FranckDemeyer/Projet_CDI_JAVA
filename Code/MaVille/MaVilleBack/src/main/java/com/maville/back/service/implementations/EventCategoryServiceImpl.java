@@ -48,7 +48,7 @@ public class EventCategoryServiceImpl implements EventCategoryService {
 
 	@Override
 	public EventCategoryDTO updateEventCategory(EventCategoryDTO eventCategory) {
-		// TODO 
+		return null;
 	}
 
 	@Override

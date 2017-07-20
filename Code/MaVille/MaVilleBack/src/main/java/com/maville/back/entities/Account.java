@@ -9,8 +9,8 @@ import javax.persistence.OneToOne;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name="Account.findAllProfessional", query="SELECT a FROM Account a WHERE admin=false"),
-	@NamedQuery(name="Account.findAllAdmin", query="SELECT a FROM Account a WHERE admin=true")
+	@NamedQuery(name="Account.findAllProfessional", query="SELECT a FROM Account a WHERE a.admin=false"),
+	@NamedQuery(name="Account.findAllAdmin", query="SELECT a FROM Account a WHERE a.admin=true")
 })
 public class Account {
 	

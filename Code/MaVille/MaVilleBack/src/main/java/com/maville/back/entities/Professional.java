@@ -4,11 +4,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 
+@NamedQuery(name="professional.getCategoryProfessionals", query="SELECT p FROM Professional WHERE p.categoryId=:professionalCategory")
 public class Professional {
 	
-	/* private Variables */
+	/* Constants */
+	
+	public static String GET_CATEGORY_PROFESSIONALS = "professional.getCategoryProfessionals";
+	
+	/* Variables */
 	
 	@Id
 	@GeneratedValue

@@ -42,7 +42,7 @@ public class DirectoryServiceImpl implements DirectoryService {
 
 	@Override
 	public DirectoryDTO updateDirectory(DirectoryDTO directory) {
-		// TODO 
+		return null;
 
 	}
 
@@ -61,7 +61,7 @@ public class DirectoryServiceImpl implements DirectoryService {
 	}
 
 	@Override
-	public List<DirectoryHourDTO> getDirectoryHours(DirectoryDTO directory) {
+	public List<DirectoryHourDTO> getDirectoryHoursByDirectory(DirectoryDTO directory) {
 		List<DirectoryHourDTO> directoryHours = null;
 		// TODO
 		return directoryHours;

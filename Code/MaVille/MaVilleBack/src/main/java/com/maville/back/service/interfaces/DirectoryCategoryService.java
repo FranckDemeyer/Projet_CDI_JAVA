@@ -17,7 +17,7 @@ public interface DirectoryCategoryService {
 
 	public void deleteDirectoryCategory(DirectoryCategoryDTO directoryCategory);
 
-	DirectoryCategoryDTO void updateDirectoryCategory(DirectoryCategoryDTO directoryCategory);
+	DirectoryCategoryDTO updateDirectoryCategory(DirectoryCategoryDTO directoryCategory);
 
 	public List<DirectoryDTO> getDirectoriesByCategory(int idCategory);
 

@@ -41,7 +41,7 @@ public class DirectoryCategoryServiceImpl implements DirectoryCategoryService {
 
 	@Override
 	public DirectoryCategoryDTO updateDirectoryCategory(DirectoryCategoryDTO directoryCategory) {
-		// TODO 
+		return null;
 	}
 
 	@Override
