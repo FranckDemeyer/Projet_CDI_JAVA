@@ -43,7 +43,7 @@ public class DirectoryServiceImpl implements DirectoryService {
 	@Override
 	public DirectoryDTO updateDirectory(DirectoryDTO directory) {
 		// TODO 
-
+		return null;
 	}
 
 	@Override

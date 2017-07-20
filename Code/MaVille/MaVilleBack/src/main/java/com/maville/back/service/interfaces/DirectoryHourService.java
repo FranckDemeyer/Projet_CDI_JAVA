@@ -11,12 +11,12 @@ public interface DirectoryHourService {
 	
 	public List<DirectoryHourDTO> getAllDirectoryHours();
 	
-	public List<DirectoryHourDTO> getDirectoryHours(DirectoryDTO directory);
+	public List<DirectoryHourDTO> getHoursByDirectory(DirectoryDTO directory);
 	
 	public void addDirectoryHour(DirectoryHourDTO directoryHour);
 	
 	public void deleteDirectoryHour(DirectoryHourDTO directoryHour);
 	
-	DirectoryHourDTO void updateDirectoryHour(DirectoryHourDTO directoryHour);
+	DirectoryHourDTO updateDirectoryHour(DirectoryHourDTO directoryHour);
 	
 }

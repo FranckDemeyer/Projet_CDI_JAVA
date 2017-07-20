@@ -1,0 +1,5 @@
+package com.maville.back.service.interfaces;
+
+public interface EventCategoryService {
+
+}

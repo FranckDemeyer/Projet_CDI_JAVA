@@ -11,13 +11,13 @@ public interface DirectoryCategoryService {
 
 	public List<DirectoryCategoryDTO> getAllDirectoryCategory();
 
-	public List<DirectoryCategoryDTO> getDirectoryCategoryByName(String name);
+	public DirectoryCategoryDTO getDirectoryCategoryByName(String name);
 
 	public void addDirectoryCategory(DirectoryCategoryDTO directoryCategory);
 
 	public void deleteDirectoryCategory(DirectoryCategoryDTO directoryCategory);
 
-	DirectoryCategoryDTO void updateDirectoryCategory(DirectoryCategoryDTO directoryCategory);
+	public DirectoryCategoryDTO updateDirectoryCategory(DirectoryCategoryDTO directoryCategory);
 
 	public List<DirectoryDTO> getDirectoriesByCategory(int idCategory);
 

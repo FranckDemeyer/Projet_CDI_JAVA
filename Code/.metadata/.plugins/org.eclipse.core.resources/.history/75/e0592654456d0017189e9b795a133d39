@@ -1,0 +1,20 @@
+package com.maville.back.service.interfaces;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+import com.maville.back.dto.EventDTO;
+
+public interface EventService {
+
+	public EventDTO getEventById(int id);
+	
+	public List<EventDTO> getAllEvents();
+	
+	public List<EventDTO> getEventByName(String name);
+	
+	public List<EventDTO> getEventByDate(LocalDateTime hour);
+	
+	public List<EventDTO> getEventByDateRange(LocalDateStart)
+	
+}

@@ -1,0 +1,20 @@
+package com.maville.back.service.interfaces;
+
+import java.util.List;
+
+import com.maville.back.dto.DirectoryCategoryDTO;
+
+public interface DirectoryCategoryService {
+
+	public DirectoryCategoryDTO getDirectoryCategoryById(int id);
+	
+	public List<DirectoryCategoryDTO> getAllDirectoryCategory();
+	
+	public void addDirectoryCategory(DirectoryCategoryDTO dirCategory);
+	
+	public void deleteDirectoryCategory(DirectoryCategoryDTO dirCategory);
+	
+	public void updateDirectoryCategory(DirectoryCategoryDTO dirCategory);
+	
+	
+}
