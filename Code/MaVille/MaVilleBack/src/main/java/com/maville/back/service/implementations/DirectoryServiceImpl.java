@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.maville.back.dto.DirectoryCategoryDTO;
 import com.maville.back.dto.DirectoryDTO;
+import com.maville.back.dto.DirectoryHourDTO;
 import com.maville.back.service.interfaces.DirectoryService;
 
 public class DirectoryServiceImpl implements DirectoryService {
@@ -57,6 +58,13 @@ public class DirectoryServiceImpl implements DirectoryService {
 		List<DirectoryDTO> listDirectory = null;
 		// TODO 
 		return listDirectory;
+	}
+
+	@Override
+	public List<DirectoryHourDTO> getDirectoryHours(DirectoryDTO directory) {
+		List<DirectoryHourDTO> directoryHours = null;
+		// TODO
+		return directoryHours;
 	}
 
 }

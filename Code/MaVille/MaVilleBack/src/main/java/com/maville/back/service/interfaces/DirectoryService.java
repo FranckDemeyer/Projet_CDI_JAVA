@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.maville.back.dto.DirectoryCategoryDTO;
 import com.maville.back.dto.DirectoryDTO;
+import com.maville.back.dto.DirectoryHourDTO;
 
 public interface DirectoryService {
 
@@ -22,5 +23,7 @@ public interface DirectoryService {
 	public List<DirectoryDTO> getDirectoryByCategory(DirectoryCategoryDTO category);
 
 	public List<DirectoryDTO> getDirectoryByCoord(String lat, String lng, double rayon);
+	
+	public List<DirectoryHourDTO> getDirectoryHours(DirectoryDTO directory); 
 
 }
