@@ -19,18 +19,14 @@ public class ProfessionalCategoryServiceImpl implements ProfessionalCategoryServ
 	}
 	
 	@Override
-<<<<<<< HEAD
-	public void addProfessionalCategory(ProfessionalCategoryDTO category) {
-=======
 	public List<ProfessionalCategoryDTO> getProfessionalCategoryByName(String name) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void add(ProfessionalCategoryDTO category) {
->>>>>>> 0a64aa8b9a45cafc693b9a88a4b1a11938b58893
-
+	public void addProfessionalCategory(ProfessionalCategoryDTO category) {
+		
 	}
 
 	@Override
@@ -39,7 +35,7 @@ public class ProfessionalCategoryServiceImpl implements ProfessionalCategoryServ
 	}
 	
 	@Override
-	public void updateProfessionalCategory(ProfessionalCategoryDTO category) {
+	public ProfessionalCategoryDTO updateProfessionalCategory(ProfessionalCategoryDTO category) {
 
 	}
 
