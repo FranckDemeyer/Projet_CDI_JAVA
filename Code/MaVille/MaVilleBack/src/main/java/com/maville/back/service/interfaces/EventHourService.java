@@ -10,5 +10,5 @@ public interface EventHourService {
 	
 	public void deleteEventHour(EventHourDTO eventHour);
 	
-	public void updateEventHour(EventHourDTO eventHour);
+	public EventHourDTO updateEventHour(EventHourDTO eventHour);
 }
