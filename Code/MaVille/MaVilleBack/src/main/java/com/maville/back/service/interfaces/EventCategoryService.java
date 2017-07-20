@@ -19,7 +19,7 @@ public interface EventCategoryService {
 	
 	public void deleteEventCategory(EventCategoryDTO eventCategory);
 	
-	public void updateEventCategory(EventCategoryDTO eventCategory);
+	public EventCategoryDTO updateEventCategory(EventCategoryDTO eventCategory);
 	
 	public List<EventDTO> getCategoryEvents(EventCategoryDTO eventCategory);
 }
