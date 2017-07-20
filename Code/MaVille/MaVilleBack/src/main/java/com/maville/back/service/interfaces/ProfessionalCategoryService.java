@@ -16,7 +16,7 @@ public interface ProfessionalCategoryService {
 
 	void delete(ProfessionalCategoryDTO category);
 
-	void update(ProfessionalCategoryDTO category);
+	ProfessionalCategoryDTO update(ProfessionalCategoryDTO category);
 	
 	List<ProfessionalDTO> getCategoryProfessionals(ProfessionalCategoryDTO professionalCategory);
 }
