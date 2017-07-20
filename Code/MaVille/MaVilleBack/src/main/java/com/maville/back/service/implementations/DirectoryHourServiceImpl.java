@@ -40,7 +40,7 @@ public class DirectoryHourServiceImpl implements DirectoryHourService {
 	}
 
 	@Override
-	public void updateDirectoryHour(DirectoryHourDTO directoryHour) {
+	public DirectoryHourDTO updateDirectoryHour(DirectoryHourDTO directoryHour) {
 		// TODO 
 	}
 
