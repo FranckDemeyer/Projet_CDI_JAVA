@@ -41,7 +41,7 @@ public class DirectoryServiceImpl implements DirectoryService {
 	}
 
 	@Override
-	public void updateDirectory(DirectoryDTO directory) {
+	public DirectoryDTO updateDirectory(DirectoryDTO directory) {
 		// TODO 
 
 	}
