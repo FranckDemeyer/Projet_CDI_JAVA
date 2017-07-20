@@ -22,7 +22,7 @@ public interface EventService {
 	
 	public void deleteEvent(EventDTO event);
 	
-	public void updateEvent(EventDTO event);
+	public EventDTO updateEvent(EventDTO event);
 	
 	public List<EventHourDTO> getEventHours(EventDTO event);
 	
