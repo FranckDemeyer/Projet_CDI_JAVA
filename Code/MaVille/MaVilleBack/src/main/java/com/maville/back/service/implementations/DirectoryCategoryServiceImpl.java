@@ -40,7 +40,7 @@ public class DirectoryCategoryServiceImpl implements DirectoryCategoryService {
 	}
 
 	@Override
-	public void updateDirectoryCategory(DirectoryCategoryDTO directoryCategory) {
+	public DirectoryCategoryDTO updateDirectoryCategory(DirectoryCategoryDTO directoryCategory) {
 		// TODO 
 	}
 
