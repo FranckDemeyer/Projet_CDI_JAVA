@@ -21,5 +21,5 @@ public interface ProfessionalService {
 	
 	public void deleteProfessional(ProfessionalDTO professional);
 	
-	public void updateProfessional(ProfessionalDTO professional);
+	public ProfessionalDTO updateProfessional(ProfessionalDTO professional);
 }
