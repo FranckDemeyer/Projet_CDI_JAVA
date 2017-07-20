@@ -18,7 +18,7 @@ public interface DirectoryService {
 
 	public void delecteDirectory(DirectoryDTO directory);
 
-	public void updateDirectory(DirectoryDTO directory);
+	public DirectoryDTO updateDirectory(DirectoryDTO directory);
 
 	public List<DirectoryDTO> getDirectoryByCategory(DirectoryCategoryDTO category);
 
