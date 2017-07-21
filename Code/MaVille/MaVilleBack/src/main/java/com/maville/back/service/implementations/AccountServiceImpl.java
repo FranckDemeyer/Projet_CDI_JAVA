@@ -12,7 +12,6 @@ import com.maville.back.dao.interfaces.AccountDAO;
 import com.maville.back.dto.AccountDTO;
 import com.maville.back.entities.Account;
 import com.maville.back.service.interfaces.AccountService;
-import com.mysql.cj.jdbc.exceptions.SQLError;
 
 @Transactional
 @Component("accountService")
@@ -46,14 +45,14 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public List<AccountDTO> getAllProfessional() {
 		List<AccountDTO> listAccounts = null;
-		BeanUtils.copyProperties(accountDao.findAllProfessional(), listAccounts);
+		BeanUtils.copyProperties(accountDao.findGroup(Account.FIND_ALL_PROFESSIONAL, null), listAccounts);
 		return listAccounts;
 	}
 
 	@Override
 	public List<AccountDTO> getAllAdmin() {
 		List<AccountDTO> listAccounts = null;
-		BeanUtils.copyProperties(accountDao.findAllAdmin(), listAccounts);
+		BeanUtils.copyProperties(accountDao.findGroup(Account.FIND_ALL_ADMIN, null), listAccounts);
 		return listAccounts;
 	}
 

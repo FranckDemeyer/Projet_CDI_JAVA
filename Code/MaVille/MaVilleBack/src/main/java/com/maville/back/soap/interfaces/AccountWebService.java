@@ -18,6 +18,8 @@ public interface AccountWebService {
 	@WebMethod
 	List<AccountDTO> findAllAccount();
 	@WebMethod
+	List<AccountDTO> findAccountByName(String name);
+	@WebMethod
 	AccountDTO updateAccount(AccountDTO account) throws Exception;
 	@WebMethod
 	List<AccountDTO> findAllProfessionalAccount();

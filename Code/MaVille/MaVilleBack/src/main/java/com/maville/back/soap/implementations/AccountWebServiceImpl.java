@@ -12,6 +12,12 @@ import com.maville.back.soap.interfaces.AccountWebService;
 public class AccountWebServiceImpl implements AccountWebService {
 
 	@Override
+	public List<AccountDTO> findAccountByName(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public void deleteAccount(AccountDTO account) {
 		ServiceFactory.getInstance().getAccountService().deleteAccount(account);
 	}
