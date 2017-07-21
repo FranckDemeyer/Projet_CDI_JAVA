@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="com.maville.back.entities.DirectoryHour"/>
-<fullyQualifiedTypeName name="com.maville.back.dto.DirectoryHourDTO"/>
 <fullyQualifiedTypeName name="com.maville.back.dto.DirectoryDTO"/>
 <fullyQualifiedTypeName name="com.maville.back.dto.EventCategoryDTO"/>
 <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
@@ -18,9 +17,6 @@
 <fullyQualifiedTypeName name="com.maville.back.service.interfaces.ProfessionalService"/>
 <fullyQualifiedTypeName name="com.maville.back.dao.interfaces.AccountDAO"/>
 <fullyQualifiedTypeName name="com.maville.back.entities.Account"/>
-<fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
-<fullyQualifiedTypeName name="javax.transaction.Transactional"/>
-<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
 <fullyQualifiedTypeName name="com.maville.back.dao.interfaces.DirectoryCategoryDAO"/>
 <fullyQualifiedTypeName name="com.maville.back.dto.DirectoryCategoryDTO"/>
 <fullyQualifiedTypeName name="com.maville.back.entities.Directory"/>
@@ -28,5 +24,10 @@
 <fullyQualifiedTypeName name="java.lang.IllegalArgumentException"/>
 <fullyQualifiedTypeName name="com.mysql.cj.jdbc.exceptions.SQLError"/>
 <fullyQualifiedTypeName name="com.maville.back.entities.DirectoryCategory"/>
+<fullyQualifiedTypeName name="com.maville.back.dto.DirectoryHourDTO"/>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
+<fullyQualifiedTypeName name="javax.transaction.Transactional"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+<fullyQualifiedTypeName name="com.maville.back.dao.interfaces.DirectoryHourDAO"/>
 <fullyQualifiedTypeName name="org.springframework.beans.BeanUtils"/>
 </qualifiedTypeNameHistroy>

@@ -20,7 +20,7 @@ public class DirectoryCategoryServiceImpl implements DirectoryCategoryService {
 
 	@Autowired
 	DirectoryCategoryDAO directoryCategoryDao;
-	
+
 	@Override
 	public DirectoryCategoryDTO getDirectoryCategoryById(int id) {
 		DirectoryCategoryDTO directoryCategory = new DirectoryCategoryDTO();
@@ -39,34 +39,35 @@ public class DirectoryCategoryServiceImpl implements DirectoryCategoryService {
 	public DirectoryCategoryDTO getDirectoryCategoryByName(String name) {
 		DirectoryCategoryDTO directoryCategory = new DirectoryCategoryDTO();
 		// TODO implement the query
-		//BeanUtils.copyProperties(directoryCategoryDao.findOne(DirectoryCategory., parameters), directoryCategory);
+		// BeanUtils.copyProperties(directoryCategoryDao.findOne(DirectoryCategory.,
+		// parameters), directoryCategory);
 		return directoryCategory;
 	}
 
 	@Override
 	public void addDirectoryCategory(DirectoryCategoryDTO directoryCategory) {
-		if (getDirectoryCategoryByName(directoryCategory.getName()) != null){
+		if (getDirectoryCategoryByName(directoryCategory.getName()) != null) {
 			throw new RuntimeException("Cette catégorie existe déjà.");
 		}
 		DirectoryCategory entity = new DirectoryCategory();
 		BeanUtils.copyProperties(directoryCategory, entity);
-		try{
+		try {
 			directoryCategoryDao.save(entity);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			throw new RuntimeException("Erreur lors de l'enregistrement de la catégorie.");
 		}
 	}
 
 	@Override
 	public void deleteDirectoryCategory(DirectoryCategoryDTO directoryCategory) {
-		if (getDirectoryCategoryByName(directoryCategory.getName()) == null){
+		if (getDirectoryCategoryByName(directoryCategory.getName()) == null) {
 			throw new RuntimeException("Cette catégorie n'existe pas.");
 		}
 		DirectoryCategory entity = new DirectoryCategory();
 		BeanUtils.copyProperties(directoryCategory, entity);
-		try{
+		try {
 			directoryCategoryDao.delete(entity);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			throw new RuntimeException("Erreur lors de la suppression de la catégorie.");
 		}
 	}
@@ -75,9 +76,9 @@ public class DirectoryCategoryServiceImpl implements DirectoryCategoryService {
 	public DirectoryCategoryDTO updateDirectoryCategory(DirectoryCategoryDTO directoryCategory) {
 		DirectoryCategory entity = new DirectoryCategory();
 		BeanUtils.copyProperties(directoryCategory, entity);
-		try{
+		try {
 			directoryCategoryDao.update(entity);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			throw new RuntimeException("Erreur lors de la mise à jour de la catégorie.");
 		}
 		BeanUtils.copyProperties(entity, directoryCategory);
@@ -87,8 +88,8 @@ public class DirectoryCategoryServiceImpl implements DirectoryCategoryService {
 	@Override
 	public List<DirectoryDTO> getDirectoriesByCategory(int idCategory) {
 		List<DirectoryDTO> listDirectory = null;
-		//TODO implement method from DAO
-		//BeanUtils.copyProperties(directoryCategoryDao., listDirectory); 
+		// TODO implement method from DAO
+		// BeanUtils.copyProperties(directoryCategoryDao., listDirectory);
 		return listDirectory;
 	}
 
