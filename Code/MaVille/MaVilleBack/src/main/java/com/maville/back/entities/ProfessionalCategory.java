@@ -15,7 +15,9 @@ public class ProfessionalCategory {
 	@Id
 	@GeneratedValue
 	private int professionalCategoryId;
+	
 	private String name;
+	
 	@OneToMany(mappedBy="category")
 	private List<Professional> professionals;
 	

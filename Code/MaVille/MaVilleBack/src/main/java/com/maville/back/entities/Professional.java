@@ -1,5 +1,6 @@
 package com.maville.back.entities;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -7,7 +8,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 
-@NamedQuery(name="professional.getCategoryProfessionals", query="SELECT p FROM Professional WHERE p.categoryId=:professionalCategory")
+@Entity
+@NamedQuery(name="professional.getCategoryProfessionals", query="SELECT p FROM Professional p WHERE p.category=:professionalCategory")
 public class Professional {
 	
 	/* Constants */
@@ -19,6 +21,7 @@ public class Professional {
 	@Id
 	@GeneratedValue
 	private int professionalId;
+	
 	private String bussinessName;
 	private String name;
 	private String address;
@@ -27,19 +30,38 @@ public class Professional {
 	private String phone;
 	private String lat;
 	private String lng;
+	
 	@ManyToOne
 	private ProfessionalCategory category;
 	private boolean connected;
+	
 	@OneToOne
 	@JoinColumn(name="account_id", referencedColumnName="accountId")
 	private Account account;
-
+	
+	/* Constructors */
+	
+	public Professional() {
+	}
+	
+	public Professional(String bussinessName, String name, String address, String postalCode, String town, String phone,
+			String lat, String lng, boolean connected) {
+		this.bussinessName = bussinessName;
+		this.name = name;
+		this.address = address;
+		this.postalCode = postalCode;
+		this.town = town;
+		this.phone = phone;
+		this.lat = lat;
+		this.lng = lng;
+		this.connected = connected;
+	}
 	/* Getters and Setters */
 	
 	public int getProfessionalId() {
 		return professionalId;
 	}
-	
+
 	public void setProfessionalId(int professionalId) {
 		this.professionalId = professionalId;
 	}
@@ -139,6 +161,6 @@ public class Professional {
 		return "Professional > professionalId : " + professionalId + ", bussinessName : " + bussinessName + ", name : "
 				+ name + ", address : " + address + ", postalCode : " + postalCode + ", town : " + town + ", phone : "
 				+ phone + ", lat : " + lat + ", lng : " + lng + ", category : " + category + ", connected : "
-				+ connected + ", account : " + account;
+				+ connected;
 	}
 }

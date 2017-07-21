@@ -11,12 +11,12 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<!-- Spring -->
-		<spring-framework.version>3.2.3.RELEASE</spring-framework.version>
+		<spring-framework.version>4.2.4.RELEASE</spring-framework.version>
 		<!-- Hibernate / JPA -->
 		<hibernate.version>5.2.10.Final</hibernate.version>
 		<!-- Logging -->
 		<!-- Test -->
-		<junit.version>4.11</junit.version>
+		<junit.version>4.12</junit.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -31,7 +31,21 @@
 				<artifactId>spring-tx</artifactId>
 				<version>${spring-framework.version}</version>
 			</dependency>
-			<!-- Logging with SLF4J & LogBack -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${spring-framework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jdbc</artifactId>
+				<version>${spring-framework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-orm</artifactId>
+				<version>${spring-framework.version}</version>
+			</dependency>
 		<!-- Logging with Log4j -->
 		<dependency>
 			<groupId>log4j</groupId>

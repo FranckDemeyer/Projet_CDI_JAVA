@@ -11,7 +11,9 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 
 import org.apache.log4j.Logger;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 public class GenericDAO<T, PK> implements AbstractDAO<T, PK> {
 	
 	/* Variables */
@@ -86,7 +88,7 @@ public class GenericDAO<T, PK> implements AbstractDAO<T, PK> {
 		}
 		return results;
 	}
-	
+		
 	@Override
 	public T update(T entity) {
 		return em.merge(entity);

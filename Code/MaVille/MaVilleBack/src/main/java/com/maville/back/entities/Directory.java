@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 @NamedQueries({
 	@NamedQuery(name="directory.getDirectoryByCoord", query="SELECT d FROM Directory d WHERE d.lat > :latMin AND d.lat < :latMax AND d.lng > :lngMin AND d.lng < :lngMax"),
 	@NamedQuery(name="directory.getDirectoryByName", query="SELECT d FROM Directory d WHERE d.name = :name"),
-	@NamedQuery(name="directory.getDirectoryByCategory", query="SELECT d FROM Directory WHERE d.category = :category")
+	@NamedQuery(name="directory.getDirectoryByCategory", query="SELECT d FROM Directory d WHERE d.category = :category")
 })
 public class Directory {
 	
@@ -29,6 +29,7 @@ public class Directory {
 	@Id
 	@GeneratedValue
 	private int directoryId;
+	
 	private String name;
 	private String address;
 	private String postalCode;
@@ -40,8 +41,10 @@ public class Directory {
 	private String photo;
 	private String website;
 	private String description;
+	
 	@ManyToOne
 	private DirectoryCategory category;
+	
 	@OneToMany(mappedBy = "directory")
 	private List<DirectoryHour> hours;
 	

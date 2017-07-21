@@ -16,6 +16,7 @@ public class Event {
 	@Id
 	@GeneratedValue
 	private int eventId;
+	
 	private String name;
 	private String address;
 	private String postalCode;
@@ -24,8 +25,10 @@ public class Event {
 	private String lng;
 	private String photo;
 	private String description;
+	
 	@ManyToOne
 	private EventCategory category;
+	
 	@OneToMany(mappedBy = "event")
 	private List<EventHour> hours;
 

@@ -1,11 +1,13 @@
 package com.maville.back.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 
 @Entity
-@NamedQuery(name="directoryHour.getDirectoryHoursByDirectory", query="SELECT dh FROM DirectoryHour WHERE dh.directory = :directory")
+@NamedQuery(name="directoryHour.getDirectoryHoursByDirectory", query="SELECT dh FROM DirectoryHour dh WHERE dh.directory = :directory")
 public class DirectoryHour {
 	
 	/* Constants */
@@ -14,13 +16,26 @@ public class DirectoryHour {
 	
 	/* Variable */
 	
+	@Id
+	@GeneratedValue
+	private int directoryHourId;
+	
 	@ManyToOne
 	private Directory directory;
+	
 	private String day;
 	private String hour;
 
 	/* Getters and Setters */
 	
+	public int getDirectoryHourId() {
+		return directoryHourId;
+	}
+
+	public void setDirectoryHourId(int directoryHourId) {
+		this.directoryHourId = directoryHourId;
+	}
+
 	public Directory getDirectory() {
 		return directory;
 	}

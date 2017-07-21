@@ -1,5 +1,6 @@
 package com.maville.back.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,8 +17,8 @@ public class Account {
 	
 	/* Constants */
 	
-	public final static String FIND_ALL_PROFESSIONAL ="";
-	public final static String FIND_ALL_ADMIN ="";
+	public final static String FIND_ALL_PROFESSIONAL ="Account.findAllProfessional";
+	public final static String FIND_ALL_ADMIN ="Account.findAllAdmin";
 	
 	/* Variables */
 
@@ -27,8 +28,26 @@ public class Account {
 	private String username;
 	private String password;
 	private boolean admin;
-	@OneToOne(mappedBy = "account")
+	@OneToOne(mappedBy = "account", cascade=CascadeType.ALL)
 	private Professional professional;
+
+	/* Constructors */
+	
+	public Account() {
+	}
+
+	public Account(String username, String password, boolean admin) {
+		this.username = username;
+		this.password = password;
+		this.admin = admin;
+	}
+
+	public Account(String username, String password, boolean admin, Professional professional) {
+		this.username = username;
+		this.password = password;
+		this.admin = admin;
+		this.professional = professional;
+	}
 
 	/* Getters and Setters */
 
@@ -76,6 +95,7 @@ public class Account {
 
 	@Override
 	public String toString() {
-		return "Account > accountId : " + accountId + ", username : " + username + ", password : " + password + ", admin : " + admin;
+		return "Account > accountId : " + accountId + ", username : " + username + ", password : " + password
+				+ ", admin : " + admin + ", professional : " + professional;
 	}
 }

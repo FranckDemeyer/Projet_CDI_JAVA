@@ -15,7 +15,9 @@ public class EventCategory {
 	@Id
 	@GeneratedValue
 	private int eventCategoryId;
+	
 	private String name;
+	
 	@OneToMany(mappedBy="category")
 	private List<Event> events;
 	

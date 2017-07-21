@@ -26,7 +26,9 @@ public class DirectoryCategory {
 	@Id
 	@GeneratedValue
 	private int directoryCategoryId;
+	
 	private String name;
+	
 	@OneToMany(mappedBy="category")
 	private List<Directory> directories;
 	

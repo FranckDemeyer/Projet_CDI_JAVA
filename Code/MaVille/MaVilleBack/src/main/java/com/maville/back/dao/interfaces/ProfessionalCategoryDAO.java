@@ -4,5 +4,4 @@ import com.maville.back.dao.generics.AbstractDAO;
 import com.maville.back.entities.ProfessionalCategory;
 
 public interface ProfessionalCategoryDAO extends AbstractDAO<ProfessionalCategory, Integer> {
-
 }
