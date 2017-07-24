@@ -15,8 +15,8 @@ import javax.persistence.OneToMany;
 	@NamedQuery(name="event.findDuplicate",
 				query="SELECT e FROM Event e WHERE e.name = :name AND e.hours= :hours AND e.lat = :lat AND e.lng = :lng"),
 	@NamedQuery(name="event.findByDate",
-				query="SELECT e FROM Event e, EventHour eh WHERE e.hours = eh.eventHourId AND (eh.hour >= :datedeb AND eh.hour < :datefin)"),
-	@NamedQuery(name="event.findByName", query="SELECT e FROM Event e WHERE e.name = :name"),
+				query="SELECT e FROM Event e"), // , EventHour eh WHERE e.hours = eh.eventHourId AND (eh.hour >= :datedeb AND eh.hour < :datefin)
+	@NamedQuery(name="event.findByName", query="SELECT e FROM Event e WHERE e.name = :name")
 })
 public class Event {
 	

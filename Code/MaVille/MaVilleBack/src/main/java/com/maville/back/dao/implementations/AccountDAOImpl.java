@@ -8,7 +8,7 @@ import com.maville.back.dao.interfaces.AccountDAO;
 import com.maville.back.entities.Account;
 
 @Transactional
-@Repository("accountDAO")
+@Repository("accountDAOI")
 public class AccountDAOImpl extends GenericDAO<Account, Integer> implements AccountDAO {
 
 	public AccountDAOImpl() {

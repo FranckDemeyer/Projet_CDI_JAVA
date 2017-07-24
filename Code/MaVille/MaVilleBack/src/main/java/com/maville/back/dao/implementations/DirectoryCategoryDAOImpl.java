@@ -13,7 +13,7 @@ import com.maville.back.entities.Directory;
 import com.maville.back.entities.DirectoryCategory;
 
 @Transactional
-@Repository("directoryCategoryDAO")
+@Repository("directoryCategoryDAOI")
 public class DirectoryCategoryDAOImpl extends GenericDAO<DirectoryCategory, Integer> implements DirectoryCategoryDAO {
 
 	public DirectoryCategoryDAOImpl() {

@@ -13,9 +13,13 @@ import com.maville.back.factories.ServiceFactory;
 @ManagedBean(name="account")
 @SessionScoped
 public class AccountBean {
-	/* private Variables */
+	
+	/* Variables */
+	
 	private AccountDTO account = new AccountDTO();
 	private static Map<Integer, AccountDTO> accounts = new HashMap<>();
+	
+	/* Constructors */
 	
 	public AccountBean() {
 		account.setProfessional(new ProfessionalDTO());
@@ -32,33 +36,38 @@ public class AccountBean {
 	public Map<Integer, AccountDTO> getAccounts() {
 		return accounts;
 	}
-	/* private Methods */
-	private static void addAccounts(AccountDTO account) {
+	
+	public static void setAccounts(Map<Integer, AccountDTO> accounts) {
+		AccountBean.accounts = accounts;
+	}
+
+	/* Methods */
+
+	private static void addAccount(AccountDTO account) {
 		accounts.put(account.getAccountId(), account);
 	}
-	private static void deleteAccounts(Integer accountId) {
+	private static void deleteAccount(Integer accountId) {
 		accounts.remove(accountId);
 	}
-	private static void updateAccounts(AccountDTO account) {
+	private static void updateAccount(AccountDTO account) {
 		accounts.put(account.getAccountId(), account);
 	}
-	
-	/* public Methods */
+
 	public String add() throws Exception {
 		ServiceFactory.getInstance().getAccountService().addAccount(account);
-		addAccounts(account);
+		addAccount(account);
 		return "add";
 	}
 	
 	public String delete() {
 		ServiceFactory.getInstance().getAccountService().deleteAccount(account);
-		deleteAccounts(account.getAccountId());
+		deleteAccount(account.getAccountId());
 		return "delete";
 	}
 	
 	public String update() throws Exception {
-		ServiceFactory.getInstance().getAccountService().updateAccount(account);
-		updateAccounts(account);
+		account = ServiceFactory.getInstance().getAccountService().updateAccount(account);
+		updateAccount(account);
 		return "update";
 	}
 	

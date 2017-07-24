@@ -8,7 +8,7 @@ import com.maville.back.dao.interfaces.ProfessionalDAO;
 import com.maville.back.entities.Professional;
 
 @Transactional
-@Repository("professionalDAO")
+@Repository("professionalDAOI")
 public class ProfessionalDAOImpl extends GenericDAO<Professional, Integer> implements ProfessionalDAO {
 
 	public ProfessionalDAOImpl() {

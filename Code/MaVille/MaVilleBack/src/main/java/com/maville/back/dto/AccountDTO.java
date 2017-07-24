@@ -13,6 +13,22 @@ public class AccountDTO implements Serializable {
 	private boolean admin;
 	private ProfessionalDTO professional;
 
+	public AccountDTO() {
+	}
+
+	public AccountDTO(String username, String password, boolean admin) {
+		this.username = username;
+		this.password = password;
+		this.admin = admin;
+	}
+
+	public AccountDTO(String username, String password, boolean admin, ProfessionalDTO professional) {
+		this.username = username;
+		this.password = password;
+		this.admin = admin;
+		this.professional = professional;
+	}
+	
 	/* Getters and Setters */
 
 	public int getAccountId() {

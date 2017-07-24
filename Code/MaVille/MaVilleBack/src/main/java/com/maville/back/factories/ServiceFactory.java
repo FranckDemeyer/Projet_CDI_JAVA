@@ -61,7 +61,7 @@ public class ServiceFactory {
 			return context.getBean("professionalService", ProfessionalService.class);
 	}
 	
-	public ProfessionalCategoryService getCategoryService() {
+	public ProfessionalCategoryService getProfessionalCategoryService() {
 		return context.getBean("professionalCategoryService", ProfessionalCategoryService.class);
 	}
 

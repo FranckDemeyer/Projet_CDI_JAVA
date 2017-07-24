@@ -1,6 +1,7 @@
 package com.maville.back.service.implementations;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import com.maville.back.dao.interfaces.EventDAO;
 import com.maville.back.dto.EventDTO;
 import com.maville.back.dto.EventHourDTO;
 import com.maville.back.entities.Event;
+import com.maville.back.entities.EventHour;
 import com.maville.back.service.interfaces.EventService;
 
 @Transactional
@@ -32,37 +34,53 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public List<EventDTO> getAllEvents() {
-		List<EventDTO> events = null;
-		BeanUtils.copyProperties(eventDAO.findAll(), events);
+		List<EventDTO> events = new ArrayList<>();
+		for(Event event : eventDAO.findAll()) {
+			EventDTO event2 = new EventDTO();
+			BeanUtils.copyProperties(event, event2);
+			events.add(event2);
+		}
 		return events;
 	}
 
 	@Override
 	public List<EventDTO> getEventByName(String name) {
-		List<EventDTO> events = null;
+		List<EventDTO> events = new ArrayList<>();
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("name", name);
-		BeanUtils.copyProperties(eventDAO.findGroup(Event.FIND_BY_NAME, parameters), events);
+		for(Event event : eventDAO.findGroup(Event.FIND_BY_NAME, parameters)) {
+			EventDTO event2 = new EventDTO();
+			BeanUtils.copyProperties(event, event2);
+			events.add(event2);
+		}
 		return events;
 	}
 
 	@Override
 	public List<EventDTO> getEventByDate(LocalDateTime date) {
-		List<EventDTO> events = null;
+		List<EventDTO> events = new ArrayList<>();
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("datedeb", date);
 		parameters.put("datefin", date.plusDays(1));
-		BeanUtils.copyProperties(eventDAO.findGroup(Event.FIND_BY_DATE, parameters), events);
+		for(Event event : eventDAO.findGroup(Event.FIND_BY_DATE, parameters)) {
+			EventDTO event2 = new EventDTO();
+			BeanUtils.copyProperties(event, event2);
+			events.add(event2);
+		}
 		return events;
 	}
 
 	@Override
 	public List<EventDTO> getEventByDateRange(LocalDateTime start, LocalDateTime end) {
-		List<EventDTO> events = null;
+		List<EventDTO> events = new ArrayList<>();
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("datedeb", start);
 		parameters.put("datefin", end.plusDays(1));
-		BeanUtils.copyProperties(eventDAO.findGroup(Event.FIND_BY_DATE, parameters), events);
+		for(Event event : eventDAO.findGroup(Event.FIND_BY_DATE, parameters)) {
+			EventDTO event2 = new EventDTO();
+			BeanUtils.copyProperties(event, event2);
+			events.add(event2);
+		}
 		return events;
 	}
 
@@ -110,9 +128,13 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public List<EventHourDTO> getEventHours(EventDTO event) {
-		List<EventHourDTO> events = null;
-		BeanUtils.copyProperties(eventDAO.find(event.getEventId()).getHours(), events);
-		return events;
+		List<EventHourDTO> eventHours = new ArrayList<>();
+		for(EventHour eh : eventDAO.find(event.getEventId()).getHours()) {
+			EventHourDTO eh2 = new EventHourDTO();
+			BeanUtils.copyProperties(eh, eh2);
+			eventHours.add(eh2);
+	}
+		return eventHours;
 	}
 
 }

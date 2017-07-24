@@ -8,7 +8,7 @@ import com.maville.back.dao.interfaces.EventHourDAO;
 import com.maville.back.entities.EventHour;
 
 @Transactional
-@Repository("eventHourDAO")
+@Repository("eventHourDAOI")
 public class EventHourDAOImpl extends GenericDAO<EventHour, Integer> implements EventHourDAO {
 
 	public EventHourDAOImpl() {

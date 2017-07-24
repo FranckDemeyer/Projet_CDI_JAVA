@@ -1,5 +1,6 @@
 package com.maville.back.service.implementations;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -37,22 +38,34 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public List<AccountDTO> getAllAccount() {
-		List<AccountDTO> listAccounts = null;
-		BeanUtils.copyProperties(accountDao.findAll(), listAccounts);
+		List<AccountDTO> listAccounts = new ArrayList<>();
+		for(Account acc : accountDao.findAll()) {
+			AccountDTO acc2 = new AccountDTO();
+			BeanUtils.copyProperties(acc, acc2);
+			listAccounts.add(acc2);
+		}
 		return listAccounts;
 	}
 
 	@Override
 	public List<AccountDTO> getAllProfessional() {
-		List<AccountDTO> listAccounts = null;
-		BeanUtils.copyProperties(accountDao.findGroup(Account.FIND_ALL_PROFESSIONAL, null), listAccounts);
+		List<AccountDTO> listAccounts = new ArrayList<>();
+		for(Account acc : accountDao.findGroup(Account.FIND_ALL_PROFESSIONAL, null)) {
+			AccountDTO acc2 = new AccountDTO();
+			BeanUtils.copyProperties(acc, acc2);
+			listAccounts.add(acc2);
+		}
 		return listAccounts;
 	}
 
 	@Override
 	public List<AccountDTO> getAllAdmin() {
-		List<AccountDTO> listAccounts = null;
-		BeanUtils.copyProperties(accountDao.findGroup(Account.FIND_ALL_ADMIN, null), listAccounts);
+		List<AccountDTO> listAccounts = new ArrayList<>();
+		for(Account acc : accountDao.findGroup(Account.FIND_ALL_ADMIN, null)) {
+			AccountDTO acc2 = new AccountDTO();
+			BeanUtils.copyProperties(acc, acc2);
+			listAccounts.add(acc2);
+		}
 		return listAccounts;
 	}
 

@@ -1,5 +1,6 @@
 package com.maville.back.service.implementations;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.maville.back.dao.interfaces.ProfessionalCategoryDAO;
 import com.maville.back.dto.ProfessionalCategoryDTO;
 import com.maville.back.dto.ProfessionalDTO;
+import com.maville.back.entities.Professional;
 import com.maville.back.entities.ProfessionalCategory;
 import com.maville.back.service.interfaces.ProfessionalCategoryService;
 
@@ -31,17 +33,25 @@ public class ProfessionalCategoryServiceImpl implements ProfessionalCategoryServ
 	
 	@Override
 	public List<ProfessionalCategoryDTO> getAllProfessionalCategory() {
-		List<ProfessionalCategoryDTO> categories = null;
-		BeanUtils.copyProperties(professionalCategoryDAO.findAll(), categories);
+		List<ProfessionalCategoryDTO> categories = new ArrayList<>();
+		for(ProfessionalCategory pc : professionalCategoryDAO.findAll()) {
+			ProfessionalCategoryDTO pc2 = new ProfessionalCategoryDTO();
+			BeanUtils.copyProperties(pc, pc2);
+			categories.add(pc2);
+		}
 		return categories;
 	}
 	
 	@Override
 	public List<ProfessionalCategoryDTO> getProfessionalCategoryByName(String name) {
-		List<ProfessionalCategoryDTO> categories = null;
+		List<ProfessionalCategoryDTO> categories = new ArrayList<>();
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("name", name);
-		BeanUtils.copyProperties(professionalCategoryDAO.findGroup(ProfessionalCategory.FIND_BY_NAME, parameters), categories);
+		for(ProfessionalCategory pc : professionalCategoryDAO.findGroup(ProfessionalCategory.FIND_BY_NAME, parameters)) {
+			ProfessionalCategoryDTO pc2 = new ProfessionalCategoryDTO();
+			BeanUtils.copyProperties(pc, pc2);
+			categories.add(pc2);
+		}
 		return categories;
 	}
 
@@ -84,8 +94,12 @@ public class ProfessionalCategoryServiceImpl implements ProfessionalCategoryServ
 
 	@Override
 	public List<ProfessionalDTO> getCategoryProfessionals(ProfessionalCategoryDTO professionalCategory) {
-		List<ProfessionalDTO> professionals = null;
-		BeanUtils.copyProperties(professionalCategoryDAO.find(professionalCategory.getProfessionalCategoryId()).getProfessionals(), professionals);
+		List<ProfessionalDTO> professionals = new ArrayList<>();
+		for(Professional pro : professionalCategoryDAO.find(professionalCategory.getProfessionalCategoryId()).getProfessionals()) {
+			ProfessionalDTO pro2 = new ProfessionalDTO();
+			BeanUtils.copyProperties(pro, pro2);
+			professionals.add(pro2);
+		}
 		return professionals;
 	}
 }

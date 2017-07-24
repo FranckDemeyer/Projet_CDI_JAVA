@@ -9,7 +9,7 @@ import com.maville.back.dao.interfaces.ProfessionalCategoryDAO;
 import com.maville.back.entities.ProfessionalCategory;
 
 @Transactional
-@Repository("professionalCategoryDAO")
+@Repository("professionalCategoryDAOI")
 public class ProfessionalCategoryDAOImpl extends GenericDAO<ProfessionalCategory, Integer>
 		implements ProfessionalCategoryDAO {
 

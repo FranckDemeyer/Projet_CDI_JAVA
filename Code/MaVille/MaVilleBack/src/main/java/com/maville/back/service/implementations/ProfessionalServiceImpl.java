@@ -1,5 +1,6 @@
 package com.maville.back.service.implementations;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,26 +32,38 @@ public class ProfessionalServiceImpl implements ProfessionalService {
 
 	@Override
 	public List<ProfessionalDTO> getAllProfessional() {
-		List<ProfessionalDTO> professionals = null;
-		BeanUtils.copyProperties(professionalDAO.findAll(), professionals);
+		List<ProfessionalDTO> professionals = new ArrayList<>();
+		for(Professional pro : professionalDAO.findAll()) {
+			ProfessionalDTO pro2 = new ProfessionalDTO();
+			BeanUtils.copyProperties(pro, pro2);
+			professionals.add(pro2);
+		}
 		return professionals;
 	}
 
 	@Override
 	public List<ProfessionalDTO> getProfessionalByName(String name) {
-		List<ProfessionalDTO> professionals = null;
+		List<ProfessionalDTO> professionals = new ArrayList<>();
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("name", name);
-		BeanUtils.copyProperties(professionalDAO.findGroup(Professional.FIND_BY_NAME, parameters), professionals);
+		for(Professional pro : professionalDAO.findGroup(Professional.FIND_BY_NAME, parameters)) {
+			ProfessionalDTO pro2 = new ProfessionalDTO();
+			BeanUtils.copyProperties(pro, pro2);
+			professionals.add(pro2);
+		}
 		return professionals;
 	}
 
 	@Override
 	public List<ProfessionalDTO> getProfessionalByCategory(ProfessionalCategoryDTO category) {
-		List<ProfessionalDTO> professionals = null;
+		List<ProfessionalDTO> professionals = new ArrayList<>();
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("category", category.getProfessionalCategoryId());
-		BeanUtils.copyProperties(professionalDAO.findGroup(Professional.FIND_BY_CATEGORY, parameters), professionals);
+		for(Professional pro : professionalDAO.findGroup(Professional.FIND_BY_CATEGORY, parameters)) {
+			ProfessionalDTO pro2 = new ProfessionalDTO();
+			BeanUtils.copyProperties(pro, pro2);
+			professionals.add(pro2);
+		}
 		return professionals;
 	}
 
