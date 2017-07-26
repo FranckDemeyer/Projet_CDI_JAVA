@@ -53,19 +53,19 @@ public class ProfessionalBean {
 	public String add() {
 		ServiceFactory.getInstance().getProfessionalService().addProfessional(professional);
 		addProfessional(professional);
-		return "add";
+		return "professional-added";
 	}
 	
 	public String delete() {
 		ServiceFactory.getInstance().getProfessionalService().deleteProfessional(professional);
 		deleteProfessional(professional);
-		return "delete";
+		return "professional-deleted";
 	}
 	
 	public String update() {
 		professional = ServiceFactory.getInstance().getProfessionalService().updateProfessional(professional);
 		updateProfessional(professional);
-		return "update";
+		return "professional-updated";
 	}
 	
 }

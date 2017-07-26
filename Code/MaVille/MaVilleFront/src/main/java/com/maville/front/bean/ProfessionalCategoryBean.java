@@ -53,19 +53,19 @@ public class ProfessionalCategoryBean {
 	public String add() {
 		ServiceFactory.getInstance().getProfessionalCategoryService().addProfessionalCategory(category);
 		addCategory(category);
-		return "add";
+		return "pcategory-added";
 	}
 	
 	public String delete() {
 		ServiceFactory.getInstance().getProfessionalCategoryService().deleteProfessionalCategory(category);
 		deleteCategory(category);
-		return "delete";
+		return "pcategory-deleted";
 	}
 	
 	public String update() {
 		category = ServiceFactory.getInstance().getProfessionalCategoryService().updateProfessionalCategory(category);
 		updateCategory(category);
-		return "update";
+		return "pcategory-updated";
 	}
 	
 }

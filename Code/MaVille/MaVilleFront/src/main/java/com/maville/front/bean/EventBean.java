@@ -53,19 +53,19 @@ public class EventBean {
 	public String add() {
 		ServiceFactory.getInstance().getEventService().addEvent(event);
 		addEvent(event);
-		return "add";
+		return "event-added";
 	}
 	
 	public String delete() {
 		ServiceFactory.getInstance().getEventService().deleteEvent(event);
 		deleteEvent(event);
-		return "delete";
+		return "event-deleted";
 	}
 	
 	public String update() {
 		event = ServiceFactory.getInstance().getEventService().updateEvent(event);
 		updateEvent(event);
-		return "update";
+		return "event-updated";
 	}
 
 }

@@ -56,19 +56,19 @@ public class AccountBean {
 	public String add() throws Exception {
 		ServiceFactory.getInstance().getAccountService().addAccount(account);
 		addAccount(account);
-		return "add";
+		return "account-added";
 	}
 	
 	public String delete() {
 		ServiceFactory.getInstance().getAccountService().deleteAccount(account);
 		deleteAccount(account.getAccountId());
-		return "delete";
+		return "account-deleted";
 	}
 	
 	public String update() throws Exception {
 		account = ServiceFactory.getInstance().getAccountService().updateAccount(account);
 		updateAccount(account);
-		return "update";
+		return "account-updated";
 	}
 	
 	public boolean isAdmin() {
