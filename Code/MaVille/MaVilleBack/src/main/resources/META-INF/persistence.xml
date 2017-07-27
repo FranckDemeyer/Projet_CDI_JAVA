@@ -28,4 +28,27 @@
 
 		</properties>
 	</persistence-unit>
+	<persistence-unit name="mongo-ogm" transaction-type="RESOURCE_LOCAL">
+		<!-- Use Hibernate OGM provider: configuration will be transparent -->
+		<provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
+		<properties>
+
+			<!-- database to be used -->
+			<property name="hibernate.ogm.datastore.database" value="maville" />
+
+			<!-- host where the database is running -->
+			<property name="hibernate.ogm.datastore.host" value="localhost" />
+			
+			<!-- database provider -->
+			<property name="hibernate.ogm.datastore.provider" value="mongodb" />
+			
+			<!-- database provider -->
+			<property name="hibernate.ogm.datastore.create_database" value="true" />
+			
+			<!-- defines which JTA Transaction we plan to use -->
+			<property name="hibernate.transaction.jta.platform"
+				value="org.hibernate.service.jta.platform.internal.JBossStandAloneJtaPlatform" />
+		</properties>
+	</persistence-unit>
+	
 </persistence>

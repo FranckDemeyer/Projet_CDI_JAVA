@@ -11,9 +11,9 @@ public interface EventCategoryService {
 	
 	public List<EventCategoryDTO> getAllEventCategories();
 	
-	public List<EventCategoryDTO> getCategoryEvents(EventDTO event);
+	public List<EventDTO> getEventbyCategory(EventCategoryDTO category);
 	
-	public List<EventCategoryDTO> getCategoryEventByName(String name);
+	public List<EventCategoryDTO> getEventCategoryByName(String name);
 	
 	public void addEventCategory(EventCategoryDTO eventCategory);
 	
@@ -21,5 +21,4 @@ public interface EventCategoryService {
 	
 	public EventCategoryDTO updateEventCategory(EventCategoryDTO eventCategory);
 	
-	public List<EventDTO> getCategoryEvents(EventCategoryDTO eventCategory);
 }

@@ -1,6 +1,8 @@
 package com.maville.back.service.implementations;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -38,17 +40,24 @@ public class DirectoryCategoryServiceImpl implements DirectoryCategoryService {
 	@Override
 	public DirectoryCategoryDTO getDirectoryCategoryByName(String name) {
 		DirectoryCategoryDTO directoryCategory = new DirectoryCategoryDTO();
-		// TODO implement the query
-		// BeanUtils.copyProperties(directoryCategoryDao.findOne(DirectoryCategory.,
-		// parameters), directoryCategory);
+		// create query parameters
+		Map<String, Object> parameters = new HashMap<>();
+		parameters.put("name", name);
+		BeanUtils.copyProperties(directoryCategoryDao.findOne(DirectoryCategory.GET_CATEGORY_BYNAME,parameters), directoryCategory);
 		return directoryCategory;
 	}
 
 	@Override
 	public void addDirectoryCategory(DirectoryCategoryDTO directoryCategory) {
+		// verify mandatory fields
+		if (directoryCategory.getName().isEmpty()){
+			throw new IllegalArgumentException("Le nom de la catégorie ne peut pas être vide");
+		}
+		// verify if name isn't already used
 		if (getDirectoryCategoryByName(directoryCategory.getName()) != null) {
 			throw new RuntimeException("Cette catégorie existe déjà.");
 		}
+		// save
 		DirectoryCategory entity = new DirectoryCategory();
 		BeanUtils.copyProperties(directoryCategory, entity);
 		try {
@@ -74,6 +83,11 @@ public class DirectoryCategoryServiceImpl implements DirectoryCategoryService {
 
 	@Override
 	public DirectoryCategoryDTO updateDirectoryCategory(DirectoryCategoryDTO directoryCategory) {
+		// verify mandatory fields
+		if (directoryCategory.getName().isEmpty()){
+			throw new IllegalArgumentException("Le nom de la catégorie ne peut pas être vide");
+		}
+		// save
 		DirectoryCategory entity = new DirectoryCategory();
 		BeanUtils.copyProperties(directoryCategory, entity);
 		try {
@@ -88,8 +102,7 @@ public class DirectoryCategoryServiceImpl implements DirectoryCategoryService {
 	@Override
 	public List<DirectoryDTO> getDirectoriesByCategory(int idCategory) {
 		List<DirectoryDTO> listDirectory = null;
-		// TODO implement method from DAO
-		// BeanUtils.copyProperties(directoryCategoryDao., listDirectory);
+		BeanUtils.copyProperties(directoryCategoryDao.getDirectoriesByCategory(idCategory), listDirectory);
 		return listDirectory;
 	}
 

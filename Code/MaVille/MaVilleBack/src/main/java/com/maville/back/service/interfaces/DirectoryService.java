@@ -22,7 +22,7 @@ public interface DirectoryService {
 
 	public List<DirectoryDTO> getDirectoryByCategory(DirectoryCategoryDTO category);
 
-	public List<DirectoryDTO> getDirectoryByCoord(String lat, String lng, double rayon);
+	public List<DirectoryDTO> getDirectoryByCoord(String lat, String lng, double radius);
 	
 	public List<DirectoryHourDTO> getDirectoryHoursByDirectory(DirectoryDTO directory); 
 

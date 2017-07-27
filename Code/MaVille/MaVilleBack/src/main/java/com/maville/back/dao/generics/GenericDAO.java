@@ -13,6 +13,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.maville.back.factories.MongoDbFactory;
+
 @Transactional
 public class GenericDAO<T, PK> implements AbstractDAO<T, PK> {
 	
@@ -21,11 +23,13 @@ public class GenericDAO<T, PK> implements AbstractDAO<T, PK> {
 	private Class<T> entityClass;
 	private Logger log = Logger.getLogger(getClass());
 	protected EntityManager em;
+	protected EntityManager mongoEm;
 	
 	/* Constructors */
 
 	public GenericDAO(Class<T> entityClass) {
 		this.entityClass = entityClass;
+		this.setMongoEm(MongoDbFactory.getInstance().getMongoEmf().createEntityManager());
 	}
 	
 	/* Getters and Setters */
@@ -33,6 +37,10 @@ public class GenericDAO<T, PK> implements AbstractDAO<T, PK> {
 	@PersistenceContext(unitName="entityManagerFactory")
 	public void setEm(EntityManager em) {
 		this.em = em;
+	}
+	
+	public void setMongoEm(EntityManager mongoEm){
+		this.mongoEm = mongoEm;
 	}
 	
 	/* Methods */
@@ -43,8 +51,12 @@ public class GenericDAO<T, PK> implements AbstractDAO<T, PK> {
 	
 	@Override
 	public void delete(T entity) {
+		//mySQL
 		T toRemove = em.merge(entity);
 		em.remove(toRemove);
+		//MongoDB
+		toRemove = mongoEm.merge(entity);
+		mongoEm.remove(toRemove);
 	}
 	@Override
 	public T find(PK entityId) {
@@ -91,13 +103,21 @@ public class GenericDAO<T, PK> implements AbstractDAO<T, PK> {
 		
 	@Override
 	public T update(T entity) {
+		// MongoDB
+		mongoEm.merge(entity);
+		// MySQL
 		return em.merge(entity);
 	}
 
 	@Override
 	public void save(T entity) {
+		//MongoDB
+		mongoEm.persist(entity);
+		mongoEm.flush();
+		//MySQL
 		em.persist(entity);
 		em.flush();
 	}
 
+	
 }
