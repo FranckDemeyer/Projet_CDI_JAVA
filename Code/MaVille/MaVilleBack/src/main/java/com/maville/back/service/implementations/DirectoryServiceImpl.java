@@ -1,6 +1,8 @@
 package com.maville.back.service.implementations;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -39,13 +41,32 @@ public class DirectoryServiceImpl implements DirectoryService {
 	@Override
 	public List<DirectoryDTO> getDirectoriesByName(String name) {
 		List<DirectoryDTO> listDirectory = null;
-		// TODO implement new method from DAO
-		//BeanUtils.copyProperties(directorydao, listDirectory);
+		Map<String, Object> parameters = new HashMap<>();
+		parameters.put("name", name);
+		BeanUtils.copyProperties(directorydao.findGroup(Directory.GET_DIRECTORY_BYNAME, parameters), listDirectory);
 		return listDirectory;
 	}
 
 	@Override
 	public void addDirectory(DirectoryDTO directory) {
+		// verify mandatory fields
+		String err = "";
+		if(directory.getName() == null || directory.getName().isEmpty()){
+			err += "Le nom est obligatoire. ";
+		}
+		if (directory.getLat() == null || directory.getLat().isEmpty()){
+			err += "La latitude est obligatoire. ";
+		}
+		if(directory.getLng() == null || directory.getLng().isEmpty()){
+			err += "La longitude est obligatoire. ";
+		}
+		if(directory.getCategory() == null){
+			err += "La catégorie est obligatoire";
+		}
+		if (err != ""){
+			throw new IllegalArgumentException(err);
+		}
+		// verify if name isn't already used
 		if(directorydao.find(directory.getDirectoryId()) != null){
 			throw new RuntimeException("une entrée d'annuaire avec le même identifiant existe déjà");
 		}
@@ -54,7 +75,7 @@ public class DirectoryServiceImpl implements DirectoryService {
 				throw new RuntimeException("Une entrée d'annuaire similaire existe déjà");
 			}
 		}
-
+		// save
 		Directory entity = new Directory();
 		BeanUtils.copyProperties(directory, entity);
 		try {
@@ -96,21 +117,29 @@ public class DirectoryServiceImpl implements DirectoryService {
 	@Override
 	public List<DirectoryDTO> getDirectoriesByCategory(DirectoryCategoryDTO category) {
 		List<DirectoryDTO> listDirectory = null;
-		// TODO 
+		Map<String, Object> parameters = new HashMap<>();
+		parameters.put("category", category);
+		BeanUtils.copyProperties(directorydao.findGroup(Directory.GET_DIRECTORY_BYCATEGORY, parameters), listDirectory); 
 		return listDirectory;
 	}
 
 	@Override
 	public List<DirectoryDTO> getDirectoriesByCoord(String lat, String lng, double rayon) {
 		List<DirectoryDTO> listDirectory = null;
-		// TODO 
+		Map<String, Object> parameters = new HashMap<>();
+		parameters.put("lat", lat);
+		parameters.put("lng", lng);
+		parameters.put("rayon", radius);
+		BeanUtils.copyProperties(directorydao.findGroup(Directory.GET_DIRECTORY_BYCOORD, parameters), listDirectory);
 		return listDirectory;
 	}
 
 	@Override
 	public List<DirectoryHourDTO> getDirectoryHoursByDirectory(DirectoryDTO directory) {
 		List<DirectoryHourDTO> directoryHours = null;
-		// TODO
+		Directory entity = new Directory();
+		BeanUtils.copyProperties(directory, entity);
+		BeanUtils.copyProperties(directorydao.getDirectoryHoursByDirectory(entity), directoryHours);
 		return directoryHours;
 	}
 

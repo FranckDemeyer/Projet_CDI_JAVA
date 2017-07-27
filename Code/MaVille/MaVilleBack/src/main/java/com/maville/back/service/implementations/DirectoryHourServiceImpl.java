@@ -1,6 +1,8 @@
 package com.maville.back.service.implementations;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -38,13 +40,29 @@ public class DirectoryHourServiceImpl implements DirectoryHourService {
 	@Override
 	public List<DirectoryHourDTO> getHoursByDirectory(DirectoryDTO directory) {
 		List<DirectoryHourDTO> listDirectoryHours = null;
-		// TODO implement new method from DAO
-		// BeanUtils.copyProperties(directoryHourDao., listDirectoryHours); 
+		Map<String, Object> parameters = new HashMap<>();
+		parameters.put("directory", directory);
+		BeanUtils.copyProperties(directoryHourDao.findGroup(DirectoryHour.GET_DIRECTORYHOURS_BYDIRECTORY, parameters), listDirectoryHours); 
 		return listDirectoryHours;
 	}
 
 	@Override
 	public void addDirectoryHour(DirectoryHourDTO directoryHour) {
+		// verify mandatory fields
+		String err = "";
+		if (directoryHour.getDirectory() == null){
+			err += "L'entrée d'annuaire de rattachement est obligatoire. ";
+		}
+		if(directoryHour.getDay() == null || directoryHour.getDay().isEmpty()){
+			err += "La date est obligatoire. ";
+		}
+		if(directoryHour.getHour() == null || directoryHour.getHour().isEmpty()){
+			err += "L'heure est obligatoire.";
+		}
+		if (err != ""){
+			throw new IllegalArgumentException(err);
+		}
+		// save
 		DirectoryHour entity = new DirectoryHour();
 		BeanUtils.copyProperties(directoryHour, entity);
 		try{
@@ -70,6 +88,21 @@ public class DirectoryHourServiceImpl implements DirectoryHourService {
 
 	@Override
 	public DirectoryHourDTO updateDirectoryHour(DirectoryHourDTO directoryHour) {
+		// verify mandatory fields
+		String err = "";
+		if (directoryHour.getDirectory() == null){
+			err += "L'entrée d'annuaire de rattachement est obligatoire. ";
+		}
+		if(directoryHour.getDay() == null || directoryHour.getDay().isEmpty()){
+			err += "La date est obligatoire. ";
+		}
+		if(directoryHour.getHour() == null || directoryHour.getHour().isEmpty()){
+			err += "L'heure est obligatoire.";
+		}
+		if (err != ""){
+			throw new IllegalArgumentException(err);
+		}
+		// save
 		if(directoryHourDao.find(directoryHour.getId()) == null){
 			throw new RuntimeException("La tranche d'heure n'existe pas.");
 		}
