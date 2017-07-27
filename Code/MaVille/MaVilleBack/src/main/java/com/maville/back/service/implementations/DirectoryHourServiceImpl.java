@@ -1,5 +1,6 @@
 package com.maville.back.service.implementations;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,17 +33,25 @@ public class DirectoryHourServiceImpl implements DirectoryHourService {
 
 	@Override
 	public List<DirectoryHourDTO> getAllDirectoryHours() {
-		List<DirectoryHourDTO> listDirectoryHours = null;
-		BeanUtils.copyProperties(directoryHourDao.findAll(), listDirectoryHours);
+		List<DirectoryHourDTO> listDirectoryHours = new ArrayList<>();
+		for(DirectoryHour entity: directoryHourDao.findAll()){
+			DirectoryHourDTO directoryHour = new DirectoryHourDTO();
+			BeanUtils.copyProperties(entity, directoryHour);
+			listDirectoryHours.add(directoryHour);
+		}
 		return listDirectoryHours;
 	}
 
 	@Override
 	public List<DirectoryHourDTO> getHoursByDirectory(DirectoryDTO directory) {
-		List<DirectoryHourDTO> listDirectoryHours = null;
+		List<DirectoryHourDTO> listDirectoryHours = new ArrayList<>();
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("directory", directory);
-		BeanUtils.copyProperties(directoryHourDao.findGroup(DirectoryHour.GET_DIRECTORYHOURS_BYDIRECTORY, parameters), listDirectoryHours); 
+		for(DirectoryHour entity : directoryHourDao.findGroup(DirectoryHour.GET_DIRECTORYHOURS_BYDIRECTORY, parameters)){
+			DirectoryHourDTO directoryHour = new DirectoryHourDTO();
+			BeanUtils.copyProperties(entity, directoryHour);
+			listDirectoryHours.add(directoryHour);
+		}
 		return listDirectoryHours;
 	}
 

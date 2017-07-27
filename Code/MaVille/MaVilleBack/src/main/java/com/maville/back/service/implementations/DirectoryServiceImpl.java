@@ -1,5 +1,6 @@
 package com.maville.back.service.implementations;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import com.maville.back.dto.DirectoryCategoryDTO;
 import com.maville.back.dto.DirectoryDTO;
 import com.maville.back.dto.DirectoryHourDTO;
 import com.maville.back.entities.Directory;
+import com.maville.back.entities.DirectoryHour;
 import com.maville.back.service.interfaces.DirectoryService;
 
 @Service("directoryService")
@@ -33,17 +35,25 @@ public class DirectoryServiceImpl implements DirectoryService {
 
 	@Override
 	public List<DirectoryDTO> getAllDirectories() {
-		List<DirectoryDTO> listDirectory = null;
-		BeanUtils.copyProperties(directorydao.findAll(), listDirectory);
+		List<DirectoryDTO> listDirectory = new ArrayList<>();
+		for(Directory entity : directorydao.findAll()){
+			DirectoryDTO directory = new DirectoryDTO();
+			BeanUtils.copyProperties(entity, directory);
+			listDirectory.add(directory);
+		}
 		return listDirectory;
 	}
 
 	@Override
 	public List<DirectoryDTO> getDirectoriesByName(String name) {
-		List<DirectoryDTO> listDirectory = null;
+		List<DirectoryDTO> listDirectory = new ArrayList<>();
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("name", name);
-		BeanUtils.copyProperties(directorydao.findGroup(Directory.GET_DIRECTORY_BYNAME, parameters), listDirectory);
+		for (Directory entity : directorydao.findGroup(Directory.GET_DIRECTORY_BYNAME, parameters)) {
+			DirectoryDTO directory = new DirectoryDTO();
+			BeanUtils.copyProperties(entity, directory);
+			listDirectory.add(directory);
+		}
 		return listDirectory;
 	}
 
@@ -116,31 +126,43 @@ public class DirectoryServiceImpl implements DirectoryService {
 
 	@Override
 	public List<DirectoryDTO> getDirectoriesByCategory(DirectoryCategoryDTO category) {
-		List<DirectoryDTO> listDirectory = null;
+		List<DirectoryDTO> listDirectory = new ArrayList<>();
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("category", category);
-		BeanUtils.copyProperties(directorydao.findGroup(Directory.GET_DIRECTORY_BYCATEGORY, parameters), listDirectory); 
+		for (Directory entity : directorydao.findGroup(Directory.GET_DIRECTORY_BYCATEGORY, parameters)){
+			DirectoryDTO directory = new DirectoryDTO();
+			BeanUtils.copyProperties(entity, directory);
+			listDirectory.add(directory);
+		}
 		return listDirectory;
 	}
 
 	@Override
 	public List<DirectoryDTO> getDirectoriesByCoord(String lat, String lng, double rayon) {
-		List<DirectoryDTO> listDirectory = null;
+		List<DirectoryDTO> listDirectory = new ArrayList<>();
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("lat", lat);
 		parameters.put("lng", lng);
-		parameters.put("rayon", radius);
-		BeanUtils.copyProperties(directorydao.findGroup(Directory.GET_DIRECTORY_BYCOORD, parameters), listDirectory);
+		parameters.put("rayon", rayon);
+		for (Directory entity : directorydao.findGroup(Directory.GET_DIRECTORY_BYCOORD, parameters)){
+			DirectoryDTO directory = new DirectoryDTO();
+			BeanUtils.copyProperties(entity, directory);
+			listDirectory.add(directory);
+		}
 		return listDirectory;
 	}
 
 	@Override
 	public List<DirectoryHourDTO> getDirectoryHoursByDirectory(DirectoryDTO directory) {
-		List<DirectoryHourDTO> directoryHours = null;
+		List<DirectoryHourDTO> listDirectoryHours = new ArrayList<>();
 		Directory entity = new Directory();
 		BeanUtils.copyProperties(directory, entity);
-		BeanUtils.copyProperties(directorydao.getDirectoryHoursByDirectory(entity), directoryHours);
-		return directoryHours;
+		for (DirectoryHour dhEntity : directorydao.getDirectoryHoursByDirectory(entity)){
+			DirectoryHourDTO directoryHour = new DirectoryHourDTO();
+			BeanUtils.copyProperties(dhEntity, directoryHour);
+			listDirectoryHours.add(directoryHour);
+		}
+		return listDirectoryHours;
 	}
 
 }

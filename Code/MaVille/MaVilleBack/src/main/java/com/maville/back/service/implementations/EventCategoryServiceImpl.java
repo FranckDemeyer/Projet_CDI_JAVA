@@ -1,5 +1,6 @@
 package com.maville.back.service.implementations;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.maville.back.dao.interfaces.EventCategoryDAO;
 import com.maville.back.dto.EventCategoryDTO;
 import com.maville.back.dto.EventDTO;
+import com.maville.back.entities.Event;
 import com.maville.back.entities.EventCategory;
 import com.maville.back.service.interfaces.EventCategoryService;
 
@@ -32,8 +34,12 @@ public class EventCategoryServiceImpl implements EventCategoryService {
 
 	@Override
 	public List<EventCategoryDTO> getAllEventCategories() {
-		List<EventCategoryDTO> listEventCategories = null;
-		BeanUtils.copyProperties(eventCategoryDao.findAll(), listEventCategories);
+		List<EventCategoryDTO> listEventCategories = new ArrayList<>();
+		for (EventCategory entity : eventCategoryDao.findAll()){
+			EventCategoryDTO eventCategory = new EventCategoryDTO();
+			BeanUtils.copyProperties(entity, eventCategory);
+			listEventCategories.add(eventCategory);
+		}
 		return listEventCategories;
 	}
 
@@ -104,8 +110,14 @@ public class EventCategoryServiceImpl implements EventCategoryService {
 
 	@Override
 	public List<EventDTO> getEventsByEventCategory(EventCategoryDTO eventCategory) {
-		List<EventDTO> listEvents = null;
-		// TODO 
+		List<EventDTO> listEvents = new ArrayList<>();
+		EventCategory ecEntity = new EventCategory();
+		BeanUtils.copyProperties(eventCategory, ecEntity);
+		for (Event entity : eventCategoryDao.getEventbyCategory(ecEntity)){
+			EventDTO event = new EventDTO();
+			BeanUtils.copyProperties(entity, event);
+			listEvents.add(event);
+		}
 		return listEvents;
 	}
 

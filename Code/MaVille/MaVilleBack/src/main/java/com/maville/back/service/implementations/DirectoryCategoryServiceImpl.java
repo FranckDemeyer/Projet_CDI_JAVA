@@ -1,5 +1,6 @@
 package com.maville.back.service.implementations;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.maville.back.dao.interfaces.DirectoryCategoryDAO;
 import com.maville.back.dto.DirectoryCategoryDTO;
 import com.maville.back.dto.DirectoryDTO;
+import com.maville.back.entities.Directory;
 import com.maville.back.entities.DirectoryCategory;
 import com.maville.back.service.interfaces.DirectoryCategoryService;
 
@@ -32,8 +34,12 @@ public class DirectoryCategoryServiceImpl implements DirectoryCategoryService {
 
 	@Override
 	public List<DirectoryCategoryDTO> getAllDirectoryCategory() {
-		List<DirectoryCategoryDTO> listDirectoryCategory = null;
-		BeanUtils.copyProperties(directoryCategoryDao.findAll(), listDirectoryCategory);
+		List<DirectoryCategoryDTO> listDirectoryCategory = new ArrayList<>();
+		for(DirectoryCategory entity : directoryCategoryDao.findAll()){
+			DirectoryCategoryDTO directoryCategory = new DirectoryCategoryDTO();
+			BeanUtils.copyProperties(entity, directoryCategory);
+			listDirectoryCategory.add(directoryCategory);
+		}
 		return listDirectoryCategory;
 	}
 
@@ -101,8 +107,12 @@ public class DirectoryCategoryServiceImpl implements DirectoryCategoryService {
 
 	@Override
 	public List<DirectoryDTO> getDirectoriesByCategory(int idCategory) {
-		List<DirectoryDTO> listDirectory = null;
-		BeanUtils.copyProperties(directoryCategoryDao.getDirectoriesByCategory(idCategory), listDirectory);
+		List<DirectoryDTO> listDirectory = new ArrayList<>();
+		for(Directory entity : directoryCategoryDao.getDirectoriesByCategory(idCategory)){
+			DirectoryDTO directory = new DirectoryDTO();
+			BeanUtils.copyProperties(entity, directory);
+			listDirectory.add(directory);
+		}
 		return listDirectory;
 	}
 
