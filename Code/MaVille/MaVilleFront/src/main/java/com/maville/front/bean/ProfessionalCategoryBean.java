@@ -1,13 +1,14 @@
 package com.maville.front.bean;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import com.maville.back.dto.ProfessionalCategoryDTO;
+import com.maville.back.dto.ProfessionalDTO;
 import com.maville.back.factories.ServiceFactory;
+import com.maville.back.service.interfaces.ProfessionalCategoryService;
 
 @ManagedBean(name="professionalCategory")
 @SessionScoped
@@ -16,7 +17,7 @@ public class ProfessionalCategoryBean {
 	/* Variables */
 	
 	private ProfessionalCategoryDTO category = new ProfessionalCategoryDTO();
-	private static Map<Integer, ProfessionalCategoryDTO> categories = new HashMap<>();
+	private ProfessionalCategoryService service = ServiceFactory.getInstance().getProfessionalCategoryService();
 	
 	/* Getters and Setters */
 	
@@ -28,43 +29,41 @@ public class ProfessionalCategoryBean {
 		this.category = category;
 	}
 	
-	public static Map<Integer, ProfessionalCategoryDTO> getCategories() {
-		return categories;
-	}
-	
-	public static void setCategories(Map<Integer, ProfessionalCategoryDTO> categories) {
-		ProfessionalCategoryBean.categories = categories;
-	}
-
 	/* Methods */
 	
-	private static void addCategory(ProfessionalCategoryDTO category) {
-		categories.put(category.getProfessionalCategoryId(), category);
+	public ProfessionalCategoryDTO getProfessionalCategoryById(int id) {
+		return service.getProfessionalCategoryById(id);
 	}
 	
-	private static void deleteCategory(ProfessionalCategoryDTO category) {
-		categories.remove(category.getProfessionalCategoryId());
+	public List<ProfessionalCategoryDTO> getAllProfessionalCategories() {
+		return service.getAllProfessionalCategories();
 	}
 	
-	private static void updateCategory(ProfessionalCategoryDTO category) {
-		categories.put(category.getProfessionalCategoryId(), category);
+	public ProfessionalCategoryDTO getProfessionalCategoryByName(String name) {
+		return service.getProfessionalCategoryByName(name);
+	}
+	
+	List<ProfessionalDTO> getProfessionalsByProfessionalCategory(ProfessionalCategoryDTO category) {
+		return service.getProfessionalsByProfessionalCategory(category);
 	}
 	
 	public String add() {
-		ServiceFactory.getInstance().getProfessionalCategoryService().addProfessionalCategory(category);
-		addCategory(category);
+		service.addProfessionalCategory(category);
 		return "pcategory-added";
 	}
 	
 	public String delete() {
-		ServiceFactory.getInstance().getProfessionalCategoryService().deleteProfessionalCategory(category);
-		deleteCategory(category);
+		service.deleteProfessionalCategory(category);
 		return "pcategory-deleted";
 	}
 	
+	public String edit(ProfessionalCategoryDTO category) {
+		this.category = category;
+		return "pcategory-edit";
+	}
+	
 	public String update() {
-		category = ServiceFactory.getInstance().getProfessionalCategoryService().updateProfessionalCategory(category);
-		updateCategory(category);
+		category = service.updateProfessionalCategory(category);
 		return "pcategory-updated";
 	}
 	

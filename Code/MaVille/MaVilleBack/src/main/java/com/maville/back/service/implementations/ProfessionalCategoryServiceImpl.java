@@ -32,7 +32,7 @@ public class ProfessionalCategoryServiceImpl implements ProfessionalCategoryServ
 	}
 	
 	@Override
-	public List<ProfessionalCategoryDTO> getAllProfessionalCategory() {
+	public List<ProfessionalCategoryDTO> getAllProfessionalCategories() {
 		List<ProfessionalCategoryDTO> categories = new ArrayList<>();
 		for(ProfessionalCategory pc : professionalCategoryDAO.findAll()) {
 			ProfessionalCategoryDTO pc2 = new ProfessionalCategoryDTO();
@@ -43,21 +43,17 @@ public class ProfessionalCategoryServiceImpl implements ProfessionalCategoryServ
 	}
 	
 	@Override
-	public List<ProfessionalCategoryDTO> getProfessionalCategoryByName(String name) {
-		List<ProfessionalCategoryDTO> categories = new ArrayList<>();
+	public ProfessionalCategoryDTO getProfessionalCategoryByName(String name) {
+		ProfessionalCategoryDTO category = null;
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("name", name);
-		for(ProfessionalCategory pc : professionalCategoryDAO.findGroup(ProfessionalCategory.FIND_BY_NAME, parameters)) {
-			ProfessionalCategoryDTO pc2 = new ProfessionalCategoryDTO();
-			BeanUtils.copyProperties(pc, pc2);
-			categories.add(pc2);
-		}
-		return categories;
+		BeanUtils.copyProperties(professionalCategoryDAO.findOne(Professional.FIND_BY_NAME, parameters), category);
+		return category;
 	}
 
 	@Override
 	public void addProfessionalCategory(ProfessionalCategoryDTO category) {
-		if(getProfessionalCategoryByName(category.getName()) != null) {throw new IllegalArgumentException("Cette Catégorie existe déjà");}
+		if(getProfessionalCategoryByName(category.getName()) != null) {throw new IllegalArgumentException("Cette Catï¿½gorie existe dï¿½jï¿½");}
 		ProfessionalCategory entity = new ProfessionalCategory();
 		BeanUtils.copyProperties(category, entity);
 		try {
@@ -69,7 +65,7 @@ public class ProfessionalCategoryServiceImpl implements ProfessionalCategoryServ
 
 	@Override
 	public void deleteProfessionalCategory(ProfessionalCategoryDTO category) {
-		if(getProfessionalCategoryById(category.getProfessionalCategoryId()) == null) {throw new IllegalArgumentException("Cette Catégorie n'existe pas");}
+		if(getProfessionalCategoryById(category.getProfessionalCategoryId()) == null) {throw new IllegalArgumentException("Cette Catï¿½gorie n'existe pas");}
 		ProfessionalCategory entity = new ProfessionalCategory();
 		BeanUtils.copyProperties(category, entity);
 		try {
@@ -86,14 +82,14 @@ public class ProfessionalCategoryServiceImpl implements ProfessionalCategoryServ
 		try {
 			entity = professionalCategoryDAO.update(entity);
 		} catch (Exception e) {
-			throw new RuntimeException("Erreur lors de la mise à jour");
+			throw new RuntimeException("Erreur lors de la mise ï¿½ jour");
 		}
 		BeanUtils.copyProperties(entity, category);
 		return category;
 	}
 
 	@Override
-	public List<ProfessionalDTO> getCategoryProfessionals(ProfessionalCategoryDTO professionalCategory) {
+	public List<ProfessionalDTO> getProfessionalsByProfessionalCategory(ProfessionalCategoryDTO professionalCategory) {
 		List<ProfessionalDTO> professionals = new ArrayList<>();
 		for(Professional pro : professionalCategoryDAO.find(professionalCategory.getProfessionalCategoryId()).getProfessionals()) {
 			ProfessionalDTO pro2 = new ProfessionalDTO();

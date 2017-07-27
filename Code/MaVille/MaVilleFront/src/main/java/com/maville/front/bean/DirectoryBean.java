@@ -1,13 +1,15 @@
 package com.maville.front.bean;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import com.maville.back.dto.DirectoryCategoryDTO;
 import com.maville.back.dto.DirectoryDTO;
+import com.maville.back.dto.DirectoryHourDTO;
 import com.maville.back.factories.ServiceFactory;
+import com.maville.back.service.interfaces.DirectoryService;
 
 @ManagedBean(name="directory")
 @SessionScoped
@@ -16,7 +18,7 @@ public class DirectoryBean {
 	/* Variables */
 	
 	private DirectoryDTO directory = new DirectoryDTO();
-	private static Map<Integer, DirectoryDTO> directories = new HashMap<>();
+	private DirectoryService service = ServiceFactory.getInstance().getDirectoryService();
 	
 	/* Getters and Setters */
 	
@@ -28,43 +30,49 @@ public class DirectoryBean {
 		this.directory = directory;
 	}
 	
-	public static Map<Integer, DirectoryDTO> getDirectories() {
-		return directories;
-	}
-	
-	public static void setDirectories(Map<Integer, DirectoryDTO> directories) {
-		DirectoryBean.directories = directories;
-	}
-	
 	/* Methods */
 	
-	private static void addDirectory(DirectoryDTO directory) {
-		directories.put(directory.getDirectoryId(), directory);
+	public DirectoryDTO getDirectoryById(int id) {
+		return service.getDirectoryById(id);
 	}
 	
-	private static void deleteDirectory(DirectoryDTO directory) {
-		directories.remove(directory.getDirectoryId());
+	public List<DirectoryDTO> getAllDirectories() {
+		return service.getAllDirectories();
 	}
 	
-	private static void updateDirectory(DirectoryDTO directory) {
-		directories.put(directory.getDirectoryId(), directory);
+	public List<DirectoryDTO> getDirectoriesByName(String name) {
+		return service.getDirectoriesByName(name);
+	}
+	
+	public List<DirectoryDTO> getDirectoriesByCategory (DirectoryCategoryDTO category) {
+		return service.getDirectoriesByCategory(category);
+	}
+	
+	public List<DirectoryDTO> getDirectoriesByCoord(String lat, String lng, double rayon) {
+		return service.getDirectoriesByCoord(lat, lng, rayon);
+	}
+	
+	public List<DirectoryHourDTO> getHoursByDirectory(DirectoryDTO directory) {
+		return service.getDirectoryHoursByDirectory(directory);
 	}
 	
 	public String add() {
-		ServiceFactory.getInstance().getDirectoryService().addDirectory(directory);
-		addDirectory(directory);
+		service.addDirectory(directory);
 		return "directory-added";
 	}
 	
 	public String delete() {
-		ServiceFactory.getInstance().getDirectoryService().delecteDirectory(directory);
-		deleteDirectory(directory);
+		service.delecteDirectory(directory);
 		return "directory-deleted";
 	}
 	
+	public String edit(DirectoryDTO directory) {
+		this.directory = directory;
+		return "directory-edit";
+	}
+	
 	public String update() {
-		directory = ServiceFactory.getInstance().getDirectoryService().updateDirectory(directory);
-		updateDirectory(directory);
+		directory = service.updateDirectory(directory);
 		return "directory-updated";
 	}
 	

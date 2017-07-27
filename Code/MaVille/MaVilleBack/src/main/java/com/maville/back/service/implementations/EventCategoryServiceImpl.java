@@ -23,17 +23,16 @@ public class EventCategoryServiceImpl implements EventCategoryService {
 	}
 
 	@Override
-	public List<EventCategoryDTO> getCategoryEvents(EventDTO event) {
-		List<EventCategoryDTO> listEventCategories = null;
+	public EventCategoryDTO getEventCategoryByEvent(EventDTO event) {
+		EventCategoryDTO category = null;
 		// TODO 
-		return listEventCategories;
+		return category;
 	}
 
 	@Override
-	public List<EventCategoryDTO> getCategoryEventByName(String name) {
-		List<EventCategoryDTO> listEventCategories = null;
-		// TODO 
-		return listEventCategories;
+	public EventCategoryDTO getEventCategoryByName(String name) {
+		EventCategoryDTO category = null;
+		return category;
 	}
 
 	@Override
@@ -52,7 +51,7 @@ public class EventCategoryServiceImpl implements EventCategoryService {
 	}
 
 	@Override
-	public List<EventDTO> getCategoryEvents(EventCategoryDTO eventCategory) {
+	public List<EventDTO> getEventsByEventCategory(EventCategoryDTO eventCategory) {
 		List<EventDTO> listEvents = null;
 		// TODO 
 		return listEvents;

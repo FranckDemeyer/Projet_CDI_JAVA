@@ -44,7 +44,7 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public List<EventDTO> getEventByName(String name) {
+	public List<EventDTO> getEventsByName(String name) {
 		List<EventDTO> events = new ArrayList<>();
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("name", name);
@@ -57,7 +57,7 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public List<EventDTO> getEventByDate(LocalDateTime date) {
+	public List<EventDTO> getEventsByDate(LocalDateTime date) {
 		List<EventDTO> events = new ArrayList<>();
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("datedeb", date);
@@ -71,7 +71,7 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public List<EventDTO> getEventByDateRange(LocalDateTime start, LocalDateTime end) {
+	public List<EventDTO> getEventsByDateRange(LocalDateTime start, LocalDateTime end) {
 		List<EventDTO> events = new ArrayList<>();
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("datedeb", start);
@@ -91,19 +91,19 @@ public class EventServiceImpl implements EventService {
 		parameters.put("hours", event.getHours());
 		parameters.put("lat", event.getLat());
 		parameters.put("lng", event.getLng());
-		if(eventDAO.findGroup(Event.FIND_DUPLICATE, parameters).isEmpty()) {throw new IllegalArgumentException("Cet evÈnement existe dÈj‡");}
+		if(eventDAO.findGroup(Event.FIND_DUPLICATE, parameters).isEmpty()) {throw new IllegalArgumentException("Cet ev√©nement existe d√©j√†");}
 		Event entity = new Event();
 		BeanUtils.copyProperties(event, entity);
 		try {
 			eventDAO.save(entity);
 		} catch (Exception e) {
-			throw new RuntimeException("Erreur lors de la crÈation");
+			throw new RuntimeException("Erreur lors de la cr√©ation");
 		}
 	}
 
 	@Override
 	public void deleteEvent(EventDTO event) {
-		if(getEventById(event.getEventId()) == null) {throw new IllegalArgumentException("Cet evÈnement n'existe pas");}
+		if(getEventById(event.getEventId()) == null) {throw new IllegalArgumentException("Cet ev√©nement n'existe pas");}
 		Event entity = new Event();
 		BeanUtils.copyProperties(event, entity);
 		try {
@@ -120,7 +120,7 @@ public class EventServiceImpl implements EventService {
 		try {
 			entity = eventDAO.update(entity);
 		} catch (Exception e) {
-			throw new RuntimeException("Erreur lors de la mise ‡ jour");
+			throw new RuntimeException("Erreur lors de la mise √† jour");
 		}
 		BeanUtils.copyProperties(entity, event);
 		return event;

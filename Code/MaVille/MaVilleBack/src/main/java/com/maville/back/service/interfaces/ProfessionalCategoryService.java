@@ -6,11 +6,12 @@ import com.maville.back.dto.ProfessionalCategoryDTO;
 import com.maville.back.dto.ProfessionalDTO;
 
 public interface ProfessionalCategoryService {
+	
 	ProfessionalCategoryDTO getProfessionalCategoryById(int id);
 
-	List<ProfessionalCategoryDTO> getAllProfessionalCategory();
+	List<ProfessionalCategoryDTO> getAllProfessionalCategories();
 	
-	List<ProfessionalCategoryDTO> getProfessionalCategoryByName(String name);
+	ProfessionalCategoryDTO getProfessionalCategoryByName(String name);
 	
 	void addProfessionalCategory(ProfessionalCategoryDTO category);
 
@@ -18,5 +19,5 @@ public interface ProfessionalCategoryService {
 
 	ProfessionalCategoryDTO updateProfessionalCategory(ProfessionalCategoryDTO category);
 	
-	List<ProfessionalDTO> getCategoryProfessionals(ProfessionalCategoryDTO professionalCategory);
+	List<ProfessionalDTO> getProfessionalsByProfessionalCategory(ProfessionalCategoryDTO professionalCategory);
 }

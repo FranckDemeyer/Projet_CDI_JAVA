@@ -31,7 +31,7 @@ public class ProfessionalServiceImpl implements ProfessionalService {
 	}
 
 	@Override
-	public List<ProfessionalDTO> getAllProfessional() {
+	public List<ProfessionalDTO> getAllProfessionals() {
 		List<ProfessionalDTO> professionals = new ArrayList<>();
 		for(Professional pro : professionalDAO.findAll()) {
 			ProfessionalDTO pro2 = new ProfessionalDTO();
@@ -42,7 +42,7 @@ public class ProfessionalServiceImpl implements ProfessionalService {
 	}
 
 	@Override
-	public List<ProfessionalDTO> getProfessionalByName(String name) {
+	public List<ProfessionalDTO> getProfessionalsByName(String name) {
 		List<ProfessionalDTO> professionals = new ArrayList<>();
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("name", name);
@@ -55,7 +55,7 @@ public class ProfessionalServiceImpl implements ProfessionalService {
 	}
 
 	@Override
-	public List<ProfessionalDTO> getProfessionalByCategory(ProfessionalCategoryDTO category) {
+	public List<ProfessionalDTO> getProfessionalsByCategory(ProfessionalCategoryDTO category) {
 		List<ProfessionalDTO> professionals = new ArrayList<>();
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("category", category.getProfessionalCategoryId());
@@ -68,20 +68,20 @@ public class ProfessionalServiceImpl implements ProfessionalService {
 	}
 
 	@Override
-	public List<ProfessionalDTO> getProfessionalByCoord(String lat, String lng, double radius) {
+	public List<ProfessionalDTO> getProfessionalsByCoord(String lat, String lng, double radius) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void addProfessional(ProfessionalDTO professional) {
-		if(getProfessionalByName(professional.getName()) != null) {throw new IllegalArgumentException("Ce professionnel existe déjà");}
+		if(getProfessionalsByName(professional.getName()) != null) {throw new IllegalArgumentException("Ce professionnel existe dï¿½jï¿½");}
 		Professional entity = new Professional();
 		BeanUtils.copyProperties(professional, entity);
 		try {
 			professionalDAO.save(entity);
 		} catch (Exception e) {
-			throw new RuntimeException("Erreur lors de la création");
+			throw new RuntimeException("Erreur lors de la crï¿½ation");
 		}
 	}
 

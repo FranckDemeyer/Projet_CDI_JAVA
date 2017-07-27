@@ -7,44 +7,47 @@ import javax.jws.WebService;
 import com.maville.back.dto.ProfessionalCategoryDTO;
 import com.maville.back.dto.ProfessionalDTO;
 import com.maville.back.factories.ServiceFactory;
+import com.maville.back.service.interfaces.ProfessionalCategoryService;
 import com.maville.back.soap.interfaces.ProfessionalCategoryWebService;
 
 @WebService(endpointInterface="com.maville.back.soap.interfaces.ProfessionalCategoryWebService")
 public class ProfessionalCategoryWebServiceImpl implements ProfessionalCategoryWebService {
+	
+	private ProfessionalCategoryService service = ServiceFactory.getInstance().getProfessionalCategoryService();
 
 	@Override
 	public void addProfessionalCategory(ProfessionalCategoryDTO category) throws Exception {
-		ServiceFactory.getInstance().getProfessionalCategoryService().addProfessionalCategory(category);
+		service.addProfessionalCategory(category);
 	}
 	
 	@Override
 	public void deleteProfessionalCategory(ProfessionalCategoryDTO category) {
-		ServiceFactory.getInstance().getProfessionalCategoryService().deleteProfessionalCategory(category);
+		service.deleteProfessionalCategory(category);
 	}
 
 	@Override
 	public ProfessionalCategoryDTO findProfessionalCategory(int categoryId) {
-		return ServiceFactory.getInstance().getProfessionalCategoryService().getProfessionalCategoryById(categoryId);
+		return service.getProfessionalCategoryById(categoryId);
 	}
 
 	@Override
 	public List<ProfessionalCategoryDTO> findAllProfessionalCategories() {
-		return ServiceFactory.getInstance().getProfessionalCategoryService().getAllProfessionalCategory();
+		return service.getAllProfessionalCategories();
 	}
 
 	@Override
-	public List<ProfessionalCategoryDTO> findProfessionalCategoriesByName(String name) {
-		return ServiceFactory.getInstance().getProfessionalCategoryService().getProfessionalCategoryByName(name);
+	public ProfessionalCategoryDTO findProfessionalCategoryByName(String name) {
+		return service.getProfessionalCategoryByName(name);
 	}
 
 	@Override
 	public List<ProfessionalDTO> findProfessionalByProfessionalCategory(ProfessionalCategoryDTO category) {
-		return ServiceFactory.getInstance().getProfessionalCategoryService().getCategoryProfessionals(category);
+		return service.getProfessionalsByProfessionalCategory(category);
 	}
 
 	@Override
 	public ProfessionalCategoryDTO updateProfessionalCategory(ProfessionalCategoryDTO category) throws Exception {
-		return ServiceFactory.getInstance().getProfessionalCategoryService().updateProfessionalCategory(category);
+		return service.updateProfessionalCategory(category);
 	}
 
 }

@@ -30,14 +30,14 @@ public class DirectoryServiceImpl implements DirectoryService {
 	}
 
 	@Override
-	public List<DirectoryDTO> getAllDirectory() {
+	public List<DirectoryDTO> getAllDirectories() {
 		List<DirectoryDTO> listDirectory = null;
 		BeanUtils.copyProperties(directorydao.findAll(), listDirectory);
 		return listDirectory;
 	}
 
 	@Override
-	public List<DirectoryDTO> getDirectoryByName(String name) {
+	public List<DirectoryDTO> getDirectoriesByName(String name) {
 		List<DirectoryDTO> listDirectory = null;
 		// TODO implement new method from DAO
 		//BeanUtils.copyProperties(directorydao, listDirectory);
@@ -49,7 +49,7 @@ public class DirectoryServiceImpl implements DirectoryService {
 		if(directorydao.find(directory.getDirectoryId()) != null){
 			throw new RuntimeException("une entrée d'annuaire avec le même identifiant existe déjà");
 		}
-		for(DirectoryDTO dir : getDirectoryByName(directory.getName())) {
+		for(DirectoryDTO dir : getDirectoriesByName(directory.getName())) {
 			if(dir.equals(directory)){
 				throw new RuntimeException("Une entrée d'annuaire similaire existe déjà");
 			}
@@ -94,14 +94,14 @@ public class DirectoryServiceImpl implements DirectoryService {
 	}
 
 	@Override
-	public List<DirectoryDTO> getDirectoryByCategory(DirectoryCategoryDTO category) {
+	public List<DirectoryDTO> getDirectoriesByCategory(DirectoryCategoryDTO category) {
 		List<DirectoryDTO> listDirectory = null;
 		// TODO 
 		return listDirectory;
 	}
 
 	@Override
-	public List<DirectoryDTO> getDirectoryByCoord(String lat, String lng, double rayon) {
+	public List<DirectoryDTO> getDirectoriesByCoord(String lat, String lng, double rayon) {
 		List<DirectoryDTO> listDirectory = null;
 		// TODO 
 		return listDirectory;

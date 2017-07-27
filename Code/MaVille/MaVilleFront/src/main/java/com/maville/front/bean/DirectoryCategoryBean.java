@@ -1,13 +1,14 @@
 package com.maville.front.bean;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import com.maville.back.dto.DirectoryCategoryDTO;
+import com.maville.back.dto.DirectoryDTO;
 import com.maville.back.factories.ServiceFactory;
+import com.maville.back.service.interfaces.DirectoryCategoryService;
 
 @ManagedBean(name="directoryCategory")
 @SessionScoped
@@ -16,7 +17,7 @@ public class DirectoryCategoryBean {
 	/* Variables */
 	
 	private DirectoryCategoryDTO category = new DirectoryCategoryDTO();
-	private static Map<Integer, DirectoryCategoryDTO> categories = new HashMap<>();
+	private DirectoryCategoryService service = ServiceFactory.getInstance().getDirectoryCategoryService();
 
 	/* Getters and Setters */
 	
@@ -28,43 +29,41 @@ public class DirectoryCategoryBean {
 		this.category = category;
 	}
 
-	public Map<Integer, DirectoryCategoryDTO> getCategories() {
-		return categories;
-	}
-
-	public void setCategories(Map<Integer, DirectoryCategoryDTO> categories) {
-		DirectoryCategoryBean.categories = categories;
-	}
-
 	/* Methods */
 	
-	private static void addCategory(DirectoryCategoryDTO category) {
-		categories.put(category.getDirectoryCategoryId(), category);
+	public DirectoryCategoryDTO getDirectoryCategoryById(int id) {
+		return service.getDirectoryCategoryById(id);
 	}
 	
-	private static void deleteCategory(DirectoryCategoryDTO category) {
-		categories.remove(category.getDirectoryCategoryId());
+	public List<DirectoryCategoryDTO> getAllDirectoryCategory() {
+		return service.getAllDirectoryCategory();
 	}
 	
-	private static void updateCategory(DirectoryCategoryDTO category) {
-		categories.put(category.getDirectoryCategoryId(), category);
+	public DirectoryCategoryDTO getDirectoryCategoryByName(String name) {
+		return service.getDirectoryCategoryByName(name);
+	}
+	
+	public List<DirectoryDTO> getDirectoriesByCategory(int categoryId) {
+		return service.getDirectoriesByCategory(categoryId);
 	}
 	
 	public String add() {
-		ServiceFactory.getInstance().getDirectoryCategoryService().addDirectoryCategory(category);
-		addCategory(category);
+		service.addDirectoryCategory(category);
 		return "dcategory-added";
 	}
 	
 	public String delete() {
-		ServiceFactory.getInstance().getDirectoryCategoryService().deleteDirectoryCategory(category);
-		deleteCategory(category);
+		service.deleteDirectoryCategory(category);
 		return "dcategory-deleted";
 	}
 	
+	public String edit(DirectoryCategoryDTO category) {
+		this.category = category;
+		return "dcategory-edit";
+	}
+	
 	public String update() {
-		category  = ServiceFactory.getInstance().getDirectoryCategoryService().updateDirectoryCategory(category);
-		updateCategory(category);
+		category  = service.updateDirectoryCategory(category);
 		return "dcategory-updated";
 	}
 	

@@ -1,13 +1,14 @@
 package com.maville.front.bean;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import com.maville.back.dto.ProfessionalCategoryDTO;
 import com.maville.back.dto.ProfessionalDTO;
 import com.maville.back.factories.ServiceFactory;
+import com.maville.back.service.interfaces.ProfessionalService;
 
 @ManagedBean(name="professional")
 @SessionScoped
@@ -16,7 +17,7 @@ public class ProfessionalBean {
 	/* Variables */
 	
 	private ProfessionalDTO professional = new ProfessionalDTO();
-	private static Map<Integer, ProfessionalDTO> professionals = new HashMap<>();
+	private ProfessionalService service = ServiceFactory.getInstance().getProfessionalService();
 	
 	/* Getters and Setters */
 	
@@ -28,43 +29,45 @@ public class ProfessionalBean {
 		this.professional = professional;
 	}
 	
-	public static Map<Integer, ProfessionalDTO> getProfessionals() {
-		return professionals;
-	}
-	
-	public static void setProfessionals(Map<Integer, ProfessionalDTO> professionals) {
-		ProfessionalBean.professionals = professionals;
-	}
-
 	/* Methods */
 	
-	private static void addProfessional(ProfessionalDTO professional) {
-		professionals.put(professional.getProfessionalId(), professional);
+	public ProfessionalDTO getProfessionalById(int id) {
+		return service.getProfessionalById(id);
 	}
 	
-	private static void deleteProfessional(ProfessionalDTO professional) {
-		professionals.remove(professional.getProfessionalId());
+	public List<ProfessionalDTO> getAllProfessionals() {
+		return service.getAllProfessionals();
 	}
 	
-	private static void updateProfessional(ProfessionalDTO professional) {
-		professionals.put(professional.getProfessionalId(), professional);
+	public List<ProfessionalDTO> getProfessionalsByName(String name) {
+		return service.getProfessionalsByName(name);
+	}
+	
+	public List<ProfessionalDTO> getProfessionalsByCategory(ProfessionalCategoryDTO category) {
+		return service.getProfessionalsByCategory(category);
+	}
+	
+	public List<ProfessionalDTO> getProfessionalsByCoord(String lat, String lng, double rayon) {
+		return service.getProfessionalsByCoord(lat, lng, rayon);
 	}
 	
 	public String add() {
-		ServiceFactory.getInstance().getProfessionalService().addProfessional(professional);
-		addProfessional(professional);
+		service.addProfessional(professional);
 		return "professional-added";
 	}
 	
 	public String delete() {
-		ServiceFactory.getInstance().getProfessionalService().deleteProfessional(professional);
-		deleteProfessional(professional);
+		service.deleteProfessional(professional);
 		return "professional-deleted";
 	}
 	
+	public String edit(ProfessionalDTO professional) {
+		this.professional = professional;
+		return "professional-edit";
+	}
+	
 	public String update() {
-		professional = ServiceFactory.getInstance().getProfessionalService().updateProfessional(professional);
-		updateProfessional(professional);
+		professional = service.updateProfessional(professional);
 		return "professional-updated";
 	}
 	

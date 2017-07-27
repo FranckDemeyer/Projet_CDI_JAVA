@@ -19,7 +19,7 @@ public interface ProfessionalCategoryWebService {
 	@WebMethod
 	List<ProfessionalCategoryDTO> findAllProfessionalCategories();
 	@WebMethod
-	List<ProfessionalCategoryDTO> findProfessionalCategoriesByName(String name);
+	ProfessionalCategoryDTO findProfessionalCategoryByName(String name);
 	@WebMethod
 	List<ProfessionalDTO> findProfessionalByProfessionalCategory(ProfessionalCategoryDTO category);
 	@WebMethod

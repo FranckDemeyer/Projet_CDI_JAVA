@@ -1,13 +1,14 @@
 package com.maville.front.bean;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import com.maville.back.dto.DirectoryDTO;
 import com.maville.back.dto.DirectoryHourDTO;
 import com.maville.back.factories.ServiceFactory;
+import com.maville.back.service.interfaces.DirectoryHourService;
 
 @ManagedBean(name="directoryHour")
 @SessionScoped
@@ -16,7 +17,7 @@ public class DirectoryHourBean {
 	/* Variables */
 	
 	private DirectoryHourDTO hour = new DirectoryHourDTO();
-	private static Map<Integer, DirectoryHourDTO> hours = new HashMap<>();
+	private DirectoryHourService service = ServiceFactory.getInstance().getDirectoryHourService();
 
 	/* Getters and Setters */
 	
@@ -28,44 +29,38 @@ public class DirectoryHourBean {
 		this.hour = hour;
 	}
 
-	public Map<Integer, DirectoryHourDTO> getHours() {
-		return hours;
-	}
-
-	public void setHours(Map<Integer, DirectoryHourDTO> hours) {
-		DirectoryHourBean.hours = hours;
-	}
-
 	/* Methods */
 	
-	private static void addHour(DirectoryHourDTO hour) {
-		hours.put(hour.getId(), hour);
+	public DirectoryHourDTO getDirectoryHourById(int id) {
+		return service.getDirectoryHourById(id);
 	}
 	
-	private static void deleteHour(DirectoryHourDTO hour) {
-		hours.remove(hour.getId());
+	public List<DirectoryHourDTO> getAllDirectoryHours() {
+		return service.getAllDirectoryHours();
 	}
 	
-	private static void updateHour(DirectoryHourDTO hour) {
-		hours.put(hour.getId(), hour);
+	public List<DirectoryHourDTO> getHoursByDirectory(DirectoryDTO directory) {
+		return service.getHoursByDirectory(directory);
 	}
 	
 	public String add() {
-		ServiceFactory.getInstance().getDirectoryHourService().addDirectoryHour(hour);
-		addHour(hour);
-		return "hour-added";
+		service.addDirectoryHour(hour);
+		return "dhour-added";
 	}
 	
 	public String delete() {
-		ServiceFactory.getInstance().getDirectoryHourService().deleteDirectoryHour(hour);
-		deleteHour(hour);
-		return "hour-deleted";
+		service.deleteDirectoryHour(hour);
+		return "dhour-deleted";
+	}
+	
+	public String edit(DirectoryHourDTO hour) {
+		this.hour = hour;
+		return "dhour-edit";
 	}
 	
 	public String update() {
-		hour = ServiceFactory.getInstance().getDirectoryHourService().updateDirectoryHour(hour);
-		updateHour(hour);
-		return "hour-updated";
+		hour = service.updateDirectoryHour(hour);
+		return "dhour-updated";
 	}
 	
 }

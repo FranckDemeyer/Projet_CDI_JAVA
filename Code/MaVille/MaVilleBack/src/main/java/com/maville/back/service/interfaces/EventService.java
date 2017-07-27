@@ -12,11 +12,11 @@ public interface EventService {
 	
 	public List<EventDTO> getAllEvents();
 	
-	public List<EventDTO> getEventByName(String name);
+	public List<EventDTO> getEventsByName(String name);
 	
-	public List<EventDTO> getEventByDate(LocalDateTime date );
+	public List<EventDTO> getEventsByDate(LocalDateTime date);
 	
-	public List<EventDTO> getEventByDateRange(LocalDateTime start, LocalDateTime end);
+	public List<EventDTO> getEventsByDateRange(LocalDateTime start, LocalDateTime end);
 	
 	public void addEvent(EventDTO event);
 	
