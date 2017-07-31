@@ -13,7 +13,7 @@ import com.maville.back.entities.Directory;
 import com.maville.back.entities.DirectoryHour;
 
 @Transactional
-@Repository("directoryDAO")
+@Repository("directoryDAOI")
 public class DirectoryDAOImpl extends GenericDAO<Directory, Integer> implements DirectoryDAO {
 
 	public DirectoryDAOImpl() {

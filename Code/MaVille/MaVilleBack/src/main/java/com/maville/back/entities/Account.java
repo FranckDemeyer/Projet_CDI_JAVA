@@ -11,7 +11,8 @@ import javax.persistence.OneToOne;
 @Entity
 @NamedQueries({
 	@NamedQuery(name="Account.findAllProfessional", query="SELECT a FROM Account a WHERE a.admin=false"),
-	@NamedQuery(name="Account.findAllAdmin", query="SELECT a FROM Account a WHERE a.admin=true")
+	@NamedQuery(name="Account.findAllAdmin", query="SELECT a FROM Account a WHERE a.admin=true")//,
+//	@NamedQuery(name="Account.findByName", query="SELECT a FROM Account a WHERE a.name=:name")
 })
 public class Account {
 	
@@ -19,6 +20,7 @@ public class Account {
 	
 	public final static String FIND_ALL_PROFESSIONAL ="Account.findAllProfessional";
 	public final static String FIND_ALL_ADMIN ="Account.findAllAdmin";
+	public final static String FIND_BY_NAME = "Account.findByName";
 	
 	/* Variables */
 

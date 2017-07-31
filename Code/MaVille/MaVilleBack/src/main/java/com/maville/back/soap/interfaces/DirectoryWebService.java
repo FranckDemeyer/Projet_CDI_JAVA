@@ -5,19 +5,28 @@ import java.util.List;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
-import com.maville.back.dto.AccountDTO;
-import com.maville.back.entities.Directory;
+import com.maville.back.dto.DirectoryCategoryDTO;
+import com.maville.back.dto.DirectoryDTO;
+import com.maville.back.dto.DirectoryHourDTO;
 
 @WebService
 public interface DirectoryWebService {
 	@WebMethod
-	void addDirectory(Directory directory) throws Exception;
+	void addDirectory(DirectoryDTO directory) throws Exception;
 	@WebMethod
-	void deleteDirectory(Directory directory);
+	void deleteDirectory(DirectoryDTO directory);
 	@WebMethod
-	AccountDTO findDirectory(int directoryId);
+	DirectoryDTO findDirectoryById(int directoryId);
 	@WebMethod
-	List<Directory> findAllDirectory();
+	List<DirectoryDTO> findAllDirectories();
 	@WebMethod
-	AccountDTO updateDirectory(Directory directory) throws Exception;
+	List<DirectoryDTO> findDirectoriesByName(String name);
+	@WebMethod
+	DirectoryDTO updateDirectory(DirectoryDTO directory) throws Exception;
+	@WebMethod
+	public List<DirectoryDTO> findDirectoriesByCategory(DirectoryCategoryDTO category);
+	@WebMethod
+	public List<DirectoryDTO> findDirectoriesByCoord(String lat, String lng, double rayon);
+	@WebMethod
+	public List<DirectoryHourDTO> findDirectoryHoursByDirectory(DirectoryDTO directory); 
 }

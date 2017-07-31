@@ -5,18 +5,23 @@ import java.util.List;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
-import com.maville.back.entities.DirectoryCategory;
+import com.maville.back.dto.DirectoryCategoryDTO;
+import com.maville.back.dto.DirectoryDTO;
 
 @WebService
 public interface DirectoryCategoryWebService {
 	@WebMethod
-	void addDirectoryCategory(DirectoryCategory directoryCategory) throws Exception;
+	void addDirectoryCategory(DirectoryCategoryDTO directoryCategory) throws Exception;
 	@WebMethod
-	void deleteDirectoryCategory(DirectoryCategory directoryCategory);
+	void deleteDirectoryCategory(DirectoryCategoryDTO directoryCategory);
 	@WebMethod
-	DirectoryCategory findDirectoryCategory(int directoryCategoryId);
+	DirectoryCategoryDTO findDirectoryCategory(int directoryCategoryId);
 	@WebMethod
-	List<DirectoryCategory> findAllDirectoryCategory();
+	List<DirectoryCategoryDTO> findAllDirectoryCategory();
 	@WebMethod
-	DirectoryCategory updateDirectoryCategory(DirectoryCategory directoryCategory) throws Exception;
+	DirectoryCategoryDTO findDirectoryCategoryByName(String name);
+	@WebMethod
+	DirectoryCategoryDTO updateDirectoryCategory(DirectoryCategoryDTO directoryCategory) throws Exception;
+	@WebMethod
+	List<DirectoryDTO> findDirectoriesByCategory(int categoryId);
 }

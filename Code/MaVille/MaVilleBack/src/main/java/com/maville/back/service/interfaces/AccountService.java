@@ -6,6 +6,7 @@ import com.maville.back.dto.AccountDTO;
 
 public interface AccountService {
 	AccountDTO getAccountById(int id);
+	AccountDTO getAccountByUsername(String username);
 	List<AccountDTO> getAllAccount();
 	List<AccountDTO> getAllProfessional();
 	List<AccountDTO> getAllAdmin();

@@ -5,10 +5,17 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="EventCategory.getCategoryByName", query="select ec from EventCategory ec where ec.name = :name")
+})
 public class EventCategory {
+	
+	public static final String GET_CATEGORY_BY_NAME = "EventCategory.getCategoryByName";
 	
 	/* Variables */
 	

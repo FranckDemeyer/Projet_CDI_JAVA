@@ -6,10 +6,25 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="event.findDuplicate",
+				query="SELECT e FROM Event e WHERE e.name = :name AND e.hours= :hours AND e.lat = :lat AND e.lng = :lng"),
+	@NamedQuery(name="event.findByDate",
+				query="SELECT e FROM Event e"), // , EventHour eh WHERE e.hours = eh.eventHourId AND (eh.hour >= :datedeb AND eh.hour < :datefin)
+	@NamedQuery(name="event.findByName", query="SELECT e FROM Event e WHERE e.name = :name")
+})
 public class Event {
+	
+	/* Constants */
+	
+	public static final String FIND_DUPLICATE = "event.findDuplicate";
+	public static final String FIND_BY_DATE = "event.findByDate";
+	public static final String FIND_BY_NAME = "event.findByName";
 	
 	/* Variables */
 	

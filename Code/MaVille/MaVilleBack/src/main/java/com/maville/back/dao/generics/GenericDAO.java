@@ -43,6 +43,7 @@ public class GenericDAO<T, PK> implements AbstractDAO<T, PK> {
 	
 	@Override
 	public void delete(T entity) {
+		//mySQL
 		T toRemove = em.merge(entity);
 		em.remove(toRemove);
 	}
@@ -91,13 +92,16 @@ public class GenericDAO<T, PK> implements AbstractDAO<T, PK> {
 		
 	@Override
 	public T update(T entity) {
+		// MySQL
 		return em.merge(entity);
 	}
 
 	@Override
 	public void save(T entity) {
+		//MySQL
 		em.persist(entity);
 		em.flush();
 	}
 
+	
 }

@@ -9,13 +9,13 @@ public interface ProfessionalService {
 
 	public ProfessionalDTO getProfessionalById(int id);
 	
-	public List<ProfessionalDTO> getAllProfessional();
+	public List<ProfessionalDTO> getAllProfessionals();
 	
-	public List<ProfessionalDTO> getProfessionalByName(String name);
+	public List<ProfessionalDTO> getProfessionalsByName(String name);
 	
-	public List<ProfessionalDTO> getProfessionalByCategory(ProfessionalCategoryDTO category);
+	public List<ProfessionalDTO> getProfessionalsByCategory(ProfessionalCategoryDTO category);
 	
-	public List<ProfessionalDTO> getProfessionalByCoord(String lat, String lng, double radius);
+	public List<ProfessionalDTO> getProfessionalsByCoord(String lat, String lng, double radius);
 	
 	public void addProfessional(ProfessionalDTO professional);
 	

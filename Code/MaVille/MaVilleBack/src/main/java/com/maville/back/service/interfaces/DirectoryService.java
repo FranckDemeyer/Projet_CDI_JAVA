@@ -10,9 +10,9 @@ public interface DirectoryService {
 
 	public DirectoryDTO getDirectoryById(int id);
 
-	public List<DirectoryDTO> getAllDirectory();
+	public List<DirectoryDTO> getAllDirectories();
 	
-	public List<DirectoryDTO> getDirectoryByName(String name);
+	public List<DirectoryDTO> getDirectoriesByName(String name);
 
 	public void addDirectory(DirectoryDTO directory);
 
@@ -20,9 +20,9 @@ public interface DirectoryService {
 
 	public DirectoryDTO updateDirectory(DirectoryDTO directory);
 
-	public List<DirectoryDTO> getDirectoryByCategory(DirectoryCategoryDTO category);
+	public List<DirectoryDTO> getDirectoriesByCategory(DirectoryCategoryDTO category);
 
-	public List<DirectoryDTO> getDirectoryByCoord(String lat, String lng, double rayon);
+	public List<DirectoryDTO> getDirectoriesByCoord(String lat, String lng, double rayon);
 	
 	public List<DirectoryHourDTO> getDirectoryHoursByDirectory(DirectoryDTO directory); 
 

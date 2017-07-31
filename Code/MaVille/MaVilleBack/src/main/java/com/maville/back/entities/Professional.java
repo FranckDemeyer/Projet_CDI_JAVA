@@ -5,16 +5,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 
 @Entity
-@NamedQuery(name="professional.getCategoryProfessionals", query="SELECT p FROM Professional p WHERE p.category=:professionalCategory")
+@NamedQueries({
+	@NamedQuery(name="professional.findByName",
+				query="SELECT p FROM Professional p WHERE p.name = :name"),
+	@NamedQuery(name="professional.findByCategory",
+				query="SELECT p FROM Professional p WHERE p.category = :category")
+})
 public class Professional {
 	
 	/* Constants */
 	
-	public static String GET_CATEGORY_PROFESSIONALS = "professional.getCategoryProfessionals";
+	public static String FIND_BY_NAME = "professional.findByName";
+	public static String FIND_BY_CATEGORY = "professional.findByCategory";
 	
 	/* Variables */
 	

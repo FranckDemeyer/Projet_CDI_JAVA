@@ -7,12 +7,21 @@ public class DirectoryHourDTO implements Serializable {
 	/* Variable */
 	
 	private static final long serialVersionUID = 1L;
+	private int id;
 	private DirectoryDTO directory;
 	private String day;
 	private String hour;
 
 	/* Getters and Setters */
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public DirectoryDTO getDirectory() {
 		return directory;
 	}

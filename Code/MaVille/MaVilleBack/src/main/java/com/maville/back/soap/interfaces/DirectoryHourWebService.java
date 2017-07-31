@@ -4,17 +4,20 @@ import java.util.List;
 
 import javax.jws.WebMethod;
 
-import com.maville.back.entities.DirectoryHour;
+import com.maville.back.dto.DirectoryDTO;
+import com.maville.back.dto.DirectoryHourDTO;
 
 public interface DirectoryHourWebService {
 	@WebMethod
-	void addDirectoryHour(DirectoryHour directoryHour) throws Exception;
+	void addDirectoryHour(DirectoryHourDTO directoryHour) throws Exception;
 	@WebMethod
-	void deleteDirectoryHour(DirectoryHour directoryHour);
+	void deleteDirectoryHour(DirectoryHourDTO directoryHour);
 	@WebMethod
-	DirectoryHour findDirectoryCategory(int directoryHourId);
+	DirectoryHourDTO findDirectoryCategoryById(int directoryHourId);
 	@WebMethod
-	List<DirectoryHour> findAllDirectoryHour();
+	List<DirectoryHourDTO> findAllDirectoryHours();
 	@WebMethod
-	DirectoryHour updateDirectoryHour(DirectoryHour directoryHour) throws Exception;
+	List<DirectoryHourDTO> findDirectoryHoursByDirectory(DirectoryDTO directory);
+	@WebMethod
+	DirectoryHourDTO updateDirectoryHour(DirectoryHourDTO directoryHour) throws Exception;
 }

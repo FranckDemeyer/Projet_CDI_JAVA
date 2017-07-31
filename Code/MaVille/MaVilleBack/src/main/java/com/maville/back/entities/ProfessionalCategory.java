@@ -5,10 +5,20 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="professionalCategory.findByName",
+				query="SELECT pc FROM ProfessionalCategory pc WHERE pc.name = :name")
+})
 public class ProfessionalCategory {
+	
+	/* Constants */
+	
+	public static final String FIND_BY_NAME = "professionalCategory.findByName";
 	
 	/* Variables */
 	

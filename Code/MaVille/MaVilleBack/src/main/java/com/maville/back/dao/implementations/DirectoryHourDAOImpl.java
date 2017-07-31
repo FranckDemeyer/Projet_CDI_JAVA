@@ -8,7 +8,7 @@ import com.maville.back.dao.interfaces.DirectoryHourDAO;
 import com.maville.back.entities.DirectoryHour;
 
 @Transactional
-@Repository("directoryHourDAO")
+@Repository("directoryHourDAOI")
 public class DirectoryHourDAOImpl extends GenericDAO<DirectoryHour, Integer> implements DirectoryHourDAO {
 
 	public DirectoryHourDAOImpl() {
