@@ -2,49 +2,49 @@ package com.maville.back.soap.implementations;
 
 import java.util.List;
 
+import javax.jws.WebService;
+
 import com.maville.back.dto.DirectoryCategoryDTO;
 import com.maville.back.dto.DirectoryDTO;
 import com.maville.back.factories.ServiceFactory;
-import com.maville.back.service.interfaces.DirectoryCategoryService;
 import com.maville.back.soap.interfaces.DirectoryCategoryWebService;
 
+@WebService(endpointInterface="com.maville.back.soap.interfaces.DirectoryCategoryWebService")
 public class DirectoryCategoryWebServiceImpl implements DirectoryCategoryWebService {
 	
-	private DirectoryCategoryService service = ServiceFactory.getInstance().getDirectoryCategoryService();
-
 	@Override
 	public void addDirectoryCategory(DirectoryCategoryDTO directoryCategory) throws Exception {
-		service.addDirectoryCategory(directoryCategory);
+		ServiceFactory.getInstance().getDirectoryCategoryService().addDirectoryCategory(directoryCategory);
 	}
 
 	@Override
 	public void deleteDirectoryCategory(DirectoryCategoryDTO directoryCategory) {
-		service.deleteDirectoryCategory(directoryCategory);
+		ServiceFactory.getInstance().getDirectoryCategoryService().deleteDirectoryCategory(directoryCategory);
 	}
 
 	@Override
 	public DirectoryCategoryDTO findDirectoryCategory(int directoryCategoryId) {
-		return service.getDirectoryCategoryById(directoryCategoryId);
+		return ServiceFactory.getInstance().getDirectoryCategoryService().getDirectoryCategoryById(directoryCategoryId);
 	}
 
 	@Override
 	public List<DirectoryCategoryDTO> findAllDirectoryCategory() {
-		return service.getAllDirectoryCategory();
+		return ServiceFactory.getInstance().getDirectoryCategoryService().getAllDirectoryCategory();
 	}
 
 	@Override
 	public DirectoryCategoryDTO updateDirectoryCategory(DirectoryCategoryDTO directoryCategory) throws Exception {
-		return service.updateDirectoryCategory(directoryCategory);
+		return ServiceFactory.getInstance().getDirectoryCategoryService().updateDirectoryCategory(directoryCategory);
 	}
 
 	@Override
 	public DirectoryCategoryDTO findDirectoryCategoryByName(String name) {
-		return service.getDirectoryCategoryByName(name);
+		return ServiceFactory.getInstance().getDirectoryCategoryService().getDirectoryCategoryByName(name);
 	}
 
 	@Override
 	public List<DirectoryDTO> findDirectoriesByCategory(int categoryId) {
-		return service.getDirectoriesByCategory(categoryId);
+		return ServiceFactory.getInstance().getDirectoryCategoryService().getDirectoriesByCategory(categoryId);
 	}
 
 }

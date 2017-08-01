@@ -6,52 +6,49 @@ import javax.jws.WebService;
 
 import com.maville.back.dto.AccountDTO;
 import com.maville.back.factories.ServiceFactory;
-import com.maville.back.service.interfaces.AccountService;
 import com.maville.back.soap.interfaces.AccountWebService;
 
 @WebService(endpointInterface="com.maville.back.soap.interfaces.AccountWebService")
 public class AccountWebServiceImpl implements AccountWebService {
 	
-	private AccountService service = ServiceFactory.getInstance().getAccountService();
-
 	@Override
 	public AccountDTO findAccountByName(String name) {
-		return service.getAccountByUsername(name);
+		return ServiceFactory.getInstance().getAccountService().getAccountByUsername(name);
 	}
 
 	@Override
 	public void deleteAccount(AccountDTO account) {
-		service.deleteAccount(account);
+		ServiceFactory.getInstance().getAccountService().deleteAccount(account);
 	}
 
 	@Override
 	public AccountDTO findAccount(int accountId) {
-		return service.getAccountById(accountId);
+		return ServiceFactory.getInstance().getAccountService().getAccountById(accountId);
 	}
 
 	@Override
 	public List<AccountDTO> findAllAccount() {
-		return service.getAllAccount();
+		return ServiceFactory.getInstance().getAccountService().getAllAccount();
 	}
 
 	@Override
 	public AccountDTO updateAccount(AccountDTO account) throws Exception {
-		return service.updateAccount(account);
+		return ServiceFactory.getInstance().getAccountService().updateAccount(account);
 	}
 
 	@Override
 	public void addAccount(AccountDTO account) throws Exception {
-		service.addAccount(account);
+		ServiceFactory.getInstance().getAccountService().addAccount(account);
 	}
 
 	@Override
 	public List<AccountDTO> findAllProfessionalAccount() {
-		return service.getAllProfessional();
+		return ServiceFactory.getInstance().getAccountService().getAllProfessional();
 	}
 
 	@Override
 	public List<AccountDTO> findAllAdminAccount() {
-		return service.getAllAdmin();
+		return ServiceFactory.getInstance().getAccountService().getAllAdmin();
 	}
 
 }

@@ -2,44 +2,44 @@ package com.maville.back.soap.implementations;
 
 import java.util.List;
 
+import javax.jws.WebService;
+
 import com.maville.back.dto.DirectoryDTO;
 import com.maville.back.dto.DirectoryHourDTO;
 import com.maville.back.factories.ServiceFactory;
-import com.maville.back.service.interfaces.DirectoryHourService;
 import com.maville.back.soap.interfaces.DirectoryHourWebService;
 
+@WebService(endpointInterface="com.maville.back.soap.interfaces.DirectoryHourWebService")
 public class DirectoryHourWebServiceImpl implements DirectoryHourWebService {
-	
-	private DirectoryHourService service = ServiceFactory.getInstance().getDirectoryHourService();
 
 	@Override
 	public void addDirectoryHour(DirectoryHourDTO directoryHour) throws Exception {
-		service.addDirectoryHour(directoryHour);
+		ServiceFactory.getInstance().getDirectoryHourService().addDirectoryHour(directoryHour);
 	}
 
 	@Override
 	public void deleteDirectoryHour(DirectoryHourDTO directoryHour) {
-		service.deleteDirectoryHour(directoryHour);
+		ServiceFactory.getInstance().getDirectoryHourService().deleteDirectoryHour(directoryHour);
 	}
 
 	@Override
 	public DirectoryHourDTO findDirectoryCategoryById(int directoryHourId) {
-		return service.getDirectoryHourById(directoryHourId);
+		return ServiceFactory.getInstance().getDirectoryHourService().getDirectoryHourById(directoryHourId);
 	}
 
 	@Override
 	public List<DirectoryHourDTO> findAllDirectoryHours() {
-		return service.getAllDirectoryHours();
+		return ServiceFactory.getInstance().getDirectoryHourService().getAllDirectoryHours();
 	}
 
 	@Override
 	public List<DirectoryHourDTO> findDirectoryHoursByDirectory(DirectoryDTO directory) {
-		return service.getHoursByDirectory(directory);
+		return ServiceFactory.getInstance().getDirectoryHourService().getHoursByDirectory(directory);
 	}
 
 	@Override
 	public DirectoryHourDTO updateDirectoryHour(DirectoryHourDTO directoryHour) throws Exception {
-		return service.updateDirectoryHour(directoryHour);
+		return ServiceFactory.getInstance().getDirectoryHourService().updateDirectoryHour(directoryHour);
 	}
 
 }
