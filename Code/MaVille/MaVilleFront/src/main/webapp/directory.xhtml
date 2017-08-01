@@ -1,0 +1,77 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<title>Gestion de l'annuaire</title>
+</h:head>
+<h:body>
+	<div id="header">
+		<ui:insert name="header">
+    			Header area.  See comments below this line in the source.
+    			<!--  include your header file or uncomment the include below and create header.xhtml in this directory -->
+			<!-- <ui:include src="header.xhtml"/> -->
+		</ui:insert>
+	</div>
+	<div id="content">
+		<ui:insert name="content">
+			<h2>Gestion de l'annuaire</h2>
+			<h:form>
+				<p:commandButton action="#{directory.create}" ajax="false" value="Nouvelle entrée"></p:commandButton>
+				<p:dataTable value="#{directory.allDirectories}" var="dir">
+					<p:column>
+						<f:facet name="header">Id</f:facet>
+						<h:outputText value="#{dir.directoryId}"></h:outputText>
+					</p:column>
+					<p:column>
+						<f:facet name="header">Name</f:facet>
+						<h:outputText value="#{dir.name}"></h:outputText>
+					</p:column>
+					<p:column>
+						<f:facet name="header">Description</f:facet>
+						<h:outputText value="#{dir.discription}"></h:outputText>
+					</p:column>
+					<p:column>
+						<f:facet name="header">Address</f:facet>
+						<h:outputText value="#{dir.address}"></h:outputText>
+						<br />
+						<h:outputText value="#{dir.postalCode}"></h:outputText>
+						<br />
+						<h:outputText value="#{dir.town}"></h:outputText>
+					</p:column>
+					<p:column>
+						<f:facet name="header">Contact</f:facet>
+						<h:outputText value="#{dir.phone}"></h:outputText>
+						<br />
+						<h:outputText value="#{dir.email}"></h:outputText>
+						<br />
+						<h:outputText value="#{dir.website}"></h:outputText>
+					</p:column>
+					<p:column>
+						<f:facet name="header">hours</f:facet>
+						<h:outputText value="#{dir.hours}"></h:outputText>
+					</p:column>
+					<p:column>
+						<f:facet name="header">Modifier</f:facet>
+						<p:commandButton action="#{directory.edit(dir)}" ajax="false" value="Modifier"></p:commandButton>
+					</p:column>
+					<p:column>
+						<f:facet name="header">Supprimer</f:facet>
+						<p:commandButton action="#{directory.delete(dir)}" ajax="false" value="Supprimer"></p:commandButton>
+					</p:column>
+				</p:dataTable>
+				<p:commandButton action="#{directory.create}" ajax="false" value="Nouvelle entrée"></p:commandButton>
+			</h:form>
+		</ui:insert>
+	</div>
+	<div id="footer">
+		<ui:insert name="footer">
+    			Footer area.  See comments below this line in the source.
+    			<!--  include your header file or uncomment the include below and create footer.xhtml in this directory -->
+			<!--<ui:include src="footer.xhtml"/>  -->
+		</ui:insert>
+	</div>
+
+</h:body>
+</html>

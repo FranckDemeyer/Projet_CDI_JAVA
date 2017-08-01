@@ -20,6 +20,11 @@ public class DirectoryBean {
 	private DirectoryDTO directory = new DirectoryDTO();
 	private DirectoryService service = ServiceFactory.getInstance().getDirectoryService();
 	
+	/* liste des pages Directory*/
+	private static final String listDirPage = "directory";
+	private static final String createDirPage = "create-directory";
+	private static final String editDirPage = "edit-directory";
+	
 	/* Getters and Setters */
 	
 	public DirectoryDTO getDirectory() {
@@ -56,24 +61,28 @@ public class DirectoryBean {
 		return service.getDirectoryHoursByDirectory(directory);
 	}
 	
+	public String create(){
+		return createDirPage;
+	}
 	public String add() {
 		service.addDirectory(directory);
-		return "directory-added";
+		return listDirPage;
 	}
 	
-	public String delete() {
-		service.delecteDirectory(directory);
-		return "directory-deleted";
+	public String delete(DirectoryDTO directory) {
+		this.directory = directory;
+		service.delecteDirectory(this.directory);
+		return listDirPage;
 	}
 	
 	public String edit(DirectoryDTO directory) {
 		this.directory = directory;
-		return "directory-edit";
+		return editDirPage;
 	}
 	
 	public String update() {
 		directory = service.updateDirectory(directory);
-		return "directory-updated";
+		return listDirPage;
 	}
 	
 }
