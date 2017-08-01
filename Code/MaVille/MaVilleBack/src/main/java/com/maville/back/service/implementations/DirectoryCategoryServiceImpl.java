@@ -49,8 +49,13 @@ public class DirectoryCategoryServiceImpl implements DirectoryCategoryService {
 		// create query parameters
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("name", name);
-		BeanUtils.copyProperties(directoryCategoryDao.findOne(DirectoryCategory.GET_CATEGORY_BYNAME,parameters), directoryCategory);
-		return directoryCategory;
+		DirectoryCategory entity = directoryCategoryDao.findOne(DirectoryCategory.GET_CATEGORY_BYNAME,parameters);
+		if (entity != null) {
+			BeanUtils.copyProperties(entity, directoryCategory);
+			return directoryCategory;
+		} else {
+			return null;
+		}
 	}
 
 	@Override

@@ -15,20 +15,34 @@
 		</ui:insert>
 	</div>
 	<div id="content">
-		<ui:insert name="content">
-			<h2>Liste des catégories de l'annuaire</h2>
-			<p:dataTable value="#{directoryCategory.allDirectoryCategory}"
-				var="directoryCategory">
-				<p:column>
-					<f:facet name="header">Nom</f:facet>
-					<h:outputText value="#{directoryCategory.category.name}" />
-				</p:column>
-				<p:column>
-					<f:facet name="header">Sous-catégories</f:facet>
-					<h:outputText value="#{directoryCategory.category.directories}" />
-				</p:column>
-			</p:dataTable>
-		</ui:insert>
+		<h:form>
+			<ui:insert name="content">
+				<h2>Liste des catégories de l'annuaire</h2>
+				<p:dataTable value="#{directoryCategory.allDirectoryCategory}"
+					var="dirCat">
+					<p:column>
+						<f:facet name="header">Nom</f:facet>
+						<h:outputText value="#{dirCat.name}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">Modifier</f:facet>
+						<p:commandButton action="#{directoryCategory.edit(dirCat)}"
+							ajax="false" value="Modifier" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">Supprimer</f:facet>
+						<p:commandButton action="#{directoryCategory.delete(dirCat)}"
+							ajax="false" value="Supprimer" />
+					</p:column>
+				</p:dataTable>
+			</ui:insert>
+		</h:form>
+		<h2>Ajouter une nouvelle catégorie</h2>
+		<h:form>
+			<p:outputLabel for="name">Nom de la catégorie : </p:outputLabel>
+			<p:inputText id="name" value="#{directoryCategory.category.name}"/>
+			<p:commandButton action="#{directoryCategory.add}" ajax="false" value="Ajouter" />
+		</h:form>
 	</div>
 	<div id="footer">
 		<ui:insert name="footer">

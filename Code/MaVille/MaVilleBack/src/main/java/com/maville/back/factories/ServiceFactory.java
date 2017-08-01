@@ -16,13 +16,12 @@ import com.maville.back.service.interfaces.ProfessionalService;
 
 
 public class ServiceFactory {
-	private ServiceFactory() {
-		//context = new AnnotationConfigApplicationContext();
-		context = new ClassPathXmlApplicationContext("META-INF/context.xml");
-	}
-
 	private static ServiceFactory instance = null;
 	private static ApplicationContext context = null;
+
+	private ServiceFactory() {
+		context = new ClassPathXmlApplicationContext("META-INF/context.xml");
+	}
 
 	public static ServiceFactory getInstance() {
 		if (instance == null) {
