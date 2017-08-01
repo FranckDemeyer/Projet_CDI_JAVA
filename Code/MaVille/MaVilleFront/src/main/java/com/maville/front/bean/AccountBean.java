@@ -1,6 +1,5 @@
 package com.maville.front.bean;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -10,12 +9,18 @@ import com.maville.back.dto.AccountDTO;
 import com.maville.back.dto.ProfessionalDTO;
 import com.maville.back.dto.ProfessionalCategoryDTO;
 import com.maville.back.factories.ServiceFactory;
+import com.maville.back.service.interfaces.AccountService;
+
 @ManagedBean(name="account")
 @SessionScoped
 public class AccountBean {
-	/* private Variables */
+	
+	/* Variables */
+	
 	private AccountDTO account = new AccountDTO();
-	private static Map<Integer, AccountDTO> accounts = new HashMap<>();
+	private AccountService service = ServiceFactory.getInstance().getAccountService();
+	
+	/* Constructors */
 	
 	public AccountBean() {
 		account.setProfessional(new ProfessionalDTO());
@@ -23,43 +28,55 @@ public class AccountBean {
 	}
 	
 	/* Getters and Setters */
+	
 	public AccountDTO getAccount() {
 		return account;
 	}
 	public void setAccount(AccountDTO account) {
 		this.account = account;
 	}
-	public Map<Integer, AccountDTO> getAccounts() {
-		return accounts;
-	}
-	/* private Methods */
-	private static void addAccounts(AccountDTO account) {
-		accounts.put(account.getAccountId(), account);
-	}
-	private static void deleteAccounts(Integer accountId) {
-		accounts.remove(accountId);
-	}
-	private static void updateAccounts(AccountDTO account) {
-		accounts.put(account.getAccountId(), account);
+
+	/* Methods */
+
+	public AccountDTO getAccountById(int id) {
+		return service.getAccountById(id);
 	}
 	
-	/* public Methods */
+	public AccountDTO getAccoutnByUsername(String name) {
+		return service.getAccountByUsername(name);
+	}
+	
+	public List<AccountDTO> getAllAccount() {
+		return service.getAllAccount();
+	}
+	
+	public List<AccountDTO> getAllAdminAccount() {
+		return service.getAllAdmin();
+	}
+	
+	public List<AccountDTO> getAllProfessionalAccount() {
+		return service.getAllProfessional();
+	}
+
 	public String add() throws Exception {
-		ServiceFactory.getInstance().getAccountService().addAccount(account);
-		addAccounts(account);
-		return "add";
+		service.addAccount(account);
+		account = new AccountDTO();
+		return "account-added";
 	}
 	
 	public String delete() {
-		ServiceFactory.getInstance().getAccountService().deleteAccount(account);
-		deleteAccounts(account.getAccountId());
-		return "delete";
+		service.deleteAccount(account);
+		return "account-deleted";
+	}
+	
+	public String edit(AccountDTO account) {
+		this.account = account;
+		return "account-edit";
 	}
 	
 	public String update() throws Exception {
-		ServiceFactory.getInstance().getAccountService().updateAccount(account);
-		updateAccounts(account);
-		return "update";
+		account = service.updateAccount(account);
+		return "account-updated";
 	}
 	
 	public boolean isAdmin() {

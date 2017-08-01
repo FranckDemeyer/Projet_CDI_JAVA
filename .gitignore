@@ -2,3 +2,4 @@
 /**/*.orig
 /**/.metadata
 /Code/Servers
+/**/.classpath
