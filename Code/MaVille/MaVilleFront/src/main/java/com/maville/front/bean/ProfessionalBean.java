@@ -3,6 +3,7 @@ package com.maville.front.bean;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import com.maville.back.dto.ProfessionalCategoryDTO;
@@ -16,10 +17,17 @@ public class ProfessionalBean {
 
 	/* Variables */
 	
+	@ManagedProperty(value="#{account}")
+	private AccountBean accountBean;
+	
 	private ProfessionalDTO professional = new ProfessionalDTO();
 	private ProfessionalService service = ServiceFactory.getInstance().getProfessionalService();
 	
 	/* Getters and Setters */
+	
+	public void setAccountBean(AccountBean accountBean) {
+		this.accountBean = accountBean;
+	}
 	
 	public ProfessionalDTO getProfessional() {
 		return professional;
@@ -52,8 +60,11 @@ public class ProfessionalBean {
 	}
 	
 	public String add() {
+		System.out.println(">><>" + accountBean.getAccountPro());
+		professional.setAccount(accountBean.getAccount());
+		System.out.println("<<>>>>>>>>>>>>>>>>>>>>>>>>>>>" + professional);
 		service.addProfessional(professional);
-		return "professional-added";
+		return "account-added";
 	}
 	
 	public String delete() {

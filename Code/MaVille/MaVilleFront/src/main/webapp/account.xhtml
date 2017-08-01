@@ -1,82 +1,29 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-	<head>
-		<meta charset="utf-8"/>
-  		<title><ui:insert name="title">Default title</ui:insert></title>
-	</head>
-	<body>
-		<div id="header">
-    		<ui:insert name="header">
-    			Header area.  See comments below this line in the source.
-    			<!--  include your header file or uncomment the include below and create header.xhtml in this directory -->
-    			<!-- <ui:include src="header.xhtml"/> -->
-   		 	</ui:insert>
-		</div>
-		<div id="content">
-  			<ui:insert name="content">
-    			Content area.  See comments below this line in the source.
-    			<f:view>
-    				<h:form>
-    					<table>
-    						<tr>
-    							<td>Nom d'utilisateur : </td>
-    							<td><h:inputText value="#{account.account.username}"/></td>
-    						</tr>
-    						<tr>
-    							<td>Mot de Passe : </td>
-    							<td><h:inputSecret value="#{account.account.password}"/></td>
-    						</tr>
-						</table>
-						<h:selectBooleanCheckbox  value="#{account.admin}" valueChangeListener="#{account.setHasAdmin}" onchange="submit()"/>
-					<table >
-  							<tr>
-    							<td><h:outputLabel value="Raison Sociale : " rendered="#{!account.admin}"/></td>
-    							<td><h:inputText value="#{account.account.professional.bussinessName}" rendered="#{!account.admin}"/></td>
-    						</tr>
-   							<tr>
-    							<td><h:outputLabel value="Nom : " rendered="#{!account.admin}"/></td>
-    							<td><h:inputText value="#{account.account.professional.name}" rendered="#{!account.admin}"/></td>
-    						</tr>
-  							<tr>
-    							<td><h:outputLabel value="Adresse : " rendered="#{!account.admin}"/></td>
-    							<td><h:inputText value="#{account.account.professional.address}" rendered="#{!account.admin}"/></td>
-    						</tr>
-   							<tr>
-    							<td><h:outputLabel value="Code Postal : " rendered="#{!account.admin}"/></td>
-    							<td><h:inputText value="#{account.account.professional.postalCode}" rendered="#{!account.admin}"/></td>
-    						</tr>
-  							<tr>
-    							<td><h:outputLabel value="Ville : " rendered="#{!account.admin}"/></td>
-    							<td><h:inputText value="#{account.account.professional.town}" rendered="#{!account.admin}"/></td>
-    						</tr>
-   							<tr>
-    							<td><h:outputLabel value="Numéro de téléphone : " rendered="#{!account.admin}"/></td>
-    							<td><h:inputText value="#{account.account.professional.phone}" rendered="#{!account.admin}"/></td>
-    						</tr>
-<!--   							<tr> -->
-<!--     							<td><h:outputLabel value="Catégorie : " rendered="#{!account.admin}"/></td> -->
-<!--     							<td><h:selectOneMenu value="#{account.account.professional.category}" rendered="#{!account.admin}"/></td> -->
-<!--     								<f:selectItem></f:selectItem> -->
-<!--     						</tr> --> 						
-						</table>
-						<h:commandButton action="#{account.add}" value="Ajouter"/>
-    				</h:form>
-    			</f:view>
-    			<!--  include your content file or uncomment the include below and create content.xhtml in this directory -->
-	  			<!-- <div> -->
-    			<!-- <ui:include src="content.xhtml"/> -->  
-    			<!-- </div> -->
-  			</ui:insert>
-		</div>
-		<div id="footer">
-  			<ui:insert name="footer">
-    			Footer area.  See comments below this line in the source.
-    			<!--  include your header file or uncomment the include below and create footer.xhtml in this directory -->
-				<!--<ui:include src="footer.xhtml"/>  -->
-  			</ui:insert>
-		</div>
-	</body>
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<head>
+<meta charset="utf-8" />
+<title><ui:insert name="title">Default title</ui:insert></title>
+</head>
+<body>
+	<f:view>
+		<h:form>
+			<table>
+				<tr>
+					<td>Nom d'utilisateur :</td>
+					<td><h:inputText value="#{account.account.username}" /></td>
+				</tr>
+				<tr>
+					<td>Mot de Passe :</td>
+					<td><h:inputSecret value="#{account.account.password}" /></td>
+				</tr>
+			</table>
+			<h:selectBooleanCheckbox value="#{account.account.admin}" />
+			<h:commandButton action="#{account.add}" value="Ajouter" />
+		</h:form>
+	</f:view>
+</body>
 </html>

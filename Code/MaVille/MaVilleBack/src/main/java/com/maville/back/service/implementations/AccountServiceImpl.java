@@ -32,10 +32,12 @@ public class AccountServiceImpl implements AccountService {
 	
 	@Override
 	public AccountDTO getAccountByUsername(String username){
-		AccountDTO account = new AccountDTO();
-		Map<String, Object> parameters = new HashMap<>(); 
-		BeanUtils.copyProperties(accountDao.findOne(Account.FIND_BY_NAME, parameters), account);
-		return account;
+		AccountDTO accountDTO = null;
+		Map<String, Object> parameters = new HashMap<>();
+		parameters.put("name", username);
+		Account account = accountDao.findOne(Account.FIND_BY_NAME, parameters);
+		if(account != null) BeanUtils.copyProperties(account, accountDTO);
+		return accountDTO;
 	}
 
 	@Override

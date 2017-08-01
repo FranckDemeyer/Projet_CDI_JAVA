@@ -3,11 +3,8 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.event.ValueChangeEvent;
 
 import com.maville.back.dto.AccountDTO;
-import com.maville.back.dto.ProfessionalDTO;
-import com.maville.back.dto.ProfessionalCategoryDTO;
 import com.maville.back.factories.ServiceFactory;
 import com.maville.back.service.interfaces.AccountService;
 
@@ -18,13 +15,12 @@ public class AccountBean {
 	/* Variables */
 	
 	private AccountDTO account = new AccountDTO();
+	private AccountDTO accountPro = new AccountDTO();
 	private AccountService service = ServiceFactory.getInstance().getAccountService();
 	
 	/* Constructors */
 	
 	public AccountBean() {
-		account.setProfessional(new ProfessionalDTO());
-		account.getProfessional().setCategory(new ProfessionalCategoryDTO());
 	}
 	
 	/* Getters and Setters */
@@ -34,6 +30,14 @@ public class AccountBean {
 	}
 	public void setAccount(AccountDTO account) {
 		this.account = account;
+	}
+
+	public AccountDTO getAccountPro() {
+		return accountPro;
+	}
+
+	public void setAccountPro(AccountDTO accountPro) {
+		this.accountPro = accountPro;
 	}
 
 	/* Methods */
@@ -59,9 +63,12 @@ public class AccountBean {
 	}
 
 	public String add() throws Exception {
+		System.out.println(account);
 		service.addAccount(account);
+		accountPro = account;
 		account = new AccountDTO();
-		return "account-added";
+		if(account.isAdmin()) return "account-added";
+		return "professional";
 	}
 	
 	public String delete() {
@@ -79,15 +86,4 @@ public class AccountBean {
 		return "account-updated";
 	}
 	
-	public boolean isAdmin() {
-		return account.isAdmin();
-	}
-	
-	public void setAdmin(boolean admin) {
-		account.setAdmin(admin);
-	}
-	
-	public void setHasAdmin(ValueChangeEvent e) {
-		account.setAdmin(Boolean.parseBoolean(e.getNewValue().toString()));
-	}
 }

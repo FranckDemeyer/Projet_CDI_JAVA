@@ -18,7 +18,7 @@ import com.maville.back.entities.ProfessionalCategory;
 import com.maville.back.service.interfaces.ProfessionalCategoryService;
 
 @Transactional
-@Service("professionalCategoryDAO")
+@Service("professionalCategoryService")
 public class ProfessionalCategoryServiceImpl implements ProfessionalCategoryService {
 	
 	@Autowired

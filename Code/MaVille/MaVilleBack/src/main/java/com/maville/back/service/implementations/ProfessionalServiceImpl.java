@@ -75,7 +75,6 @@ public class ProfessionalServiceImpl implements ProfessionalService {
 
 	@Override
 	public void addProfessional(ProfessionalDTO professional) {
-		if(getProfessionalsByName(professional.getName()) != null) {throw new IllegalArgumentException("Ce professionnel existe d�j�");}
 		Professional entity = new Professional();
 		BeanUtils.copyProperties(professional, entity);
 		try {

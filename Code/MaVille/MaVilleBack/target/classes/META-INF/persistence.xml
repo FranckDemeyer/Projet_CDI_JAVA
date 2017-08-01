@@ -24,7 +24,7 @@
 			<property name="hibernate.format_sql" value="false" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
 				<!-- validate : valide le schema, update : met à jour, create : recréé la table, create-drop : detruit le schema quand la factory est fermée de manière explicite -->
-			<property name="hibernate.hbm2ddl.auto" value="create" />
+			<property name="hibernate.hbm2ddl.auto" value="none" />
 
 		</properties>
 	</persistence-unit>
