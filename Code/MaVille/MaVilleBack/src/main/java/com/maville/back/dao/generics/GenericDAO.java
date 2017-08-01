@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
@@ -67,7 +68,11 @@ public class GenericDAO<T, PK> implements AbstractDAO<T, PK> {
 		try {
 			Query query = em.createNamedQuery(namedQuery);
 			if(parameters != null && !parameters.isEmpty()) populateQueryParameters(query, parameters);
-			result = (T) query.getSingleResult();
+			try{
+				result = (T) query.getSingleResult();
+			} catch (NoResultException e){
+				
+			}
 		} catch (Exception e) {
 			log.debug("Erreur dans la methode findOneResult : " + e.getMessage());
 			e.printStackTrace();

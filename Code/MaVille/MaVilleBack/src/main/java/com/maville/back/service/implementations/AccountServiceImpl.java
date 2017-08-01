@@ -34,6 +34,7 @@ public class AccountServiceImpl implements AccountService {
 	public AccountDTO getAccountByUsername(String username){
 		AccountDTO account = new AccountDTO();
 		Map<String, Object> parameters = new HashMap<>(); 
+		parameters.put("name", username);
 		BeanUtils.copyProperties(accountDao.findOne(Account.FIND_BY_NAME, parameters), account);
 		return account;
 	}

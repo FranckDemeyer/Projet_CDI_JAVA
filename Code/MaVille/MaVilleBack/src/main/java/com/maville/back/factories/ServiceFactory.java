@@ -2,6 +2,7 @@ package com.maville.back.factories;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.maville.back.service.interfaces.AccountService;
 import com.maville.back.service.interfaces.DirectoryCategoryService;
@@ -15,20 +16,20 @@ import com.maville.back.service.interfaces.ProfessionalService;
 
 
 public class ServiceFactory {
-	private ServiceFactory() {
-	}
-
 	private static ServiceFactory instance = null;
 	private static ApplicationContext context = null;
 
+	private ServiceFactory() {
+		context = new ClassPathXmlApplicationContext("META-INF/context.xml");
+	}
+
 	public static ServiceFactory getInstance() {
 		if (instance == null) {
-			context = new AnnotationConfigApplicationContext();
 			instance = new ServiceFactory();
 		}
 		return instance;
 	}
-
+	
 	public AccountService getAccountService() {
 		return context.getBean("accountService", AccountService.class);
 	}

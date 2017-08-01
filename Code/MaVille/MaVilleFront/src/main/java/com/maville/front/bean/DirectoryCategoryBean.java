@@ -1,9 +1,10 @@
 package com.maville.front.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 
 import com.maville.back.dto.DirectoryCategoryDTO;
 import com.maville.back.dto.DirectoryDTO;
@@ -11,7 +12,7 @@ import com.maville.back.factories.ServiceFactory;
 import com.maville.back.service.interfaces.DirectoryCategoryService;
 
 @ManagedBean(name="directoryCategory")
-@SessionScoped
+@RequestScoped
 public class DirectoryCategoryBean {
 
 	/* Variables */
@@ -48,23 +49,33 @@ public class DirectoryCategoryBean {
 	}
 	
 	public String add() {
+		category.setDirectoryCategoryId(0);
+		List<DirectoryDTO> listDirectories = new ArrayList<>();
+		category.setDirectories(listDirectories);
 		service.addDirectoryCategory(category);
-		return "dcategory-added";
+		return "directory-category";
+//		return "dcategory-added";
 	}
 	
-	public String delete() {
-		service.deleteDirectoryCategory(category);
-		return "dcategory-deleted";
+	public String delete(DirectoryCategoryDTO category) {
+		this.category = category;
+		service.deleteDirectoryCategory(this.category);
+		category = new DirectoryCategoryDTO();
+		return "directory-category";
+//		return "dcategory-deleted";
 	}
 	
 	public String edit(DirectoryCategoryDTO category) {
 		this.category = category;
-		return "dcategory-edit";
+		return "update-dircat";
 	}
 	
 	public String update() {
 		category  = service.updateDirectoryCategory(category);
-		return "dcategory-updated";
+		// set to new not to have the name of previous category in display
+		category = new DirectoryCategoryDTO();
+		return "directory-category";
+//		return "dcategory-updated";
 	}
 	
 }
