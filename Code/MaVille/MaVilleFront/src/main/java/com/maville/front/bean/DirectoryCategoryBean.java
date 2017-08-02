@@ -1,5 +1,6 @@
 package com.maville.front.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +14,9 @@ import com.maville.back.service.interfaces.DirectoryCategoryService;
 
 @ManagedBean(name="directoryCategory")
 @RequestScoped
-public class DirectoryCategoryBean {
+public class DirectoryCategoryBean implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	/* Variables */
 	
 	private DirectoryCategoryDTO category = new DirectoryCategoryDTO();

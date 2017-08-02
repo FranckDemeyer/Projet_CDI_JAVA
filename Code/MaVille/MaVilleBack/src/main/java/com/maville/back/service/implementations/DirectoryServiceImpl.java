@@ -70,9 +70,9 @@ public class DirectoryServiceImpl implements DirectoryService {
 		if(directory.getLng() == null || directory.getLng().isEmpty()){
 			err += "La longitude est obligatoire. ";
 		}
-		if(directory.getCategory() == null){
-			err += "La catégorie est obligatoire";
-		}
+//		if(directory.getCategory() == null){
+//			err += "La catégorie est obligatoire";
+//		}
 		if (err != ""){
 			throw new IllegalArgumentException(err);
 		}
@@ -139,7 +139,7 @@ public class DirectoryServiceImpl implements DirectoryService {
 
 	@Override
 	public List<DirectoryDTO> getDirectoriesByCoord(String lat, String lng, double rayon) {
-		List<DirectoryDTO> listDirectory = null;
+		List<DirectoryDTO> listDirectory = new ArrayList<>();
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("lat", lat);
 		parameters.put("lng", lng);
