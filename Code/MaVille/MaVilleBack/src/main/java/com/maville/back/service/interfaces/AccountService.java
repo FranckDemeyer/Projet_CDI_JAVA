@@ -10,7 +10,7 @@ public interface AccountService {
 	List<AccountDTO> getAllAccount();
 	List<AccountDTO> getAllProfessional();
 	List<AccountDTO> getAllAdmin();
-	void addAccount(AccountDTO account) throws Exception;
+	AccountDTO addAccount(AccountDTO account) throws Exception;
 	void deleteAccount(AccountDTO account);
 	AccountDTO updateAccount(AccountDTO account) throws Exception;
 }

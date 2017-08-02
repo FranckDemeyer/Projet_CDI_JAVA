@@ -60,7 +60,12 @@ public class ProfessionalBean {
 	}
 	
 	public String add() {
-		System.out.println(">><>" + accountBean.getAccountPro());
+		accountBean.getAccount().setProfessional(professional);
+		try {
+			accountBean.setAccount(accountBean.getService().addAccount(accountBean.getAccount()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		professional.setAccount(accountBean.getAccount());
 		System.out.println("<<>>>>>>>>>>>>>>>>>>>>>>>>>>>" + professional);
 		service.addProfessional(professional);

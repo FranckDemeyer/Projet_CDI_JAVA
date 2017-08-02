@@ -10,5 +10,5 @@ public interface AbstractDAO <T, PK> {
 	T findOne(String namedQuery, Map<String, Object> parameters);
 	List<T> findGroup(String namedQuery, Map<String, Object> parameters);
 	T update(T entity);
-	void save(T entity);
+	T save(T entity);
 }

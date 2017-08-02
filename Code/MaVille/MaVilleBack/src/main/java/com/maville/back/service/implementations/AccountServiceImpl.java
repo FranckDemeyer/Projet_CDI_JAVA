@@ -74,7 +74,7 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public void addAccount(AccountDTO account) throws Exception {
+	public AccountDTO addAccount(AccountDTO account) throws Exception {
 		// verify mandatory data
 		String err = "";
 		if(account.getUsername().isEmpty()){
@@ -94,10 +94,12 @@ public class AccountServiceImpl implements AccountService {
 		Account entity = new Account();
 		BeanUtils.copyProperties(account, entity);
 		try{
-			accountDao.save(entity);
+			entity = accountDao.save(entity);
+			BeanUtils.copyProperties(entity, account);
 		} catch(Exception e){
 			throw new RuntimeException("Erreur lors de l'enregistrement de l'utilisateur");
 		}
+		return account;
 	}
 
 	@Override

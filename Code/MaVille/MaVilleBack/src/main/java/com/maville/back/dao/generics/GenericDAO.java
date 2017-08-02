@@ -100,10 +100,12 @@ public class GenericDAO<T, PK> implements AbstractDAO<T, PK> {
 	}
 
 	@Override
-	public void save(T entity) {
+	public T save(T entity) {
 		//MySQL
 		em.persist(entity);
+		entity = em.merge(entity);
 		em.flush();
+		return entity;
 	}
 
 	

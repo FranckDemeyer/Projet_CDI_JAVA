@@ -15,7 +15,6 @@ public class AccountBean {
 	/* Variables */
 	
 	private AccountDTO account = new AccountDTO();
-	private AccountDTO accountPro = new AccountDTO();
 	private AccountService service = ServiceFactory.getInstance().getAccountService();
 	
 	/* Constructors */
@@ -32,12 +31,12 @@ public class AccountBean {
 		this.account = account;
 	}
 
-	public AccountDTO getAccountPro() {
-		return accountPro;
+	public AccountService getService() {
+		return service;
 	}
 
-	public void setAccountPro(AccountDTO accountPro) {
-		this.accountPro = accountPro;
+	public void setService(AccountService service) {
+		this.service = service;
 	}
 
 	/* Methods */
@@ -63,12 +62,10 @@ public class AccountBean {
 	}
 
 	public String add() throws Exception {
-		System.out.println(account);
+		if(!account.isAdmin()) return "professional";
 		service.addAccount(account);
-		accountPro = account;
 		account = new AccountDTO();
-		if(account.isAdmin()) return "account-added";
-		return "professional";
+		return "account-added";
 	}
 	
 	public String delete() {

@@ -168,6 +168,6 @@ public class Professional {
 		return "Professional > professionalId : " + professionalId + ", bussinessName : " + bussinessName + ", name : "
 				+ name + ", address : " + address + ", postalCode : " + postalCode + ", town : " + town + ", phone : "
 				+ phone + ", lat : " + lat + ", lng : " + lng + ", category : " + category + ", connected : "
-				+ connected;
+				+ connected + ", account : " + account;
 	}
 }

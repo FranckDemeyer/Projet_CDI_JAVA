@@ -75,8 +75,11 @@ public class ProfessionalServiceImpl implements ProfessionalService {
 
 	@Override
 	public void addProfessional(ProfessionalDTO professional) {
+		System.out.println("pro > " + professional);
 		Professional entity = new Professional();
+		System.out.println(entity);
 		BeanUtils.copyProperties(professional, entity);
+		System.out.println("ent > " + entity);
 		try {
 			professionalDAO.save(entity);
 		} catch (Exception e) {
