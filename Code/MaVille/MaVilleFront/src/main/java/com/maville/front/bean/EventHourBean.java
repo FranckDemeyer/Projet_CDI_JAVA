@@ -1,5 +1,7 @@
 package com.maville.front.bean;
 
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -9,10 +11,11 @@ import com.maville.back.service.interfaces.EventHourService;
 
 @ManagedBean(name="eventHour")
 @SessionScoped
-public class EventHourBean {
+public class EventHourBean implements Serializable {
 
 	/* Variables */
 	
+	private static final long serialVersionUID = 1L;
 	private EventHourDTO hour = new EventHourDTO();
 	private EventHourService service = ServiceFactory.getInstance().getEventHourService();
 	

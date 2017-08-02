@@ -1,4 +1,5 @@
 package com.maville.front.bean;
+import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -10,10 +11,11 @@ import com.maville.back.service.interfaces.AccountService;
 
 @ManagedBean(name="account")
 @SessionScoped
-public class AccountBean {
+public class AccountBean implements Serializable {
 	
 	/* Variables */
-	
+
+	private static final long serialVersionUID = 1L;
 	private AccountDTO account = new AccountDTO();
 	private AccountService service = ServiceFactory.getInstance().getAccountService();
 	

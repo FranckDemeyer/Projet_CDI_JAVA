@@ -40,6 +40,7 @@ public class Professional {
 	
 	@ManyToOne
 	private ProfessionalCategory category;
+	
 	private boolean connected;
 	
 	@OneToOne

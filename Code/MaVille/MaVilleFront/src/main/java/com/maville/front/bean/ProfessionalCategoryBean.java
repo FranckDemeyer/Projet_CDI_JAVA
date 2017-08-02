@@ -1,5 +1,6 @@
 package com.maville.front.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -12,10 +13,11 @@ import com.maville.back.service.interfaces.ProfessionalCategoryService;
 
 @ManagedBean(name="professionalCategory")
 @SessionScoped
-public class ProfessionalCategoryBean {
+public class ProfessionalCategoryBean implements Serializable {
 
 	/* Variables */
 	
+	private static final long serialVersionUID = 1L;
 	private ProfessionalCategoryDTO category = new ProfessionalCategoryDTO();
 	private ProfessionalCategoryService service = ServiceFactory.getInstance().getProfessionalCategoryService();
 	

@@ -1,5 +1,6 @@
 package com.maville.front.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -12,10 +13,11 @@ import com.maville.back.service.interfaces.DirectoryHourService;
 
 @ManagedBean(name="directoryHour")
 @SessionScoped
-public class DirectoryHourBean {
+public class DirectoryHourBean implements Serializable {
 	
 	/* Variables */
 	
+	private static final long serialVersionUID = 1L;
 	private DirectoryHourDTO hour = new DirectoryHourDTO();
 	private DirectoryHourService service = ServiceFactory.getInstance().getDirectoryHourService();
 

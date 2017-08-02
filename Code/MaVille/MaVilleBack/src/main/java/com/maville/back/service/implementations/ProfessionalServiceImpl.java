@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.maville.back.dao.interfaces.ProfessionalDAO;
 import com.maville.back.dto.ProfessionalCategoryDTO;
 import com.maville.back.dto.ProfessionalDTO;
+import com.maville.back.entities.Account;
 import com.maville.back.entities.Professional;
 import com.maville.back.service.interfaces.ProfessionalService;
 
@@ -69,7 +70,6 @@ public class ProfessionalServiceImpl implements ProfessionalService {
 
 	@Override
 	public List<ProfessionalDTO> getProfessionalsByCoord(String lat, String lng, double radius) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -77,8 +77,11 @@ public class ProfessionalServiceImpl implements ProfessionalService {
 	public void addProfessional(ProfessionalDTO professional) {
 		System.out.println("pro > " + professional);
 		Professional entity = new Professional();
+		Account account = new Account();
 		System.out.println(entity);
 		BeanUtils.copyProperties(professional, entity);
+		BeanUtils.copyProperties(professional.getAccount(), account);
+		entity.setAccount(account);
 		System.out.println("ent > " + entity);
 		try {
 			professionalDAO.save(entity);

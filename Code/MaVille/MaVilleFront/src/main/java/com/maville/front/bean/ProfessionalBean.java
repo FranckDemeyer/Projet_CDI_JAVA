@@ -1,5 +1,6 @@
 package com.maville.front.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -13,9 +14,11 @@ import com.maville.back.service.interfaces.ProfessionalService;
 
 @ManagedBean(name="professional")
 @SessionScoped
-public class ProfessionalBean {
+public class ProfessionalBean implements Serializable {
 
 	/* Variables */
+	
+	private static final long serialVersionUID = 1L;
 	
 	@ManagedProperty(value="#{account}")
 	private AccountBean accountBean;

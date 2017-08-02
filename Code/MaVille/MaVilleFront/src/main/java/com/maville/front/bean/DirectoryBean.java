@@ -1,5 +1,6 @@
 package com.maville.front.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -13,10 +14,11 @@ import com.maville.back.service.interfaces.DirectoryService;
 
 @ManagedBean(name="directory")
 @SessionScoped
-public class DirectoryBean {
+public class DirectoryBean implements Serializable {
 	
 	/* Variables */
 	
+	private static final long serialVersionUID = 1L;
 	private DirectoryDTO directory = new DirectoryDTO();
 	private DirectoryService service = ServiceFactory.getInstance().getDirectoryService();
 	
