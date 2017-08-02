@@ -62,6 +62,10 @@ public class ProfessionalBean implements Serializable {
 		return service.getProfessionalsByCoord(lat, lng, rayon);
 	}
 	
+	public String locate() {
+		return null;
+	}
+	
 	public String add() {
 		accountBean.getAccount().setProfessional(professional);
 		try {
@@ -70,7 +74,6 @@ public class ProfessionalBean implements Serializable {
 			e.printStackTrace();
 		}
 		professional.setAccount(accountBean.getAccount());
-		System.out.println("<<>>>>>>>>>>>>>>>>>>>>>>>>>>>" + professional);
 		service.addProfessional(professional);
 		return "account-added";
 	}

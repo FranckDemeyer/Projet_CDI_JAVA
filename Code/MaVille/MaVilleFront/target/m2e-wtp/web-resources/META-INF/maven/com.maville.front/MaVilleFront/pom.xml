@@ -9,6 +9,12 @@
 	<groupId>com.maville.front</groupId>
 	<artifactId>MaVilleFront</artifactId>
 	<packaging>war</packaging>
+    <repositories>
+        <repository>
+            <id>googlecode.com</id>
+            <url>http://gmaps4jsf.googlecode.com/svn/trunk/gmaps4jsf-repo</url>
+        </repository>
+    </repositories>
 	<dependencies>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -33,8 +39,14 @@
 			<artifactId>primefaces</artifactId>
 			<version>6.1</version>
 		</dependency>
+		<dependency>
+			<groupId>com.googlecode.gmaps4jsf</groupId>
+			<artifactId>gmaps4jsf-core</artifactId>
+			<version>3.0.0</version>
+		</dependency>
 	</dependencies>
 	<build>
+		<finalName>gmaps</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

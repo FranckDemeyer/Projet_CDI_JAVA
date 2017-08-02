@@ -23,7 +23,7 @@ public class ProfessionalServiceImpl implements ProfessionalService {
 	
 	@Autowired
 	private ProfessionalDAO professionalDAO;
-
+	
 	@Override
 	public ProfessionalDTO getProfessionalById(int id) {
 		ProfessionalDTO professional = new ProfessionalDTO();
@@ -75,14 +75,14 @@ public class ProfessionalServiceImpl implements ProfessionalService {
 
 	@Override
 	public void addProfessional(ProfessionalDTO professional) {
-		System.out.println("pro > " + professional);
+		
+		// TODO: verifying method, copyproperties problem with professional.account //
+		
 		Professional entity = new Professional();
 		Account account = new Account();
-		System.out.println(entity);
 		BeanUtils.copyProperties(professional, entity);
 		BeanUtils.copyProperties(professional.getAccount(), account);
 		entity.setAccount(account);
-		System.out.println("ent > " + entity);
 		try {
 			professionalDAO.save(entity);
 		} catch (Exception e) {
