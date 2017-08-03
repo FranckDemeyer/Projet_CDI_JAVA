@@ -26,17 +26,9 @@
 			</h:form>
 			<h:form>
 				<p:outputLabel for="category" value="Catégorie : " />
-				<p:selectOneMenu id="category" value="#{directory.directory.category}" >
-					<f:selectItem itemLabel="Sélectionner ..." itemValue="" />
-					<f:selectItems value="#{directory.categoryBean.category}" />
+				<p:selectOneMenu id="category" value="#{directory.directory.category}" converter="dirCatConverter" >
+					<f:selectItems value="#{directory.listCategories}" var="category" itemLabel="#{category.name}" itemValue="#{category}" />
 				</p:selectOneMenu>
-<!-- 				<p:selectOneMenu id="category" value="#{directory.category}" var="dc" filter="true" filterMatchMode="startsWith"> -->
-<!-- 					<f:selectItem itemLabel="Sélectionner ..." itemValue="" /> -->
-<!-- 					<f:selectItems value="#{directoryCategory.allDirectoryCategory}" var="category" itemLabel="#{category.name}" itemValue="#{category}" /> -->
-<!-- 					<p:column> -->
-<!--               		  <h:outputText value="#{dc.name}" /> -->
-<!--          		   </p:column> -->
-<!-- 				</p:selectOneMenu> -->
 				<br />
 				<p:outputLabel for="name" value="Nom : " />
 				<p:inputText id="name" value="#{directory.directory.name}" />

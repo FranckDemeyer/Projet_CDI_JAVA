@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -29,8 +30,12 @@ public class DirectoryBean implements Serializable {
 	
 	private DirectoryDTO directory = new DirectoryDTO();
 	private DirectoryService service = ServiceFactory.getInstance().getDirectoryService();
+	
+	/* Manage Category */
 	@ManagedProperty(value="#{directoryCategory}")
 	private DirectoryCategoryBean categoryBean;
+	private DirectoryCategoryDTO category;
+	private List<DirectoryCategoryDTO> listCategories;
 	
 	/* liste des pages Directory*/
 	private static final String listDirPage = "directory";
@@ -44,9 +49,26 @@ public class DirectoryBean implements Serializable {
 	/* file upload */
 	UploadedFile file;
 	
+	@PostConstruct
+	public void init(){
+		listCategories = ServiceFactory.getInstance().getDirectoryCategoryService().getAllDirectoryCategory();
+		System.out.println(listCategories);
+	}
 
 	/* Getters and Setters */
 	
+	public DirectoryCategoryDTO getCategory() {
+		return category;
+	}
+
+	public void setCategory(DirectoryCategoryDTO category) {
+		this.category = category;
+	}
+
+	public List<DirectoryCategoryDTO> getListCategories() {
+		return listCategories;
+	}
+
 	public DirectoryDTO getDirectory() {
 		return directory;
 	}
@@ -58,7 +80,6 @@ public class DirectoryBean implements Serializable {
 	public void setCategoryBean(DirectoryCategoryBean categoryBean) {
 		this.categoryBean = categoryBean;
 	}
-
 	
 	/* Methods */
 	
