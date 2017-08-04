@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 	<h:head>
 		<meta charset="utf-8"/>
   		<title>Création du compte :</title>
@@ -11,50 +12,52 @@
 		<h:form>
 			<table>
 				<tr>
-					<td><h:outputLabel value="Raison Sociale : " /></td>
-					<td><h:inputText value="#{professional.professional.bussinessName}" /></td>
+					<td><p:outputLabel value="Raison Sociale : " /></td>
+					<td><p:inputText value="#{professional.professional.bussinessName}" /></td>
 				</tr>
 				<tr>
-					<td><h:outputLabel value="Nom : " /></td>
-					<td><h:inputText value="#{professional.professional.name}" /></td>
+					<td><p:outputLabel value="Nom : " /></td>
+					<td><p:inputText value="#{professional.professional.name}" /></td>
 				</tr>
 				<tr>
-					<td><h:outputLabel value="Adresse : " /></td>
-					<td><h:inputText styleClass="address" value="#{professional.professional.address}" /></td>
+					<td><p:outputLabel value="Adresse : " /></td>
+					<td><p:inputText styleClass="address" value="#{professional.professional.address}" /></td>
 				</tr>
 				<tr>
-					<td><h:outputLabel value="Code Postal : " /></td>
-					<td><h:inputText styleClass="postcode" value="#{professional.professional.postalCode}" /></td>
+					<td><p:outputLabel value="Code Postal : " /></td>
+					<td><p:inputText styleClass="postcode" value="#{professional.professional.postalCode}" /></td>
 				</tr>
 				<tr>
-					<td><h:outputLabel value="Ville : " /></td>
-					<td><h:inputText styleClass="town" value="#{professional.professional.town}" /></td>
+					<td><p:outputLabel value="Ville : " /></td>
+					<td><p:inputText styleClass="town" value="#{professional.professional.town}" /></td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center">Ou :</td>
 				</tr>
 				<tr>
-					<td><h:outputLabel value="Latitude" id="pro_lat" /></td>
-					<td><h:inputText styleClass="lat" value="#{professional.professional.lat}" /></td>
+					<td><p:outputLabel value="Latitude" id="pro_lat" /></td>
+					<td><p:inputText styleClass="lat" value="#{professional.professional.lat}" /></td>
 				</tr>
 				<tr>
-					<td><h:outputLabel value="Longitude" id="pro_lng"/></td>
-					<td><h:inputText styleClass="lng" value="#{professional.professional.lng}" /></td>
+					<td><p:outputLabel value="Longitude" id="pro_lng"/></td>
+					<td><p:inputText styleClass="lng" value="#{professional.professional.lng}" /></td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center"><input type="submit" value="Me localiser" id="pro_location" /></td>
 				</tr>
 				<tr>
-					<td><h:outputLabel value="Numéro de téléphone : " /></td>
-					<td><h:inputText value="#{professional.professional.phone}" /></td>
+					<td><p:outputLabel value="Numéro de téléphone : " /></td>
+					<td><p:inputText value="#{professional.professional.phone}" /></td>
 				</tr>
 				<tr>
-					<td><h:outputLabel value="Catégorie : " /></td>
-					<td><h:selectOneMenu value="#{professional.professional.category}" /></td>
-					<f:selectItem value="#{professionalCategory.allProfessionalCategories}" />
+					<td><p:outputLabel value="Catégorie : " /></td>
+					<td><p:selectOneMenu value="#{professional.professional.category}" converter="proCatConverter">
+							<f:selectItems value="#{professional.category}" var="prof" itemLabel="#{prof.name}" itemValue="#{prof}"/>
+						</p:selectOneMenu>
+					</td>
 				</tr>
 			</table>
-			<h:commandButton action="#{professional.add}" value="Ajouter" />	
+			<h:commandButton action="#{professional.add}" value="Ajouter"/>
 		</h:form>
 		<script src="https://maps.googleapis.com/maps/api/js?key=#{apikey.google_map_api_key}&amp;libraries=geometry"/>
 		<h:outputScript library="javascript" name="jquery-3.1.1.min.js" target="body"/>

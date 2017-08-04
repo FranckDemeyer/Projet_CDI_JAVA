@@ -2,7 +2,6 @@ package com.maville.front.bean;
 
 import java.io.Serializable;
 import java.util.List;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -25,6 +24,7 @@ public class ProfessionalBean implements Serializable {
 	
 	private ProfessionalDTO professional = new ProfessionalDTO();
 	private ProfessionalService service = ServiceFactory.getInstance().getProfessionalService();
+	private List<ProfessionalCategoryDTO> category = ServiceFactory.getInstance().getProfessionalCategoryService().getAllProfessionalCategories();
 	
 	/* Getters and Setters */
 	
@@ -40,6 +40,14 @@ public class ProfessionalBean implements Serializable {
 		this.professional = professional;
 	}
 	
+	public List<ProfessionalCategoryDTO> getCategory() {
+		return category;
+	}
+
+	public void setCategory(List<ProfessionalCategoryDTO> category) {
+		this.category = category;
+	}
+
 	/* Methods */
 	
 	public ProfessionalDTO getProfessionalById(int id) {
@@ -60,10 +68,6 @@ public class ProfessionalBean implements Serializable {
 	
 	public List<ProfessionalDTO> getProfessionalsByCoord(String lat, String lng, double rayon) {
 		return service.getProfessionalsByCoord(lat, lng, rayon);
-	}
-	
-	public String locate() {
-		return null;
 	}
 	
 	public String add() {

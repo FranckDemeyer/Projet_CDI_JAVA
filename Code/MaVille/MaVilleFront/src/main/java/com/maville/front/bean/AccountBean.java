@@ -64,6 +64,7 @@ public class AccountBean implements Serializable {
 	}
 
 	public String add() throws Exception {
+		System.out.println(account);
 		if(!account.isAdmin()) return "professional-add";
 		service.addAccount(account);
 		account = new AccountDTO();

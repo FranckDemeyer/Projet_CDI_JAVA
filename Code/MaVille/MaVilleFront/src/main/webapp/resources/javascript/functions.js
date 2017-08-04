@@ -1,23 +1,29 @@
 /* jslint browser:true*/
-/*global $, navigator, console, google*/
+/*global jQuery, navigator, console, alert, google*/
 (function () {
     'use strict';
 
+    var jq = jQuery.noConflict();
+    
     function inverseGeocoding() {
-        var latLng = new google.maps.latLng({lat: $(".lat").val(), lng: $(".lng").val() }),
+        var latLng = new google.maps.LatLng({lat: parseFloat(jq(".lat").val()), lng: parseFloat(jq(".lng").val()) }),
             geocoder = new google.maps.Geocoder();
         geocoder.geocode({'location': latLng}, function (results, status) {
             if (status === 'OK') {
                 if (results[0]) {
-                    console.log(results.formatted_address);
+                    console.log(results[0].formatted_address);
+                    var address = results[0].formatted_address.split(",");
+                    jq(".address").val(address[0]);
+                    jq(".postcode").val(address[1].split(" ")[1]);
+                    jq(".town").val(address[1].split(" ")[2]);
                 }
             }
         });
     }
 
     function showPosition(position) {
-        $(".lat").val(position.coords.latitude);
-        $(".lng").val(position.coords.longitude);
+    	jq(".lat").val(position.coords.latitude);
+    	jq(".lng").val(position.coords.longitude);
         inverseGeocoding();
     }
 
@@ -29,26 +35,35 @@
     }
 
     function geocoding() {
-        var address = $(".address").val() + ", " + $(".postcode").val() + " " + $(".town").val(),
+        var address = jq(".address").val() + ", " + jq(".postcode").val() + " " + jq(".town").val(),
             geocoder = new google.maps.Geocoder();
         geocoder.geocode({'address': address}, function (results, status) {
             if (status === 'OK') {
-                $(".lat").val(results[0].geometry.location.lat());
-                $(".lng").val(results[0].geometry.location.lng());
+            	jq(".lat").val(results[0].geometry.location.lat());
+            	jq(".lng").val(results[0].geometry.location.lng());
             }
         });
     }
 
-    $("document").ready(function () {
-        $("body").on("click", "#pro_location", function (ev) {
-            ev.preventDefault();
-            locate();
-            return false;
-        });
-        $("body").on("blur", ".town", function (ev) {
-            ev.preventDefault();
-            geocoding();
-            return false;
-        });
+    jq("document").ready(function () {
+    	jq("body")
+            .on("click", "#pro_location", function (ev) {
+                ev.preventDefault();
+                locate();
+                return false;
+            })
+            .on("blur", ".town", function (ev) {
+                ev.preventDefault();
+                geocoding();
+                return false;
+            })
+            .on("blur", ".lng", function (ev) {
+                ev.preventDefault();
+                if (jq(".lat").val() !== "" && jq(".lng").val() !== "") {
+                    inverseGeocoding();
+                } else {
+                    alert("Vous devez spécifié soit une adresse, soit des coordonnées GPS, vous pouvez cilquer sur Me localiser pour accéder à votre position.");
+                }
+            });
     });
 }());
