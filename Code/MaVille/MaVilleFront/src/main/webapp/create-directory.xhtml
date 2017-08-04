@@ -1,0 +1,78 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<title>Gestion de l'annuaire</title>
+</h:head>
+<h:body>
+	<div id="header">
+		<ui:insert name="header">
+    			Header area.  See comments below this line in the source.
+    			<!--  include your header file or uncomment the include below and create header.xhtml in this directory -->
+			<!-- <ui:include src="header.xhtml"/> -->
+		</ui:insert>
+	</div>
+	<div id="content">
+		<ui:insert name="content">
+			<h2>Ajout d'une entrée dans l'annuaire</h2>
+			<h:form enctype="multipart/form-data">
+				<p:outputLabel for="file" value="Photo :" />
+				<p:fileUpload id="file" value="#{directory.file}" mode="advanced"
+					auto="true" fileUploadListener="#{directory.fileUploadListener}" />
+			</h:form>
+			<h:form>
+				<p:outputLabel for="category" value="Catégorie : " />
+				<p:selectOneMenu id="category" value="#{directory.directory.category}" converter="dirCatConverter" >
+					<f:selectItems value="#{directory.listCategories}" var="category" itemLabel="#{category.name}" itemValue="#{category}" />
+				</p:selectOneMenu>
+				<br />
+				<p:outputLabel for="name" value="Nom : " />
+				<p:inputText id="name" value="#{directory.directory.name}" />
+				<br />
+				<p:outputLabel for="address" value="Adresse : " />
+				<p:inputText id="address" value="#{directory.directory.address}" />
+				<br />
+				<p:outputLabel for="postalCode" value="Code postal : " />
+				<p:inputText id="postalCode"
+					value="#{directory.directory.postalCode}" />
+				<br />
+				<p:outputLabel for="town" value="Ville : " />
+				<p:inputText id="town" value="#{directory.directory.town}" />
+				<br />
+				<p:outputLabel for="lat" value="Latitude : " />
+				<p:inputNumber id="lat" value="#{directory.directory.lat}"
+					minValue="-90.000000" maxValue="90.000000" decimalSeparator="." />
+				<p:outputLabel for="lng" value="Longitude : " />
+				<p:inputText id="lng" value="#{directory.directory.lng}"
+					minValue="-180.000000" maxValue="180.000000" decimalSeparator="." />
+				<br />
+				<p:outputLabel for="phone" value="Téléphone : " />
+				<p:inputText id="phone" value="#{directory.directory.phone}" />
+				<br />
+				<p:outputLabel for="email" value="E-mail : " />
+				<p:inputText id="email" value="#{directory.directory.mail}" />
+				<br />
+				<p:outputLabel for="website" value="Site internet : " />
+				<p:inputText id="website" value="#{directory.directory.website}" />
+				<br />
+				<p:outputLabel for="description" value="Description : " />
+				<p:inputTextarea id="description"
+					value="#{directory.directory.description}" />
+				<br />
+				<!-- hours -->
+				<p:commandButton action="#{directory.add}" value="Enregistrer" ajax="false" />
+			</h:form>
+		</ui:insert>
+	</div>
+	<div id="footer">
+		<ui:insert name="footer">
+    			Footer area.  See comments below this line in the source.
+    			<!--  include your header file or uncomment the include below and create footer.xhtml in this directory -->
+			<!--<ui:include src="footer.xhtml"/>  -->
+		</ui:insert>
+	</div>
+
+</h:body>
+</html>

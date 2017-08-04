@@ -1,10 +1,12 @@
 package com.maville.front.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 import com.maville.back.dto.DirectoryCategoryDTO;
 import com.maville.back.dto.DirectoryDTO;
@@ -12,9 +14,10 @@ import com.maville.back.factories.ServiceFactory;
 import com.maville.back.service.interfaces.DirectoryCategoryService;
 
 @ManagedBean(name="directoryCategory")
-@RequestScoped
-public class DirectoryCategoryBean {
+@SessionScoped
+public class DirectoryCategoryBean implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	/* Variables */
 	
 	private DirectoryCategoryDTO category = new DirectoryCategoryDTO();
