@@ -44,6 +44,11 @@
 			<artifactId>gmaps4jsf-core</artifactId>
 			<version>3.0.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<finalName>gmaps</finalName>

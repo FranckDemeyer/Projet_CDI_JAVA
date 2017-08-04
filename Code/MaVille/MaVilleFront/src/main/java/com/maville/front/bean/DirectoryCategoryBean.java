@@ -1,9 +1,11 @@
 package com.maville.front.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
 import com.maville.back.dto.DirectoryCategoryDTO;
@@ -50,23 +52,33 @@ public class DirectoryCategoryBean implements Serializable {
 	}
 	
 	public String add() {
+		category.setDirectoryCategoryId(0);
+		List<DirectoryDTO> listDirectories = new ArrayList<>();
+		category.setDirectories(listDirectories);
 		service.addDirectoryCategory(category);
-		return "dcategory-added";
+		return "directory-category";
+//		return "dcategory-added";
 	}
 	
-	public String delete() {
-		service.deleteDirectoryCategory(category);
-		return "dcategory-deleted";
+	public String delete(DirectoryCategoryDTO category) {
+		this.category = category;
+		service.deleteDirectoryCategory(this.category);
+		category = new DirectoryCategoryDTO();
+		return "directory-category";
+//		return "dcategory-deleted";
 	}
 	
 	public String edit(DirectoryCategoryDTO category) {
 		this.category = category;
-		return "dcategory-edit";
+		return "update-dircat";
 	}
 	
 	public String update() {
 		category  = service.updateDirectoryCategory(category);
-		return "dcategory-updated";
+		// set to new not to have the name of previous category in display
+		category = new DirectoryCategoryDTO();
+		return "directory-category";
+//		return "dcategory-updated";
 	}
 	
 }

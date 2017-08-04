@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<title>Gestion des catégories de l'annuaire</title>
+</h:head>
+<h:body>
+	<div id="header">
+		<ui:insert name="header">
+    			Header area.  See comments below this line in the source.
+    			<!--  include your header file or uncomment the include below and create header.xhtml in this directory -->
+			<!-- <ui:include src="header.xhtml"/> -->
+		</ui:insert>
+	</div>
+	<div id="content">
+		<h:form>
+			<h2>Modifier la catégorie 
+				<h:outputText value="#{directoryCategory.category.directoryCategoryId}"></h:outputText>
+			</h2>
+			<h:inputHidden value="#{directoryCategory.category.directoryCategoryId}"></h:inputHidden>
+			<p:outputLabel for="name">Nom :</p:outputLabel>
+			<p:inputText id="name" value="#{directoryCategory.category.name}"></p:inputText>
+			<br />
+			<p:commandButton action="#{directoryCategory.update}" ajax="false"></p:commandButton>
+		</h:form>
+	</div>
+	<div id="footer">
+		<ui:insert name="footer">
+    			Footer area.  See comments below this line in the source.
+    			<!--  include your header file or uncomment the include below and create footer.xhtml in this directory -->
+			<!--<ui:include src="footer.xhtml"/>  -->
+		</ui:insert>
+	</div>
+
+</h:body>
+</html>

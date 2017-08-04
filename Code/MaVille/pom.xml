@@ -17,6 +17,8 @@
 		<!-- Logging -->
 		<!-- Test -->
 		<junit.version>4.12</junit.version>
+		<!-- primefaces -->
+		<primefaces.version>6.1</primefaces.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -46,12 +48,12 @@
 				<artifactId>spring-orm</artifactId>
 				<version>${spring-framework.version}</version>
 			</dependency>
-		<!-- Logging with Log4j -->
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-		</dependency>
+			<!-- Logging with Log4j -->
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>1.2.17</version>
+			</dependency>
 			<dependency>
 				<groupId>ch.qos.logback</groupId>
 				<artifactId>logback-classic</artifactId>
@@ -109,6 +111,11 @@
 				<groupId>javax.annotation</groupId>
 				<artifactId>javax.annotation-api</artifactId>
 				<version>1.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.primefaces</groupId>
+				<artifactId>primefaces</artifactId>
+				<version>${primefaces.version}</version>
 			</dependency>
 			<!-- google maps -->
 			<dependency>
