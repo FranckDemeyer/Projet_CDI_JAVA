@@ -10,54 +10,31 @@
 	</h:head>
 	<h:body>
 		<h:form>
-			<table>
-				<tr>
-					<td><p:outputLabel value="Raison Sociale : " /></td>
-					<td><p:inputText value="#{professional.professional.bussinessName}" /></td>
-				</tr>
-				<tr>
-					<td><p:outputLabel value="Nom : " /></td>
-					<td><p:inputText value="#{professional.professional.name}" /></td>
-				</tr>
-				<tr>
-					<td><p:outputLabel value="Adresse : " /></td>
-					<td><p:inputText styleClass="address" value="#{professional.professional.address}" /></td>
-				</tr>
-				<tr>
-					<td><p:outputLabel value="Code Postal : " /></td>
-					<td><p:inputText styleClass="postcode" value="#{professional.professional.postalCode}" /></td>
-				</tr>
-				<tr>
-					<td><p:outputLabel value="Ville : " /></td>
-					<td><p:inputText styleClass="town" value="#{professional.professional.town}" /></td>
-				</tr>
-				<tr>
-					<td colspan="2" align="center">Ou :</td>
-				</tr>
-				<tr>
-					<td><p:outputLabel value="Latitude" id="pro_lat" /></td>
-					<td><p:inputText styleClass="lat" value="#{professional.professional.lat}" /></td>
-				</tr>
-				<tr>
-					<td><p:outputLabel value="Longitude" id="pro_lng"/></td>
-					<td><p:inputText styleClass="lng" value="#{professional.professional.lng}" /></td>
-				</tr>
-				<tr>
-					<td colspan="2" align="center"><input type="submit" value="Me localiser" id="pro_location" /></td>
-				</tr>
-				<tr>
-					<td><p:outputLabel value="Numéro de téléphone : " /></td>
-					<td><p:inputText value="#{professional.professional.phone}" /></td>
-				</tr>
-				<tr>
-					<td><p:outputLabel value="Catégorie : " /></td>
-					<td><p:selectOneMenu value="#{professional.professional.category}" converter="proCatConverter">
-							<f:selectItems value="#{professional.category}" var="prof" itemLabel="#{prof.name}" itemValue="#{prof}"/>
-						</p:selectOneMenu>
-					</td>
-				</tr>
-			</table>
-			<h:commandButton action="#{professional.add}" value="Ajouter"/>
+			<h:panelGrid>
+				<p:outputLabel for="business" value="Raison Sociale : " />
+				<p:inputText id="business" value="#{professional.professional.bussinessName}" />
+				<p:outputLabel for="name" value="Nom : " />
+				<p:inputText id="name" value="#{professional.professional.name}" required="true" />
+				<p:outputLabel for="adress" value="Adresse : " />
+				<p:inputText id="adress" styleClass="address" value="#{professional.professional.address}" />
+				<p:outputLabel for="cp" value="Code Postal : " />
+				<p:inputText id="cp" styleClass="postcode" value="#{professional.professional.postalCode}" />
+				<p:outputLabel for="city" value="Ville : " />
+				<p:inputText id="city" styleClass="town" value="#{professional.professional.town}" />
+				<p:outputLabel value="Ou :" />
+				<p:outputLabel for="pLat" value="Latitude" />
+				<p:inputText id="pLat" styleClass="lat" value="#{professional.professional.lat}" required="true" />
+				<p:outputLabel for="pLng" value="Longitude" />
+				<p:inputText id="pLng" styleClass="lng" value="#{professional.professional.lng}" required="true" />
+				<p:commandButton value="Me localiser" styleClass="pro_location" />
+				<p:outputLabel for="phone" value="Numéro de téléphone : " />
+				<p:inputText id="phone" value="#{professional.professional.phone}" />
+				<p:outputLabel for="category" value="Catégorie : " />
+				<p:selectOneMenu id="category" value="#{professional.professional.category}" converter="proCatConverter">
+					<f:selectItems value="#{professional.category}" var="prof" itemLabel="#{prof.name}" itemValue="#{prof}"/>
+				</p:selectOneMenu>
+			</h:panelGrid>
+			<p:commandButton action="#{professional.add}" value="Ajouter"/>
 		</h:form>
 		<script src="https://maps.googleapis.com/maps/api/js?key=#{apikey.google_map_api_key}&amp;libraries=geometry"/>
 		<h:outputScript library="javascript" name="jquery-3.1.1.min.js" target="body"/>

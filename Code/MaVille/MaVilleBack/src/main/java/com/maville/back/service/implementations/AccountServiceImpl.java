@@ -120,15 +120,21 @@ public class AccountServiceImpl implements AccountService {
 		// save data
 		Account entity = new Account();
 		BeanUtils.copyProperties(account, entity);
-		Professional professional = new Professional();
-		BeanUtils.copyProperties(account.getProfessional(), professional);
+		Professional professional = null;
+		if(account.getProfessional() != null) {
+			professional = new Professional();
+			BeanUtils.copyProperties(account.getProfessional(), professional);
+		}
 		entity.setProfessional(professional);
 		try{
 			entity = accountDao.save(entity);
 			BeanUtils.copyProperties(entity, account);
-			ProfessionalDTO professionalDTO = new ProfessionalDTO();
-			BeanUtils.copyProperties(entity.getProfessional(), professionalDTO);
-			account.setProfessional(professionalDTO);
+			ProfessionalDTO professionalDTO = null;
+			if(entity.getProfessional() != null) {
+				professionalDTO = new ProfessionalDTO();
+				BeanUtils.copyProperties(entity.getProfessional(), professionalDTO);
+				account.setProfessional(professionalDTO);
+			}
 		} catch(Exception e){
 			throw new RuntimeException("Erreur lors de l'enregistrement de l'utilisateur");
 		}

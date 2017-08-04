@@ -3,14 +3,13 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-
+import javax.faces.bean.ViewScoped;
 import com.maville.back.dto.AccountDTO;
 import com.maville.back.factories.ServiceFactory;
 import com.maville.back.service.interfaces.AccountService;
 
 @ManagedBean(name="account")
-@SessionScoped
+@ViewScoped
 public class AccountBean implements Serializable {
 	
 	/* Variables */
@@ -18,6 +17,11 @@ public class AccountBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private AccountDTO account = new AccountDTO();
 	private AccountService service = ServiceFactory.getInstance().getAccountService();
+	private List<AccountDTO> accounts;
+	private List<AccountDTO> allAccountSort;
+	private List<AccountDTO> allAdminAccountSort;
+	private List<AccountDTO> allProfessionalAccountSort;
+	private String radioButton = "Tous";
 	
 	/* Constructors */
 	
@@ -41,7 +45,63 @@ public class AccountBean implements Serializable {
 		this.service = service;
 	}
 
+	public List<AccountDTO> getAccounts() {
+		return accounts;
+	}
+
+	public void setAccounts(List<AccountDTO> accounts) {
+		this.accounts = accounts;
+	}
+
+	public List<AccountDTO> getAllAccountSort() {
+		return allAccountSort;
+	}
+
+	public void setAllAccountSort(List<AccountDTO> allAccountSort) {
+		this.allAccountSort = allAccountSort;
+	}
+
+	public List<AccountDTO> getAllAdminAccountSort() {
+		return allAdminAccountSort;
+	}
+
+	public void setAllAdminAccountSort(List<AccountDTO> allAdminAccountSort) {
+		this.allAdminAccountSort = allAdminAccountSort;
+	}
+
+	public List<AccountDTO> getAllProfessionalAccountSort() {
+		return allProfessionalAccountSort;
+	}
+
+	public void setAllProfessionalAccountSort(List<AccountDTO> allProfessionalAccountSort) {
+		this.allProfessionalAccountSort = allProfessionalAccountSort;
+	}
+
+	public String getRadioButton() {
+		return radioButton;
+	}
+
+	public void setRadioButton(String radioButton) {
+		this.radioButton = radioButton;
+	}
+	
 	/* Methods */
+	
+	public String getUpdateView() {
+		System.out.println("ok > " + radioButton);
+		switch(radioButton) {
+			case "Tous":
+				accounts = getAllAccount();
+				break;
+			case "Administrateurs":
+				accounts = getAllAdminAccount();
+				break;
+			case "Professionnels":
+				accounts = getAllProfessionalAccount();
+				break;
+		}
+		return null;
+	}
 
 	public AccountDTO getAccountById(int id) {
 		return service.getAccountById(id);
@@ -52,19 +112,22 @@ public class AccountBean implements Serializable {
 	}
 	
 	public List<AccountDTO> getAllAccount() {
-		return service.getAllAccount();
+		if(allAccountSort == null) allAccountSort = service.getAllAccount();
+		return allAccountSort;
 	}
 	
 	public List<AccountDTO> getAllAdminAccount() {
-		return service.getAllAdmin();
+		if(allAdminAccountSort == null) allAdminAccountSort = service.getAllAdmin();
+		return allAdminAccountSort;
 	}
 	
 	public List<AccountDTO> getAllProfessionalAccount() {
-		return service.getAllProfessional();
+		if(allProfessionalAccountSort == null) allProfessionalAccountSort = service.getAllProfessional();
+		return allProfessionalAccountSort;
 	}
 
 	public String add() throws Exception {
-		System.out.println(account);
+		
 		if(!account.isAdmin()) return "professional-add";
 		service.addAccount(account);
 		account = new AccountDTO();

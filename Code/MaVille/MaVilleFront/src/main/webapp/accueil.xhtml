@@ -10,27 +10,24 @@
 	</h:head>
 	<h:body>
 		<h:form>
+<!-- 			<p:selectOneRadio value="#{account.radioButton}" > -->
+<!-- 				<f:selectItem itemLabel="Tous" itemValue="Tous"  /> -->
+<!-- 				<f:selectItem itemLabel="Professionnels" itemValue="Professionnels" /> -->
+<!-- 				<f:selectItem itemLabel="Administrateurs" itemValue="Administrateurs" /> -->
+<!-- 				<p:ajax listener="#{account.updateView}" /> -->
+<!-- 			</p:selectOneRadio> -->
 			<p:dataTable value="#{account.allAccount}" var="a">
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Username" />
-					</f:facet>
-					<h:outputText value="#{a.username}"/>
+				<p:column headerText="Nom d'utilisateur" sortBy="#{a.username}">
+					<p:outputLabel value="#{a.username}"/>
 				</p:column>
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Password" />
-					</f:facet>
-					<h:outputText value="#{a.password}"/>
+				<p:column headerText="Mot de passe">
+					<p:outputLabel value="#{a.password}"/>
 				</p:column>
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="business name" />
-					</f:facet>
-					<h:outputText value="#{a.professional.bussinessName}"/>
+				<p:column headerText="Société" sortBy="#{a.professional.name}">
+					<p:outputLabel rendered="#{a.professional.professionalId > 0}" value="#{a.professional.bussinessName} #{a.professional.name}, #{a.professional.address}, #{a.professional.postalCode} #{a.professional.town}"/>
 				</p:column>
 			</p:dataTable>
-			<h:commandLink value="accounts" action="account-add.xhtml"/>
+			<p:commandLink value="accounts" action="account-add.xhtml"/>
 		</h:form>
 	</h:body>
 </html>

@@ -4,7 +4,7 @@
     'use strict';
 
     var jq = jQuery.noConflict();
-    
+
     function inverseGeocoding() {
         var latLng = new google.maps.LatLng({lat: parseFloat(jq(".lat").val()), lng: parseFloat(jq(".lng").val()) }),
             geocoder = new google.maps.Geocoder();
@@ -22,8 +22,8 @@
     }
 
     function showPosition(position) {
-    	jq(".lat").val(position.coords.latitude);
-    	jq(".lng").val(position.coords.longitude);
+        jq(".lat").val(position.coords.latitude);
+        jq(".lng").val(position.coords.longitude);
         inverseGeocoding();
     }
 
@@ -39,15 +39,15 @@
             geocoder = new google.maps.Geocoder();
         geocoder.geocode({'address': address}, function (results, status) {
             if (status === 'OK') {
-            	jq(".lat").val(results[0].geometry.location.lat());
-            	jq(".lng").val(results[0].geometry.location.lng());
+                jq(".lat").val(results[0].geometry.location.lat());
+                jq(".lng").val(results[0].geometry.location.lng());
             }
         });
     }
 
     jq("document").ready(function () {
-    	jq("body")
-            .on("click", "#pro_location", function (ev) {
+        jq("body")
+            .on("click", ".pro_location", function (ev) {
                 ev.preventDefault();
                 locate();
                 return false;
