@@ -16,6 +16,7 @@ import com.maville.back.dto.DirectoryCategoryDTO;
 import com.maville.back.dto.DirectoryDTO;
 import com.maville.back.dto.DirectoryHourDTO;
 import com.maville.back.entities.Directory;
+import com.maville.back.entities.DirectoryCategory;
 import com.maville.back.entities.DirectoryHour;
 import com.maville.back.service.interfaces.DirectoryService;
 
@@ -29,7 +30,11 @@ public class DirectoryServiceImpl implements DirectoryService {
 	@Override
 	public DirectoryDTO getDirectoryById(int id) {
 		DirectoryDTO directory = new DirectoryDTO();
-		BeanUtils.copyProperties(directorydao.find(id), directory);
+		Directory entity = directorydao.find(id);
+		BeanUtils.copyProperties(entity, directory);
+		DirectoryCategoryDTO category = new DirectoryCategoryDTO();
+		BeanUtils.copyProperties(entity.getCategory(), category);
+		directory.setCategory(category);
 		return directory;
 	}
 
@@ -39,6 +44,9 @@ public class DirectoryServiceImpl implements DirectoryService {
 		for (Directory entity : directorydao.findAll()){
 			DirectoryDTO directory = new DirectoryDTO();
 			BeanUtils.copyProperties(entity, directory);
+			DirectoryCategoryDTO category = new DirectoryCategoryDTO();
+			BeanUtils.copyProperties(entity.getCategory(), category);
+			directory.setCategory(category);
 			listDirectory.add(directory);
 		}
 		return listDirectory;
@@ -52,6 +60,9 @@ public class DirectoryServiceImpl implements DirectoryService {
 		for (Directory entity : directorydao.findGroup(Directory.GET_DIRECTORY_BYNAME, parameters)){
 			DirectoryDTO directory = new DirectoryDTO();
 			BeanUtils.copyProperties(entity, directory);
+			DirectoryCategoryDTO category = new DirectoryCategoryDTO();
+			BeanUtils.copyProperties(entity.getCategory(), category);
+			directory.setCategory(category);
 			listDirectory.add(directory);
 		}
 		return listDirectory;
@@ -70,9 +81,9 @@ public class DirectoryServiceImpl implements DirectoryService {
 		if(directory.getLng() == null || directory.getLng().isEmpty()){
 			err += "La longitude est obligatoire. ";
 		}
-//		if(directory.getCategory() == null){
-//			err += "La catégorie est obligatoire";
-//		}
+		if(directory.getCategory() == null){
+			err += "La catégorie est obligatoire";
+		}
 		if (err != ""){
 			throw new IllegalArgumentException(err);
 		}
@@ -88,6 +99,9 @@ public class DirectoryServiceImpl implements DirectoryService {
 		// save
 		Directory entity = new Directory();
 		BeanUtils.copyProperties(directory, entity);
+		DirectoryCategory categoryEntity = new DirectoryCategory();
+		BeanUtils.copyProperties(directory.getCategory(), categoryEntity);
+		entity.setCategory(categoryEntity);
 		try {
 			directorydao.save(entity);
 		} catch(Exception e) {
@@ -102,8 +116,11 @@ public class DirectoryServiceImpl implements DirectoryService {
 		}
 		Directory entity = new Directory();
 		BeanUtils.copyProperties(directory, entity);
+		DirectoryCategory categoryEntity = new DirectoryCategory();
+		BeanUtils.copyProperties(directory.getCategory(), categoryEntity);
+		entity.setCategory(categoryEntity);
 		try {
-			directorydao.save(entity);
+			directorydao.delete(entity);
 		} catch (Exception  e) {
 			throw new RuntimeException("Erreur lors de l'enregistrement de l'entrée d'annuaire");
 		}
@@ -116,6 +133,9 @@ public class DirectoryServiceImpl implements DirectoryService {
 		}
 		Directory entity = new Directory();
 		BeanUtils.copyProperties(directory, entity);
+		DirectoryCategory categoryEntity = new DirectoryCategory();
+		BeanUtils.copyProperties(directory.getCategory(), categoryEntity);
+		entity.setCategory(categoryEntity);
 		try {
 			entity = directorydao.update(entity);
 		} catch (Exception e) {
@@ -132,6 +152,9 @@ public class DirectoryServiceImpl implements DirectoryService {
 		for (Directory entity : directorydao.findGroup(Directory.GET_DIRECTORY_BYCATEGORY, parameters)){
 			DirectoryDTO newDirectory = new DirectoryDTO();
 			BeanUtils.copyProperties(entity, newDirectory);
+			DirectoryCategoryDTO dirCategory = new DirectoryCategoryDTO();
+			BeanUtils.copyProperties(entity.getCategory(), dirCategory);
+			newDirectory.setCategory(dirCategory);
 			listDirectory.add(newDirectory);
 		}
 		return listDirectory;
@@ -147,6 +170,9 @@ public class DirectoryServiceImpl implements DirectoryService {
 		for(Directory entity : directorydao.findGroup(Directory.GET_DIRECTORY_BYCOORD, parameters)){
 			DirectoryDTO directory = new DirectoryDTO();
 			BeanUtils.copyProperties(entity, directory);
+			DirectoryCategoryDTO category = new DirectoryCategoryDTO();
+			BeanUtils.copyProperties(entity.getCategory(), category);
+			directory.setCategory(category);
 			listDirectory.add(directory);
 		}
 		return listDirectory;

@@ -18,40 +18,42 @@
 		<ui:insert name="content">
 			<h2>Gestion de l'annuaire</h2>
 			<h:form>
-				<p><p:commandButton action="#{directory.create}" ajax="false"
-					value="Nouvelle entrée"></p:commandButton></p>
+				<p>
+					<p:commandButton action="#{directory.create}" ajax="false"
+						value="Nouvelle entrée"></p:commandButton>
+				</p>
+				
 				<p:dataTable value="#{directory.allDirectories}" var="dir"
 					widgetVar="directoriesTable"
 					filteredValue="#{directory.filteredDirectories}">
-					
-					<!-- onefield search at head of table -->
-					<f:facet name="header">
-						<p:outputPanel>
-<!-- 							<h:outputText value="Search all fields:" /> -->
-							<p:inputText id="globalFilter" onkeyup="PF('carsTable').filter()"
-								style="width:150px" placeholder="Enter keyword" />
-						</p:outputPanel>
-					</f:facet>
+
+<!-- 					onefield search at head of table -->
+<!-- 					<f:facet name="header"> -->
+<!-- 						<p:outputPanel> -->
+<!-- 							<h:outputText value="Recherche :" /> -->
+<!-- 							<p:inputText id="globalFilter" onkeyup="PF('directoriesTable').filter()" -->
+<!-- 								style="width:150px" placeholder="saisissez votre recherche" /> -->
+<!-- 						</p:outputPanel> -->
+<!-- 					</f:facet> -->
 
 					<!-- columns -->
-					<p:column filterBy="#{dir.directoryId}" headerText="Id" filterMatchMode="contains"  sortBy="#{dir.directoryId}">
-<!-- 						<f:facet name="header">Id</f:facet> -->
+					<p:column filterBy="#{dir.directoryId}" headerText="Id"
+						filterMatchMode="contains" sortBy="#{dir.directoryId}">
 						<h:outputText value="#{dir.directoryId}"></h:outputText>
 					</p:column>
-					<p:column filterBy="#{dir.category.name}" headerText="Categorie" filterMatchMode="StartWith"  sortBy="#{dir.category.name}">
-<!-- 						<f:facet name="header">Name</f:facet> -->
+					<p:column filterBy="#{dir.category.name}" headerText="Categorie"
+						filterMatchMode="contains" sortBy="#{dir.category.name}">
 						<h:outputText value="#{dir.category.name}"></h:outputText>
 					</p:column>
-					<p:column filterBy="#{dir.name}" headerText="Nom" filterMatchMode="exact"  sortBy="#{dir.name}">
-<!-- 						<f:facet name="header">Name</f:facet> -->
+					<p:column filterBy="#{dir.name}" headerText="Nom"
+						filterMatchMode="contains" sortBy="#{dir.name}">
 						<h:outputText value="#{dir.name}"></h:outputText>
 					</p:column>
-					<p:column filterBy="#{dir.description}" headerText="Description" filterMatchMode="contains"  sortBy="#{dir.description}">
-<!-- 						<f:facet name="header">Description</f:facet> -->
+					<p:column filterBy="#{dir.description}" headerText="Description"
+						filterMatchMode="contains" sortBy="#{dir.description}">
 						<h:outputText value="#{dir.description}"></h:outputText>
 					</p:column>
 					<p:column headerText="Adresse">
-<!-- 						<f:facet name="header">Addresse</f:facet> -->
 						<h:outputText value="#{dir.address}"></h:outputText>
 						<br />
 						<h:outputText value="#{dir.postalCode}"></h:outputText>
@@ -59,32 +61,33 @@
 						<h:outputText value="#{dir.town}"></h:outputText>
 					</p:column>
 					<p:column headerText="Contact">
-<!-- 						<f:facet name="header">Contact</f:facet> -->
 						<h:outputText value="#{dir.phone}"></h:outputText>
 						<br />
 						<h:outputText value="#{dir.mail}"></h:outputText>
 						<br />
 						<h:outputText value="#{dir.website}"></h:outputText>
 					</p:column>
-<!-- 					<p:column headerText="Heures d'ouverture"> -->
-<!-- 						<f:facet name="header">hours</f:facet> -->
-<!-- 						<p:dataList value="#{dir.hoursByDirectory}" var ="hourDir"> -->
-<!-- 							#{hourDir.day} - #{hourDir.hour} -->
-<!-- 						</p:dataList> -->
-<!-- 					</p:column> -->
+					<!-- 					<p:column headerText="Heures d'ouverture"> -->
+					<!-- 						<f:facet name="header">hours</f:facet> -->
+					<!-- 						<p:dataList value="#{dir.hoursByDirectory}" var ="hourDir"> -->
+					<!-- 							#{hourDir.day} - #{hourDir.hour} -->
+					<!-- 						</p:dataList> -->
+					<!-- 					</p:column> -->
 					<p:column>
-<!-- 						<f:facet name="header">Modifier</f:facet> -->
+						<!-- 						<f:facet name="header">Modifier</f:facet> -->
 						<p:commandButton action="#{directory.edit(dir)}" ajax="false"
 							value="Modifier"></p:commandButton>
 					</p:column>
 					<p:column>
-<!-- 						<f:facet name="header">Supprimer</f:facet> -->
+						<!-- 						<f:facet name="header">Supprimer</f:facet> -->
 						<p:commandButton action="#{directory.delete(dir)}" ajax="false"
 							value="Supprimer"></p:commandButton>
 					</p:column>
 				</p:dataTable>
-				<p><p:commandButton action="#{directory.create}" ajax="false"
-					value="Nouvelle entrée"></p:commandButton></p>
+				<p>
+					<p:commandButton action="#{directory.create}" ajax="false"
+						value="Nouvelle entrée"></p:commandButton>
+				</p>
 			</h:form>
 		</ui:insert>
 	</div>
