@@ -1,8 +1,9 @@
 package com.maville.front.bean;
 
+import java.io.Serializable;
 import java.util.List;
-
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import com.maville.back.dto.ProfessionalCategoryDTO;
@@ -12,14 +13,24 @@ import com.maville.back.service.interfaces.ProfessionalService;
 
 @ManagedBean(name="professional")
 @SessionScoped
-public class ProfessionalBean {
+public class ProfessionalBean implements Serializable {
 
 	/* Variables */
 	
+	private static final long serialVersionUID = 1L;
+	
+	@ManagedProperty(value="#{account}")
+	private AccountBean accountBean;
+	
 	private ProfessionalDTO professional = new ProfessionalDTO();
 	private ProfessionalService service = ServiceFactory.getInstance().getProfessionalService();
+	private List<ProfessionalCategoryDTO> category = ServiceFactory.getInstance().getProfessionalCategoryService().getAllProfessionalCategories();
 	
 	/* Getters and Setters */
+	
+	public void setAccountBean(AccountBean accountBean) {
+		this.accountBean = accountBean;
+	}
 	
 	public ProfessionalDTO getProfessional() {
 		return professional;
@@ -29,6 +40,14 @@ public class ProfessionalBean {
 		this.professional = professional;
 	}
 	
+	public List<ProfessionalCategoryDTO> getCategory() {
+		return category;
+	}
+
+	public void setCategory(List<ProfessionalCategoryDTO> category) {
+		this.category = category;
+	}
+
 	/* Methods */
 	
 	public ProfessionalDTO getProfessionalById(int id) {
@@ -52,8 +71,10 @@ public class ProfessionalBean {
 	}
 	
 	public String add() {
+		accountBean.getAccount().setProfessional(professional);
+		professional.setAccount(accountBean.getAccount());
 		service.addProfessional(professional);
-		return "professional-added";
+		return "account-added";
 	}
 	
 	public String delete() {

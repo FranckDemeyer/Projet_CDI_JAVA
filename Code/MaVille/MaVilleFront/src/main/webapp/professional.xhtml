@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:m="http://code.google.com/p/gmaps4jsf/">
+	<h:head>
+		<meta charset="utf-8"/>
+  		<title>Default title</title>
+	</h:head>
+	<h:body>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=#{apikey.google_map_api_key}">
+		</script> 
+		<h:form>
+			<p:dataTable value="#{professional.allProfessionals}" var="pro">
+				<p:column headerText="Username">
+					<h:outputText value="#{pro.account.username}" />
+				</p:column>
+				<p:column headerText="Raison Sociale">
+					<h:outputText value="#{pro.bussinessName}" />
+				</p:column>
+				<p:column headerText="Nom">
+					<h:outputText value="#{pro.name}" />
+				</p:column>
+				<p:column headerText="Adresse">
+					<h:outputText value="#{pro.address}, #{pro.postalCode} #{pro.town}" />
+				</p:column>
+				<p:column headerText="Téléphone">
+					<h:outputText value="#{pro.phone}" />
+				</p:column>
+				<p:column headerText="Emplacement">
+ 					<m:map width="200" height="200" latitude="#{pro.lat}" longitude="#{pro.lng}" zoom="14" enableScrollWheelZoom="true">
+ 					</m:map>
+				</p:column>
+<!-- 				<p:column headerText="Id"> -->
+<!-- 					<h:outputText value="#{professional.professional.professionalId}" /> -->
+<!-- 				</p:column> -->
+<!-- 				<p:column headerText="Id"> -->
+<!-- 					<h:outputText value="#{professional.professional.professionalId}" /> -->
+<!-- 				</p:column> -->
+<!-- 				<p:column headerText="Id"> -->
+<!-- 					<h:outputText value="#{professional.professional.professionalId}" /> -->
+<!-- 				</p:column> -->
+<!-- 				<p:column headerText="Id"> -->
+<!-- 					<h:outputText value="#{professional.professional.professionalId}" /> -->
+<!-- 				</p:column>			 -->
+			</p:dataTable>
+		</h:form>
+	</h:body>
+</html>

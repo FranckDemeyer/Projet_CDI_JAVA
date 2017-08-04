@@ -13,7 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.maville.back.dao.interfaces.ProfessionalDAO;
 import com.maville.back.dto.ProfessionalCategoryDTO;
 import com.maville.back.dto.ProfessionalDTO;
+import com.maville.back.entities.Account;
 import com.maville.back.entities.Professional;
+import com.maville.back.entities.ProfessionalCategory;
+import com.maville.back.factories.ServiceFactory;
 import com.maville.back.service.interfaces.ProfessionalService;
 
 @Transactional
@@ -22,12 +25,19 @@ public class ProfessionalServiceImpl implements ProfessionalService {
 	
 	@Autowired
 	private ProfessionalDAO professionalDAO;
-
+	
 	@Override
 	public ProfessionalDTO getProfessionalById(int id) {
-		ProfessionalDTO professional = new ProfessionalDTO();
-		BeanUtils.copyProperties(professionalDAO.find(id), professional);
-		return professional;
+		ProfessionalDTO professionalDTO = null;
+		Professional professional = professionalDAO.find(id);
+		if(professional != null) {
+			professionalDTO = new ProfessionalDTO();
+			BeanUtils.copyProperties(professional, professionalDTO);
+			ProfessionalCategoryDTO categoryDTO = new ProfessionalCategoryDTO();
+			BeanUtils.copyProperties(professional.getCategory(), categoryDTO);
+			professionalDTO.setCategory(categoryDTO);
+		}
+		return professionalDTO;
 	}
 
 	@Override
@@ -36,6 +46,9 @@ public class ProfessionalServiceImpl implements ProfessionalService {
 		for(Professional pro : professionalDAO.findAll()) {
 			ProfessionalDTO pro2 = new ProfessionalDTO();
 			BeanUtils.copyProperties(pro, pro2);
+			ProfessionalCategoryDTO categoryDTO = new ProfessionalCategoryDTO();
+			BeanUtils.copyProperties(pro, categoryDTO);
+			pro2.setCategory(categoryDTO);
 			professionals.add(pro2);
 		}
 		return professionals;
@@ -49,6 +62,9 @@ public class ProfessionalServiceImpl implements ProfessionalService {
 		for(Professional pro : professionalDAO.findGroup(Professional.FIND_BY_NAME, parameters)) {
 			ProfessionalDTO pro2 = new ProfessionalDTO();
 			BeanUtils.copyProperties(pro, pro2);
+			ProfessionalCategoryDTO categoryDTO = new ProfessionalCategoryDTO();
+			BeanUtils.copyProperties(pro.getCategory(), categoryDTO);
+			pro2.setCategory(categoryDTO);
 			professionals.add(pro2);
 		}
 		return professionals;
@@ -62,6 +78,9 @@ public class ProfessionalServiceImpl implements ProfessionalService {
 		for(Professional pro : professionalDAO.findGroup(Professional.FIND_BY_CATEGORY, parameters)) {
 			ProfessionalDTO pro2 = new ProfessionalDTO();
 			BeanUtils.copyProperties(pro, pro2);
+			ProfessionalCategoryDTO categoryDTO = new ProfessionalCategoryDTO();
+			BeanUtils.copyProperties(pro.getCategory(), categoryDTO);
+			pro2.setCategory(categoryDTO);
 			professionals.add(pro2);
 		}
 		return professionals;
@@ -69,15 +88,24 @@ public class ProfessionalServiceImpl implements ProfessionalService {
 
 	@Override
 	public List<ProfessionalDTO> getProfessionalsByCoord(String lat, String lng, double radius) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void addProfessional(ProfessionalDTO professional) {
-		if(getProfessionalsByName(professional.getName()) != null) {throw new IllegalArgumentException("Ce professionnel existe d�j�");}
 		Professional entity = new Professional();
+		Account account = new Account();
+		ProfessionalCategory category = new ProfessionalCategory();
 		BeanUtils.copyProperties(professional, entity);
+		try {
+			professional.setAccount(ServiceFactory.getInstance().getAccountService().addAccount(professional.getAccount()));
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		BeanUtils.copyProperties(professional.getAccount(), account);
+		BeanUtils.copyProperties(professional.getCategory(), category);
+		entity.setAccount(account);
+		entity.setCategory(category);
 		try {
 			professionalDAO.save(entity);
 		} catch (Exception e) {

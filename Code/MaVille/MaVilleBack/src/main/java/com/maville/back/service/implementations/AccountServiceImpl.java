@@ -13,7 +13,9 @@ import org.springframework.stereotype.Component;
 
 import com.maville.back.dao.interfaces.AccountDAO;
 import com.maville.back.dto.AccountDTO;
+import com.maville.back.dto.ProfessionalDTO;
 import com.maville.back.entities.Account;
+import com.maville.back.entities.Professional;
 import com.maville.back.service.interfaces.AccountService;
 
 @Transactional
@@ -21,22 +23,36 @@ import com.maville.back.service.interfaces.AccountService;
 public class AccountServiceImpl implements AccountService {
 	
 	@Autowired
-	AccountDAO accountDao;
+	private AccountDAO accountDao;
 	
 	@Override
 	public AccountDTO getAccountById(int id) {
-		AccountDTO account = new AccountDTO();
-		BeanUtils.copyProperties(accountDao.find(id), account);
-		return account;
+		AccountDTO accountDTO = null;
+		Account account = accountDao.find(id);
+		if(account != null) {
+			accountDTO = new AccountDTO();
+			BeanUtils.copyProperties(account, accountDTO);
+			ProfessionalDTO professionalDTO = new ProfessionalDTO();
+			BeanUtils.copyProperties(account.getProfessional(), professionalDTO);
+			accountDTO.setProfessional(professionalDTO);
+		}
+		return accountDTO;
 	}
 	
 	@Override
 	public AccountDTO getAccountByUsername(String username){
-		AccountDTO account = new AccountDTO();
-		Map<String, Object> parameters = new HashMap<>(); 
+		AccountDTO accountDTO = null;
+		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("name", username);
-		BeanUtils.copyProperties(accountDao.findOne(Account.FIND_BY_NAME, parameters), account);
-		return account;
+		Account account = accountDao.findOne(Account.FIND_BY_NAME, parameters);
+		if(account != null) {
+			accountDTO = new AccountDTO();
+			BeanUtils.copyProperties(account, accountDTO);
+			ProfessionalDTO professionalDTO = new ProfessionalDTO();
+			BeanUtils.copyProperties(account.getProfessional(), professionalDTO);
+			accountDTO.setProfessional(professionalDTO);
+		}
+		return accountDTO;
 	}
 
 	@Override
@@ -45,6 +61,12 @@ public class AccountServiceImpl implements AccountService {
 		for(Account acc : accountDao.findAll()) {
 			AccountDTO acc2 = new AccountDTO();
 			BeanUtils.copyProperties(acc, acc2);
+			ProfessionalDTO professionalDTO = null;
+			if(acc.getProfessional() != null) {
+				professionalDTO = new ProfessionalDTO();
+				BeanUtils.copyProperties(acc.getProfessional(), professionalDTO);
+			}
+			acc2.setProfessional(professionalDTO);
 			listAccounts.add(acc2);
 		}
 		return listAccounts;
@@ -56,6 +78,9 @@ public class AccountServiceImpl implements AccountService {
 		for(Account acc : accountDao.findGroup(Account.FIND_ALL_PROFESSIONAL, null)) {
 			AccountDTO acc2 = new AccountDTO();
 			BeanUtils.copyProperties(acc, acc2);
+			ProfessionalDTO professionalDTO = new ProfessionalDTO();
+			BeanUtils.copyProperties(acc.getProfessional(), professionalDTO);
+			acc2.setProfessional(professionalDTO);
 			listAccounts.add(acc2);
 		}
 		return listAccounts;
@@ -67,13 +92,16 @@ public class AccountServiceImpl implements AccountService {
 		for(Account acc : accountDao.findGroup(Account.FIND_ALL_ADMIN, null)) {
 			AccountDTO acc2 = new AccountDTO();
 			BeanUtils.copyProperties(acc, acc2);
+			ProfessionalDTO professionalDTO = new ProfessionalDTO();
+			BeanUtils.copyProperties(acc.getProfessional(), professionalDTO);
+			acc2.setProfessional(professionalDTO);
 			listAccounts.add(acc2);
 		}
 		return listAccounts;
 	}
 
 	@Override
-	public void addAccount(AccountDTO account) throws Exception {
+	public AccountDTO addAccount(AccountDTO account) throws Exception {
 		// verify mandatory data
 		String err = "";
 		if(account.getUsername().isEmpty()){
@@ -92,11 +120,25 @@ public class AccountServiceImpl implements AccountService {
 		// save data
 		Account entity = new Account();
 		BeanUtils.copyProperties(account, entity);
+		Professional professional = null;
+		if(account.getProfessional() != null) {
+			professional = new Professional();
+			BeanUtils.copyProperties(account.getProfessional(), professional);
+		}
+		entity.setProfessional(professional);
 		try{
-			accountDao.save(entity);
+			entity = accountDao.save(entity);
+			BeanUtils.copyProperties(entity, account);
+			ProfessionalDTO professionalDTO = null;
+			if(entity.getProfessional() != null) {
+				professionalDTO = new ProfessionalDTO();
+				BeanUtils.copyProperties(entity.getProfessional(), professionalDTO);
+				account.setProfessional(professionalDTO);
+			}
 		} catch(Exception e){
 			throw new RuntimeException("Erreur lors de l'enregistrement de l'utilisateur");
 		}
+		return account;
 	}
 
 	@Override

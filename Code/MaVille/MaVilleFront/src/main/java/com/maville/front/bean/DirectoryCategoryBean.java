@@ -17,9 +17,9 @@ import com.maville.back.service.interfaces.DirectoryCategoryService;
 @SessionScoped
 public class DirectoryCategoryBean implements Serializable {
 
-	private static final long serialVersionUID = 1L;
 	/* Variables */
 	
+	private static final long serialVersionUID = 1L;
 	private DirectoryCategoryDTO category = new DirectoryCategoryDTO();
 	private DirectoryCategoryService service = ServiceFactory.getInstance().getDirectoryCategoryService();
 

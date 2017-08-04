@@ -1,5 +1,6 @@
 package com.maville.front.bean;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -13,10 +14,11 @@ import com.maville.back.service.interfaces.EventService;
 
 @ManagedBean(name="event")
 @SessionScoped
-public class EventBean {
+public class EventBean implements Serializable {
 	
 	/* Variables */
 	
+	private static final long serialVersionUID = 1L;
 	private EventDTO event = new EventDTO();
 	private EventService service = ServiceFactory.getInstance().getEventService();
 	

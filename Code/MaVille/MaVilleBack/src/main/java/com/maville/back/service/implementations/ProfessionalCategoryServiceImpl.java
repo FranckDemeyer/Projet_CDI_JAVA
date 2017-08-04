@@ -18,7 +18,7 @@ import com.maville.back.entities.ProfessionalCategory;
 import com.maville.back.service.interfaces.ProfessionalCategoryService;
 
 @Transactional
-@Service("professionalCategoryDAO")
+@Service("professionalCategoryService")
 public class ProfessionalCategoryServiceImpl implements ProfessionalCategoryService {
 	
 	@Autowired
@@ -26,9 +26,20 @@ public class ProfessionalCategoryServiceImpl implements ProfessionalCategoryServ
 	
 	@Override
 	public ProfessionalCategoryDTO getProfessionalCategoryById(int id) {
-		ProfessionalCategoryDTO category = new ProfessionalCategoryDTO();
-		BeanUtils.copyProperties(professionalCategoryDAO.find(id), category);
-		return category;
+		ProfessionalCategoryDTO categoryDTO = null;
+		ProfessionalCategory category = professionalCategoryDAO.find(id);
+		if(category != null) {
+			categoryDTO = new ProfessionalCategoryDTO();
+			BeanUtils.copyProperties(category, categoryDTO);
+			List<ProfessionalDTO> professionalsDTO = new ArrayList<>();
+			for(Professional professional: category.getProfessionals()) {
+				ProfessionalDTO professionalDTO = new ProfessionalDTO();
+				BeanUtils.copyProperties(professional, professionalDTO);
+				professionalsDTO.add(professionalDTO);
+			}
+			categoryDTO.setProfessionals(professionalsDTO);
+		}
+		return categoryDTO;
 	}
 	
 	@Override
@@ -37,6 +48,13 @@ public class ProfessionalCategoryServiceImpl implements ProfessionalCategoryServ
 		for(ProfessionalCategory pc : professionalCategoryDAO.findAll()) {
 			ProfessionalCategoryDTO pc2 = new ProfessionalCategoryDTO();
 			BeanUtils.copyProperties(pc, pc2);
+			List<ProfessionalDTO> proDTO = new ArrayList<>();
+			for(Professional p: pc.getProfessionals()) {
+				ProfessionalDTO pDTO = new ProfessionalDTO();
+				BeanUtils.copyProperties(p, pDTO);
+				proDTO.add(pDTO);
+			}
+			pc2.setProfessionals(proDTO);
 			categories.add(pc2);
 		}
 		return categories;
@@ -44,11 +62,22 @@ public class ProfessionalCategoryServiceImpl implements ProfessionalCategoryServ
 	
 	@Override
 	public ProfessionalCategoryDTO getProfessionalCategoryByName(String name) {
-		ProfessionalCategoryDTO category = null;
+		ProfessionalCategoryDTO categoryDTO = null;
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("name", name);
-		BeanUtils.copyProperties(professionalCategoryDAO.findOne(Professional.FIND_BY_NAME, parameters), category);
-		return category;
+		ProfessionalCategory category = professionalCategoryDAO.findOne(Professional.FIND_BY_NAME, parameters);
+		if(category != null) {
+			categoryDTO = new ProfessionalCategoryDTO();
+			BeanUtils.copyProperties(category, categoryDTO);
+			List<ProfessionalDTO> professionalsDTO = new ArrayList<>();
+			for(Professional professional: category.getProfessionals()) {
+				ProfessionalDTO professionalDTO = new ProfessionalDTO();
+				BeanUtils.copyProperties(professional, professionalDTO);
+				professionalsDTO.add(professionalDTO);
+			}
+			categoryDTO.setProfessionals(professionalsDTO);
+		}
+		return categoryDTO;
 	}
 
 	@Override
@@ -56,6 +85,13 @@ public class ProfessionalCategoryServiceImpl implements ProfessionalCategoryServ
 		if(getProfessionalCategoryByName(category.getName()) != null) {throw new IllegalArgumentException("Cette Cat�gorie existe d�j�");}
 		ProfessionalCategory entity = new ProfessionalCategory();
 		BeanUtils.copyProperties(category, entity);
+		List<Professional> professionals = new ArrayList<>();
+		for(ProfessionalDTO proDTO: category.getProfessionals()) {
+			Professional pro = new Professional();
+			BeanUtils.copyProperties(proDTO, pro);
+			professionals.add(pro);
+		}
+		entity.setProfessionals(professionals);
 		try {
 			professionalCategoryDAO.save(entity);
 		} catch (Exception e) {

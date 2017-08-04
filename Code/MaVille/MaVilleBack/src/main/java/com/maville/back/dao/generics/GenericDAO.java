@@ -68,11 +68,9 @@ public class GenericDAO<T, PK> implements AbstractDAO<T, PK> {
 		try {
 			Query query = em.createNamedQuery(namedQuery);
 			if(parameters != null && !parameters.isEmpty()) populateQueryParameters(query, parameters);
-			try{
+			try {
 				result = (T) query.getSingleResult();
-			} catch (NoResultException e){
-				
-			}
+			} catch (NoResultException e) {}
 		} catch (Exception e) {
 			log.debug("Erreur dans la methode findOneResult : " + e.getMessage());
 			e.printStackTrace();
@@ -102,10 +100,12 @@ public class GenericDAO<T, PK> implements AbstractDAO<T, PK> {
 	}
 
 	@Override
-	public void save(T entity) {
+	public T save(T entity) {
 		//MySQL
 		em.persist(entity);
+		entity = em.merge(entity);
 		em.flush();
+		return entity;
 	}
 
 	

@@ -27,9 +27,11 @@ public class Account {
 	@Id
 	@GeneratedValue
 	private int accountId;
+	
 	private String username;
 	private String password;
 	private boolean admin;
+	
 	@OneToOne(mappedBy = "account", cascade=CascadeType.ALL)
 	private Professional professional;
 

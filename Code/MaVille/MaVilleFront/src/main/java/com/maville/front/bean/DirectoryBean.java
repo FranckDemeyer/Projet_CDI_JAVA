@@ -25,7 +25,6 @@ import com.maville.back.service.interfaces.DirectoryService;
 @SessionScoped
 public class DirectoryBean implements Serializable {
 
-	private static final long serialVersionUID = 1L;
 	/* Variables */
 
 	private DirectoryDTO directory = new DirectoryDTO();
