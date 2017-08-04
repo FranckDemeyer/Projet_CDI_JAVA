@@ -72,11 +72,6 @@ public class ProfessionalBean implements Serializable {
 	
 	public String add() {
 		accountBean.getAccount().setProfessional(professional);
-		try {
-			accountBean.setAccount(accountBean.getService().addAccount(accountBean.getAccount()));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		professional.setAccount(accountBean.getAccount());
 		service.addProfessional(professional);
 		return "account-added";
